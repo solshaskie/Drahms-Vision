@@ -1,0 +1,112 @@
+/* Astronomy Camera System - Theme Styles */
+
+/* Dark Theme (Default) */
+.theme-dark {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #1a1a2e;
+    --bg-tertiary: #16213e;
+    --bg-panel: #0f1419;
+    --bg-overlay: rgba(0, 0, 0, 0.8);
+    
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #666666;
+    --accent-gold: #ffd700;
+    --accent-green: #00ff88;
+    --accent-blue: #00bfff;
+    --accent-red: #ff4444;
+    --border-color: #333333;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --gradient-primary: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+    --gradient-accent: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+}
+
+/* Light Theme */
+.theme-light {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --bg-panel: #ffffff;
+    --bg-overlay: rgba(255, 255, 255, 0.9);
+    
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --text-muted: #666666;
+    --accent-gold: #ffd700;
+    --accent-green: #00ff88;
+    --accent-blue: #00bfff;
+    --accent-red: #ff4444;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --gradient-primary: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    --gradient-accent: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+}
+
+/* Theme Transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Theme-specific component styles */
+.theme-dark .control-button {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.theme-dark .control-button:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--accent-gold);
+}
+
+.theme-light .control-button {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.theme-light .control-button:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--accent-blue);
+}
+
+/* Panel backgrounds */
+.theme-dark .panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+}
+
+.theme-light .panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+}
+
+/* Input styles */
+.theme-dark input, .theme-dark select, .theme-dark textarea {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.theme-light input, .theme-light select, .theme-light textarea {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Slider styles */
+.theme-dark input[type="range"] {
+    background: var(--bg-secondary);
+}
+
+.theme-dark input[type="range"]::-webkit-slider-thumb {
+    background: var(--accent-gold);
+}
+
+.theme-light input[type="range"] {
+    background: var(--bg-secondary);
+}
+
+.theme-light input[type="range"]::-webkit-slider-thumb {
+    background: var(--accent-blue);
+}
