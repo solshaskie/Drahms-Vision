@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/themes.css">
     <link rel="stylesheet" href="styles/components.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-<body class="theme-dark">
+<body>
     <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen">
         <div class="loading-content">
@@ -24,8 +24,8 @@
         </div>
     </div>
 
-    <!-- Main Application Container -->
-    <div id="app" class="app-container hidden">
+    <!-- Main Application -->
+    <div id="app" class="app-container" style="display: none;">
         <!-- Header -->
         <header class="app-header">
             <div class="header-left">
@@ -45,536 +45,134 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="header-center">
-                <div class="camera-info">
-                    <span id="camera-name">No Camera Connected</span>
-                    <span id="camera-battery">--</span>
-                </div>
-            </div>
-            
             <div class="header-right">
-                <button class="theme-toggle" id="theme-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="settings-btn" id="settings-btn">
+                <button class="btn-secondary" id="settings-btn">
                     <i class="fas fa-cog"></i>
-                </button>
-                <button class="help-btn" id="help-btn">
-                    <i class="fas fa-question-circle"></i>
+                    Settings
                 </button>
             </div>
         </header>
 
-        <!-- Main Content Area -->
+        <!-- Main Content -->
         <main class="main-content">
-            <!-- Left Panel - Camera Controls -->
-            <aside class="left-panel">
-                <div class="panel-section">
-                    <h3><i class="fas fa-camera"></i> Camera Controls</h3>
-                    
-                    <!-- Camera Mode -->
-                    <div class="control-group">
-                        <label>Mode</label>
-                        <div class="mode-selector">
-                            <button class="mode-btn active" data-mode="photo">
-                                <i class="fas fa-camera"></i>
-                                Photo
-                            </button>
-                            <button class="mode-btn" data-mode="video">
-                                <i class="fas fa-video"></i>
-                                Video
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Zoom Control -->
-                    <div class="control-group">
-                        <label>Zoom <span id="zoom-value">1x</span></label>
-                        <div class="slider-container">
-                            <input type="range" id="zoom-slider" min="1" max="10" step="0.1" value="1">
-                            <div class="zoom-buttons">
-                                <button class="zoom-btn" data-zoom="0.5">0.5x</button>
-                                <button class="zoom-btn" data-zoom="1">1x</button>
-                                <button class="zoom-btn" data-zoom="2">2x</button>
-                                <button class="zoom-btn" data-zoom="5">5x</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Focus Control -->
-                    <div class="control-group">
-                        <label>Focus</label>
-                        <div class="focus-controls">
-                            <button class="focus-btn" id="auto-focus">
-                                <i class="fas fa-crosshairs"></i>
-                                Auto Focus
-                            </button>
-                            <div class="manual-focus">
-                                <input type="range" id="focus-slider" min="0" max="100" value="50">
-                                <span>Manual</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Flash Control -->
-                    <div class="control-group">
-                        <label>Flash</label>
-                        <div class="flash-controls">
-                            <button class="flash-btn" data-flash="off">
-                                <i class="fas fa-ban"></i>
-                                Off
-                            </button>
-                            <button class="flash-btn" data-flash="auto">
-                                <i class="fas fa-bolt"></i>
-                                Auto
-                            </button>
-                            <button class="flash-btn" data-flash="on">
-                                <i class="fas fa-bolt"></i>
-                                On
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Camera Settings -->
-                    <div class="control-group">
-                        <label>Settings</label>
-                        <div class="settings-controls">
-                            <div class="setting-item">
-                                <span>ISO</span>
-                                <select id="iso-select">
-                                    <option value="100">100</option>
-                                    <option value="200">200</option>
-                                    <option value="400">400</option>
-                                    <option value="800">800</option>
-                                    <option value="1600">1600</option>
-                                    <option value="3200">3200</option>
-                                </select>
-                            </div>
-                            <div class="setting-item">
-                                <span>Shutter</span>
-                                <select id="shutter-select">
-                                    <option value="1/1000">1/1000</option>
-                                    <option value="1/500">1/500</option>
-                                    <option value="1/250">1/250</option>
-                                    <option value="1/125">1/125</option>
-                                    <option value="1/60">1/60</option>
-                                    <option value="1/30">1/30</option>
-                                    <option value="1/15">1/15</option>
-                                    <option value="1/8">1/8</option>
-                                    <option value="1/4">1/4</option>
-                                    <option value="1/2">1/2</option>
-                                    <option value="1">1s</option>
-                                    <option value="2">2s</option>
-                                    <option value="4">4s</option>
-                                    <option value="8">8s</option>
-                                    <option value="15">15s</option>
-                                    <option value="30">30s</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Capture Controls -->
-                    <div class="control-group">
-                        <div class="capture-controls">
-                            <button class="capture-btn primary" id="capture-btn">
-                                <i class="fas fa-camera"></i>
-                                Capture
-                            </button>
-                            <button class="capture-btn secondary" id="burst-btn">
-                                <i class="fas fa-layer-group"></i>
-                                Burst
-                            </button>
-                        </div>
-                    </div>
+            <!-- Camera Control Panel -->
+            <section class="camera-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-camera"></i> Camera Control</h2>
                 </div>
-
-                <!-- Sky Mapping Controls -->
-                <div class="panel-section">
-                    <h3><i class="fas fa-star"></i> Sky Mapping</h3>
-                    
-                    <div class="sky-controls">
-                        <button class="sky-btn" id="toggle-sky-map">
-                            <i class="fas fa-map"></i>
-                            Toggle Sky Map
-                        </button>
-                        <button class="sky-btn" id="auto-track">
-                            <i class="fas fa-crosshairs"></i>
-                            Auto Track
-                        </button>
-                        <button class="sky-btn" id="search-celestial">
-                            <i class="fas fa-search"></i>
-                            Search Objects
-                        </button>
-                    </div>
-
-                    <div class="celestial-search">
-                        <input type="text" id="celestial-search" placeholder="Search stars, planets, constellations...">
-                        <div class="search-results" id="search-results"></div>
-                    </div>
-
-                    <div class="sky-info">
-                        <div class="info-item">
-                            <span>Azimuth:</span>
-                            <span id="azimuth">--</span>
-                        </div>
-                        <div class="info-item">
-                            <span>Elevation:</span>
-                            <span id="elevation">--</span>
-                        </div>
-                        <div class="info-item">
-                            <span>Pointing at:</span>
-                            <span id="pointing-at">--</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Object Identification -->
-                <div class="panel-section">
-                    <h3><i class="fas fa-eye"></i> Object ID</h3>
-                    
-                    <div class="id-controls">
-                        <button class="id-btn" id="toggle-google-lens">
-                            <i class="fab fa-google"></i>
-                            Google Lens
-                        </button>
-                        <button class="id-btn" id="toggle-bird-id">
-                            <i class="fas fa-feather"></i>
-                            Bird ID
-                        </button>
-                        <button class="id-btn" id="identify-object">
-                            <i class="fas fa-search"></i>
-                            Identify
-                        </button>
-                    </div>
-
-                    <div class="identification-results" id="identification-results">
-                        <p>Click "Identify" to analyze objects in view</p>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- Center Panel - Camera Feed -->
-            <section class="center-panel">
-                <div class="camera-feed-container">
+                <div class="camera-viewport">
                     <div class="camera-feed" id="camera-feed">
-                        <div class="feed-placeholder">
+                        <div class="camera-placeholder">
                             <i class="fas fa-camera"></i>
                             <p>Camera feed will appear here</p>
-                            <p>Connect your Android device to begin</p>
                         </div>
                     </div>
-                    
-                    <!-- Overlay Controls -->
-                    <div class="feed-overlay">
-                        <div class="overlay-controls">
-                            <button class="overlay-btn" id="toggle-grid">
-                                <i class="fas fa-th"></i>
-                            </button>
-                            <button class="overlay-btn" id="toggle-crosshair">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                            <button class="overlay-btn" id="toggle-histogram">
-                                <i class="fas fa-chart-bar"></i>
-                            </button>
-                        </div>
-                        
-                        <div class="feed-info">
-                            <div class="info-display">
-                                <span id="exposure-info">ISO: -- | Shutter: --</span>
-                                <span id="focus-info">Focus: --</span>
-                                <span id="zoom-info">Zoom: 1x</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Sky Map Overlay -->
-                    <div class="sky-map-overlay" id="sky-map-overlay">
-                        <canvas id="sky-map-canvas"></canvas>
-                    </div>
-
-                    <!-- Object Tracking Overlay -->
-                    <div class="tracking-overlay" id="tracking-overlay">
-                        <div class="tracking-box" id="tracking-box"></div>
-                    </div>
-                </div>
-
-                <!-- Image Gallery -->
-                <div class="image-gallery">
-                    <div class="gallery-header">
-                        <h3><i class="fas fa-images"></i> Captured Images</h3>
-                        <div class="gallery-controls">
-                            <button class="gallery-btn" id="clear-gallery">
-                                <i class="fas fa-trash"></i>
-                                Clear
-                            </button>
-                            <button class="gallery-btn" id="export-gallery">
-                                <i class="fas fa-download"></i>
-                                Export
-                            </button>
-                        </div>
-                    </div>
-                    <div class="gallery-grid" id="gallery-grid">
-                        <!-- Images will be dynamically added here -->
+                    <div class="camera-controls">
+                        <button class="btn-primary" id="capture-btn">
+                            <i class="fas fa-circle"></i>
+                            Capture
+                        </button>
+                        <button class="btn-secondary" id="record-btn">
+                            <i class="fas fa-video"></i>
+                            Record
+                        </button>
                     </div>
                 </div>
             </section>
 
-            <!-- Right Panel - Image Editing -->
-            <aside class="right-panel">
-                <div class="panel-section">
-                    <h3><i class="fas fa-edit"></i> Image Editor</h3>
-                    
-                    <div class="editor-controls">
-                        <button class="editor-btn" id="auto-enhance">
-                            <i class="fas fa-magic"></i>
-                            Auto Enhance
-                        </button>
-                        <button class="editor-btn" id="ai-upscale">
-                            <i class="fas fa-expand-arrows-alt"></i>
-                            AI Upscale
-                        </button>
-                    </div>
-
-                    <!-- Basic Adjustments -->
-                    <div class="adjustment-group">
-                        <h4>Basic Adjustments</h4>
-                        
-                        <div class="adjustment-item">
-                            <label>Brightness</label>
-                            <input type="range" id="brightness-slider" min="-100" max="100" value="0">
-                            <span class="value-display" id="brightness-value">0</span>
-                        </div>
-
-                        <div class="adjustment-item">
-                            <label>Contrast</label>
-                            <input type="range" id="contrast-slider" min="-100" max="100" value="0">
-                            <span class="value-display" id="contrast-value">0</span>
-                        </div>
-
-                        <div class="adjustment-item">
-                            <label>Saturation</label>
-                            <input type="range" id="saturation-slider" min="-100" max="100" value="0">
-                            <span class="value-display" id="saturation-value">0</span>
-                        </div>
-
-                        <div class="adjustment-item">
-                            <label>Hue</label>
-                            <input type="range" id="hue-slider" min="-180" max="180" value="0">
-                            <span class="value-display" id="hue-value">0</span>
-                        </div>
-                    </div>
-
-                    <!-- Advanced Adjustments -->
-                    <div class="adjustment-group">
-                        <h4>Advanced Adjustments</h4>
-                        
-                        <div class="adjustment-item">
-                            <label>Sharpness</label>
-                            <input type="range" id="sharpness-slider" min="0" max="100" value="0">
-                            <span class="value-display" id="sharpness-value">0</span>
-                        </div>
-
-                        <div class="adjustment-item">
-                            <label>Noise Reduction</label>
-                            <input type="range" id="noise-slider" min="0" max="100" value="0">
-                            <span class="value-display" id="noise-value">0</span>
-                        </div>
-
-                        <div class="adjustment-item">
-                            <label>Vignette</label>
-                            <input type="range" id="vignette-slider" min="0" max="100" value="0">
-                            <span class="value-display" id="vignette-value">0</span>
-                        </div>
-                    </div>
-
-                    <!-- Color Grading -->
-                    <div class="adjustment-group">
-                        <h4>Color Grading</h4>
-                        
-                        <div class="adjustment-item">
-                            <label>Temperature</label>
-                            <input type="range" id="temperature-slider" min="-100" max="100" value="0">
-                            <span class="value-display" id="temperature-value">0</span>
-                        </div>
-
-                        <div class="adjustment-item">
-                            <label>Tint</label>
-                            <input type="range" id="tint-slider" min="-100" max="100" value="0">
-                            <span class="value-display" id="tint-value">0</span>
-                        </div>
-
-                        <div class="adjustment-item">
-                            <label>Highlights</label>
-                            <input type="range" id="highlights-slider" min="-100" max="100" value="0">
-                            <span class="value-display" id="highlights-value">0</span>
-                        </div>
-
-                        <div class="adjustment-item">
-                            <label>Shadows</label>
-                            <input type="range" id="shadows-slider" min="-100" max="100" value="0">
-                            <span class="value-display" id="shadows-value">0</span>
-                        </div>
-                    </div>
-
-                    <!-- Presets -->
-                    <div class="preset-group">
-                        <h4>Presets</h4>
-                        <div class="preset-buttons">
-                            <button class="preset-btn" data-preset="astronomy">Astronomy</button>
-                            <button class="preset-btn" data-preset="night">Night</button>
-                            <button class="preset-btn" data-preset="portrait">Portrait</button>
-                            <button class="preset-btn" data-preset="landscape">Landscape</button>
-                            <button class="preset-btn" data-preset="vintage">Vintage</button>
-                        </div>
-                    </div>
-
-                    <!-- Save Controls -->
-                    <div class="save-controls">
-                        <button class="save-btn" id="save-edited">
-                            <i class="fas fa-save"></i>
-                            Save
-                        </button>
-                        <button class="save-btn secondary" id="reset-edits">
-                            <i class="fas fa-undo"></i>
-                            Reset
-                        </button>
+            <!-- Sky Mapping Panel -->
+            <section class="sky-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-star"></i> Sky Mapping</h2>
+                </div>
+                <div class="sky-map" id="sky-map">
+                    <div class="sky-placeholder">
+                        <i class="fas fa-star"></i>
+                        <p>Sky map will appear here</p>
                     </div>
                 </div>
-            </aside>
+            </section>
+
+            <!-- Object Identification Panel -->
+            <section class="identification-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-search"></i> Object Identification</h2>
+                </div>
+                <div class="identification-results" id="identification-results">
+                    <div class="results-placeholder">
+                        <i class="fas fa-search"></i>
+                        <p>Identification results will appear here</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Image Editor Panel -->
+            <section class="editor-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-edit"></i> Image Editor</h2>
+                </div>
+                <div class="editor-workspace" id="editor-workspace">
+                    <div class="editor-placeholder">
+                        <i class="fas fa-edit"></i>
+                        <p>Image editor will appear here</p>
+                    </div>
+                </div>
+            </section>
         </main>
 
-        <!-- Status Bar -->
-        <footer class="status-bar">
-            <div class="status-left">
-                <span id="status-message">Ready</span>
-            </div>
-            <div class="status-center">
-                <span id="current-time">--:--</span>
-            </div>
-            <div class="status-right">
-                <span id="storage-info">Storage: --</span>
-                <span id="memory-usage">Memory: --</span>
-            </div>
-        </footer>
-    </div>
-
-    <!-- Modals -->
-    <div id="settings-modal" class="modal hidden">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-cog"></i> Settings</h2>
-                <button class="modal-close" id="settings-close">
-                    <i class="fas fa-times"></i>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Quick Actions</h3>
+                <button class="btn-sidebar" id="auto-mode-btn">
+                    <i class="fas fa-magic"></i>
+                    Auto Mode
+                </button>
+                <button class="btn-sidebar" id="night-mode-btn">
+                    <i class="fas fa-moon"></i>
+                    Night Mode
+                </button>
+                <button class="btn-sidebar" id="manual-mode-btn">
+                    <i class="fas fa-sliders-h"></i>
+                    Manual Mode
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="settings-section">
-                    <h3>Connection</h3>
-                    <div class="setting-item">
-                        <label>Server Port</label>
-                        <input type="number" id="server-port" value="3000">
-                    </div>
-                    <div class="setting-item">
-                        <label>Auto-reconnect</label>
-                        <input type="checkbox" id="auto-reconnect" checked>
-                    </div>
-                </div>
-                
-                <div class="settings-section">
-                    <h3>Camera</h3>
-                    <div class="setting-item">
-                        <label>Default Resolution</label>
-                        <select id="default-resolution">
-                            <option value="1920x1080">1920x1080</option>
-                            <option value="3840x2160">4K</option>
-                            <option value="1280x720">720p</option>
-                        </select>
-                    </div>
-                    <div class="setting-item">
-                        <label>Frame Rate</label>
-                        <select id="frame-rate">
-                            <option value="30">30 fps</option>
-                            <option value="60">60 fps</option>
-                            <option value="24">24 fps</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="settings-section">
-                    <h3>Storage</h3>
-                    <div class="setting-item">
-                        <label>Save Location</label>
-                        <input type="text" id="save-location" value="./captures">
-                    </div>
-                    <div class="setting-item">
-                        <label>Auto-save</label>
-                        <input type="checkbox" id="auto-save" checked>
+            <div class="sidebar-section">
+                <h3>Camera Settings</h3>
+                <div class="setting-group">
+                    <label>Zoom</label>
+                    <input type="range" id="zoom-slider" min="1" max="10" value="1">
+                </div>
+                <div class="setting-group">
+                    <label>Focus</label>
+                    <input type="range" id="focus-slider" min="0" max="100" value="50">
+                </div>
+                <div class="setting-group">
+                    <label>ISO</label>
+                    <input type="range" id="iso-slider" min="100" max="3200" value="400">
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Gallery</h3>
+                <div class="gallery-preview" id="gallery-preview">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-images"></i>
+                        <p>No images yet</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div id="help-modal" class="modal hidden">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-question-circle"></i> Help</h2>
-                <button class="modal-close" id="help-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="help-section">
-                    <h3>Getting Started</h3>
-                    <ol>
-                        <li>Install the Android companion app on your phone</li>
-                        <li>Ensure both devices are on the same WiFi network</li>
-                        <li>Open the Android app and follow the connection instructions</li>
-                        <li>Once connected, you'll see the live camera feed</li>
-                    </ol>
-                </div>
-                
-                <div class="help-section">
-                    <h3>Camera Controls</h3>
-                    <ul>
-                        <li><strong>Zoom:</strong> Use the slider or preset buttons to zoom in/out</li>
-                        <li><strong>Focus:</strong> Auto-focus or manual focus with the slider</li>
-                        <li><strong>Flash:</strong> Control flash settings for low-light conditions</li>
-                        <li><strong>Settings:</strong> Adjust ISO and shutter speed for optimal exposure</li>
-                    </ul>
-                </div>
-
-                <div class="help-section">
-                    <h3>Sky Mapping</h3>
-                    <ul>
-                        <li><strong>Toggle Sky Map:</strong> Overlay celestial objects on the camera feed</li>
-                        <li><strong>Auto Track:</strong> Automatically track selected celestial objects</li>
-                        <li><strong>Search:</strong> Find specific stars, planets, or constellations</li>
-                    </ul>
-                </div>
-
-                <div class="help-section">
-                    <h3>Object Identification</h3>
-                    <ul>
-                        <li><strong>Google Lens:</strong> Identify objects, animals, and plants</li>
-                        <li><strong>Bird ID:</strong> Specialized bird identification using eBird API</li>
-                        <li><strong>Live Tracking:</strong> Keep focus on moving objects</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        </aside>
     </div>
 
     <!-- Scripts -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
     <script src="js/camera.js"></script>
     <script src="js/sky-map.js"></script>
-    <script src="js/image-editor.js"></script>
     <script src="js/object-identification.js"></script>
+    <script src="js/image-editor.js"></script>
     <script src="js/ui.js"></script>
-    <script src="js/app.js"></script>
 </body>
 </html>
