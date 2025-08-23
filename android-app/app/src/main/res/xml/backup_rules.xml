@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Include app settings and databases -->
+    <include domain="sharedpref" path="."/>
+    <include domain="database" path="."/>
+    <include domain="file" path="settings/"/>
+    
+    <!-- Exclude large files and temporary data -->
+    <exclude domain="file" path="captures/"/>
+    <exclude domain="file" path="temp/"/>
+    <exclude domain="file" path="logs/"/>
+    <exclude domain="database" path="camera_cache.db"/>
+</full-backup-content>
