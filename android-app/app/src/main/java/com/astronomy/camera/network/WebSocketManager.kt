@@ -9,7 +9,7 @@ class WebSocketManager {
     
     companion object {
         private const val TAG = "WebSocketManager"
-        private const val SERVER_URL = "http://10.0.0.60:3000"
+        private const val SERVER_URL = "http://10.0.0.60:3003"
     }
     
     private var socket: Socket? = null

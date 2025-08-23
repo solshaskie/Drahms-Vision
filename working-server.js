@@ -1,12 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
-const fs = require('fs').promises;
-const multer = require('multer');
 const cors = require('cors');
-const moment = require('moment');
-const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const server = http.createServer(app);
@@ -17,101 +14,46 @@ const io = socketIo(server, {
     }
 });
 
-const port = 3003;
-
 // Middleware
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
-app.use(express.static('.'));
+app.use(express.json());
+app.use(express.static(path.join(__dirname)));
 
-// File upload handling
-const upload = multer({
-    storage: multer.diskStorage({
-        destination: (req, file, cb) => {
-            cb(null, path.join(__dirname, 'captures'));
-        },
-        filename: (req, file, cb) => {
-            const timestamp = moment().format('YYYY-MM-DD_HH-mm-ss');
-            const filename = `${timestamp}_${uuidv4()}.${file.originalname.split('.').pop()}`;
-            cb(null, filename);
-        }
-    }),
-    limits: {
-        fileSize: 50 * 1024 * 1024 // 50MB limit
-    }
-});
+// Serve static files
+app.use('/styles', express.static(path.join(__dirname, 'styles')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
-// Socket.io connection handling
-io.on('connection', (socket) => {
-    console.log(`Client connected: ${socket.id}`);
-    
-    socket.emit('connected', {
-        message: 'Connected to Drahms Vision server',
-        timestamp: new Date().toISOString()
-    });
-    
-    socket.on('disconnect', () => {
-        console.log(`Client disconnected: ${socket.id}`);
-    });
-    
-    socket.on('ping', () => {
-        socket.emit('pong', { timestamp: new Date().toISOString() });
-    });
-});
+const port = process.env.PORT || 3003; // Changed to 3003 to match app
 
-// Routes
+// Main route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/favicon.ico', (req, res) => {
-    res.status(204).end(); // No content
+    res.status(204).end();
 });
 
-// API Status endpoints
+// API Status
 app.get('/api/status', (req, res) => {
-    try {
-        res.json({
-            status: 'running',
-            name: 'Drahms Vision Astronomy Camera System',
-            version: '1.0.0',
-            timestamp: new Date().toISOString(),
-            apis: {
-                googleVision: { configured: true, rateLimit: { remaining: 1000, limit: 1800 } },
-                eBird: { configured: true, rateLimit: { remaining: 10000, limit: 10000 } }
-            },
-            uptime: process.uptime()
-        });
-    } catch (error) {
-        console.error('API status error:', error);
-        res.status(500).json({ 
-            error: 'Failed to get status',
-            details: error.message 
-        });
-    }
-});
-
-app.get('/api/status/apis', (req, res) => {
-    try {
-        res.json({
+    res.json({
+        status: 'running',
+        name: 'Drahms Vision Astronomy Camera System',
+        version: '1.0.0',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        apis: {
             googleVision: {
                 configured: true,
-                rateLimit: { remaining: 1000, limit: 1800, resetTime: Date.now() + 60000 }
+                rateLimit: { remaining: 1000, limit: 1000, resetTime: new Date(Date.now() + 3600000).toISOString() }
             },
             eBird: {
                 configured: true,
-                rateLimit: { remaining: 10000, limit: 10000, resetTime: Date.now() + 1000 }
-            },
-            timestamp: new Date().toISOString()
-        });
-    } catch (error) {
-        console.error('API status error:', error);
-        res.status(500).json({ 
-            error: 'Failed to get API status',
-            details: error.message 
-        });
-    }
+                rateLimit: { remaining: 1000, limit: 1000, resetTime: new Date(Date.now() + 3600000).toISOString() }
+            }
+        }
+    });
 });
 
 // Test endpoint
@@ -124,90 +66,54 @@ app.get('/api/test', (req, res) => {
 });
 
 // Camera endpoints
-app.post('/api/camera/initialize', async (req, res) => {
-    try {
-        const { cameraId = 'default' } = req.body;
-        res.json({
-            success: true,
-            cameraId: cameraId,
-            status: 'initialized',
-            message: 'Camera initialized successfully'
-        });
-    } catch (error) {
-        console.error('Camera initialization error:', error);
-        res.status(500).json({ 
-            error: 'Failed to initialize camera',
-            details: error.message 
-        });
-    }
+app.post('/api/camera/initialize', (req, res) => {
+    res.json({
+        success: true,
+        cameraId: 'default',
+        status: 'initialized',
+        message: 'Camera initialized successfully'
+    });
 });
 
-app.get('/api/camera/status/:cameraId?', (req, res) => {
-    try {
-        const cameraId = req.params.cameraId || 'default';
-        res.json({
-            cameraId: cameraId,
-            status: 'connected',
-            battery: 85,
-            temperature: 23,
-            lastActivity: new Date().toISOString()
-        });
-    } catch (error) {
-        console.error('Camera status error:', error);
-        res.status(500).json({ 
-            error: 'Failed to get camera status',
-            details: error.message 
-        });
-    }
+app.post('/api/camera/stream/start', (req, res) => {
+    res.json({
+        success: true,
+        streamId: 'stream_' + Date.now(),
+        status: 'started',
+        message: 'Camera stream started successfully'
+    });
 });
 
-// Sky data endpoints
-app.get('/api/sky/constellations', async (req, res) => {
-    try {
-        res.json([
-            { name: 'Ursa Major', visible: true, magnitude: 1.8 },
-            { name: 'Orion', visible: true, magnitude: 0.4 },
-            { name: 'Cassiopeia', visible: true, magnitude: 2.1 }
-        ]);
-    } catch (error) {
-        console.error('Constellations error:', error);
-        res.status(500).json({ 
-            error: 'Failed to get constellations',
-            details: error.message 
-        });
-    }
+app.post('/api/camera/capture', (req, res) => {
+    res.json({
+        success: true,
+        imageId: 'img_' + Date.now(),
+        timestamp: new Date().toISOString(),
+        message: 'Image captured successfully'
+    });
 });
 
-app.get('/api/sky/stars', async (req, res) => {
-    try {
-        res.json([
-            { name: 'Polaris', magnitude: 1.97, visible: true },
-            { name: 'Sirius', magnitude: -1.46, visible: true },
-            { name: 'Vega', magnitude: 0.03, visible: true }
-        ]);
-    } catch (error) {
-        console.error('Stars error:', error);
-        res.status(500).json({ 
-            error: 'Failed to get stars',
-            details: error.message 
-        });
-    }
+// Sky mapping endpoints
+app.get('/api/sky/constellations', (req, res) => {
+    res.json([
+        { id: 'ursa_major', name: 'Ursa Major', visible: true },
+        { id: 'ursa_minor', name: 'Ursa Minor', visible: true },
+        { id: 'orion', name: 'Orion', visible: false }
+    ]);
 });
 
-app.get('/api/sky/planets', async (req, res) => {
-    try {
-        res.json([
-            { name: 'Mars', magnitude: -0.5, visible: true },
-            { name: 'Venus', magnitude: -4.2, visible: true },
-            { name: 'Jupiter', magnitude: -2.1, visible: true }
-        ]);
-    } catch (error) {
-        console.error('Planets error:', error);
-        res.status(500).json({ 
-            error: 'Failed to get planets',
-            details: error.message 
-        });
-    }
+app.get('/api/stars', (req, res) => {
+    res.json([
+        { id: 'polaris', name: 'Polaris', magnitude: 1.97, visible: true },
+        { id: 'sirius', name: 'Sirius', magnitude: -1.46, visible: false }
+    ]);
+});
+
+app.get('/api/planets', (req, res) => {
+    res.json([
+        { id: 'mars', name: 'Mars', visible: true, magnitude: -0.5 },
+        { id: 'venus', name: 'Venus', visible: false, magnitude: -4.0 }
+    ]);
 });
 
 // Gallery endpoint
@@ -216,245 +122,80 @@ app.get('/api/gallery', async (req, res) => {
         res.json([]);
     } catch (error) {
         console.error('Gallery error:', error);
-        res.status(500).json({ 
-            error: 'Failed to get gallery',
-            details: error.message 
+        res.status(500).json({
+            error: 'Failed to load gallery',
+            message: error.message
         });
     }
 });
 
 // Object identification endpoints
-app.post('/api/identify/object', upload.single('image'), async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            identified: true,
-            results: {
-                googleVision: {
-                    labels: ['object', 'camera', 'device'],
-                    confidence: 0.85
-                }
+app.post('/api/identify', (req, res) => {
+    res.json({
+        success: true,
+        results: [
+            {
+                label: 'Celestial Object',
+                confidence: 0.95,
+                type: 'star'
             }
-        });
-    } catch (error) {
-        console.error('Object identification error:', error);
-        res.status(500).json({ 
-            error: 'Failed to identify object',
-            details: error.message 
-        });
-    }
-});
-
-app.post('/api/identify/google-lens', async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            labels: ['object', 'camera', 'device'],
-            confidence: 0.85
-        });
-    } catch (error) {
-        console.error('Google Lens error:', error);
-        res.status(500).json({ 
-            error: 'Failed to identify with Google Lens',
-            details: error.message 
-        });
-    }
-});
-
-app.post('/api/identify/ebird', async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            identified: true,
-            species: 'American Robin',
-            confidence: 0.92
-        });
-    } catch (error) {
-        console.error('eBird error:', error);
-        res.status(500).json({ 
-            error: 'Failed to identify with eBird',
-            details: error.message 
-        });
-    }
+        ],
+        timestamp: new Date().toISOString()
+    });
 });
 
 // Image processing endpoints
-app.post('/api/image/enhance', upload.single('image'), async (req, res) => {
-    try {
-        res.json({
+app.post('/api/image/enhance', (req, res) => {
+    res.json({
+        success: true,
+        enhanced: true,
+        message: 'Image enhanced successfully'
+    });
+});
+
+// Socket.io connection handling
+io.on('connection', (socket) => {
+    console.log('Client connected:', socket.id);
+    
+    socket.on('disconnect', () => {
+        console.log('Client disconnected:', socket.id);
+    });
+    
+    socket.on('image_data', (data) => {
+        console.log('Received image data from client');
+        
+        // Convert the image data to base64 for web display
+        const base64Image = Buffer.from(data).toString('base64');
+        const imageUrl = `data:image/jpeg;base64,${base64Image}`;
+        
+        // Broadcast the image to all connected web clients
+        io.emit('camera_feed', {
+            type: 'image',
+            data: imageUrl,
+            timestamp: new Date().toISOString()
+        });
+        
+        // Also emit a capture event for the web interface
+        io.emit('capture_complete', {
             success: true,
-            enhanced: true,
-            message: 'Image enhanced successfully'
+            imageId: 'img_' + Date.now(),
+            imageUrl: imageUrl,
+            timestamp: new Date().toISOString()
         });
-    } catch (error) {
-        console.error('Image enhancement error:', error);
-        res.status(500).json({ 
-            error: 'Failed to enhance image',
-            details: error.message 
+    });
+    
+    socket.on('sensor_data', (data) => {
+        console.log('Received sensor data:', data);
+        
+        // Broadcast sensor data to all connected web clients
+        io.emit('sensor_update', {
+            ...data,
+            timestamp: new Date().toISOString()
         });
-    }
+    });
 });
 
-// Camera stream endpoints
-app.post('/api/camera/stream/start', async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            streamId: 'stream_' + Date.now(),
-            message: 'Camera stream started'
-        });
-    } catch (error) {
-        console.error('Camera stream start error:', error);
-        res.status(500).json({ 
-            error: 'Failed to start camera stream',
-            details: error.message 
-        });
-    }
-});
-
-app.post('/api/camera/stream/stop', async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            message: 'Camera stream stopped'
-        });
-    } catch (error) {
-        console.error('Camera stream stop error:', error);
-        res.status(500).json({ 
-            error: 'Failed to stop camera stream',
-            details: error.message 
-        });
-    }
-});
-
-// Editor endpoints
-app.post('/api/editor/upscale', async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            upscaledImage: req.body.image,
-            message: 'Image upscaled successfully'
-        });
-    } catch (error) {
-        console.error('Image upscale error:', error);
-        res.status(500).json({ 
-            error: 'Failed to upscale image',
-            details: error.message 
-        });
-    }
-});
-
-app.post('/api/editor/sharpen', async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            sharpenImage: req.body.image,
-            message: 'Image sharpened successfully'
-        });
-    } catch (error) {
-        console.error('Image sharpen error:', error);
-        res.status(500).json({ 
-            error: 'Failed to sharpen image',
-            details: error.message 
-        });
-    }
-});
-
-app.post('/api/editor/denoise', async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            denoisedImage: req.body.image,
-            message: 'Image denoised successfully'
-        });
-    } catch (error) {
-        console.error('Image denoise error:', error);
-        res.status(500).json({ 
-            error: 'Failed to denoise image',
-            details: error.message 
-        });
-    }
-});
-
-app.post('/api/editor/save', async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            savedImage: req.body.image,
-            message: 'Image saved successfully'
-        });
-    } catch (error) {
-        console.error('Image save error:', error);
-        res.status(500).json({ 
-            error: 'Failed to save image',
-            details: error.message 
-        });
-    }
-});
-
-app.post('/api/editor/color-correct', async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            correctedImage: req.body.image,
-            message: 'Color correction applied successfully'
-        });
-    } catch (error) {
-        console.error('Color correction error:', error);
-        res.status(500).json({ 
-            error: 'Failed to apply color correction',
-            details: error.message 
-        });
-    }
-});
-
-app.post('/api/editor/ai-denoise', async (req, res) => {
-    try {
-        res.json({
-            success: true,
-            denoisedImage: req.body.image,
-            message: 'AI noise reduction applied successfully'
-        });
-    } catch (error) {
-        console.error('AI denoise error:', error);
-        res.status(500).json({ 
-            error: 'Failed to apply AI noise reduction',
-            details: error.message 
-        });
-    }
-});
-
-app.get('/api/editor/presets', async (req, res) => {
-    try {
-        res.json({
-            'landscape': { brightness: 5, contrast: 10, saturation: 15, gamma: 1.0 },
-            'portrait': { brightness: 0, contrast: 5, saturation: 10, gamma: 1.1 },
-            'vintage': { brightness: -5, contrast: 15, saturation: -10, gamma: 1.2 }
-        });
-    } catch (error) {
-        console.error('Presets error:', error);
-        res.status(500).json({ 
-            error: 'Failed to load presets',
-            details: error.message 
-        });
-    }
-});
-
-// Initialize directories
-async function initializeDirectories() {
-    const dirs = ['captures', 'logs', 'temp'];
-    for (const dir of dirs) {
-        try {
-            await fs.mkdir(path.join(__dirname, dir), { recursive: true });
-        } catch (error) {
-            console.log(`Directory ${dir} already exists or cannot be created`);
-        }
-    }
-}
-
-// Start server
 server.listen(port, async () => {
-    await initializeDirectories();
     console.log('🔭 Drahms Vision - Astronomy Camera System');
     console.log('==========================================');
     console.log(`✅ Server running on port ${port}`);
@@ -465,11 +206,11 @@ server.listen(port, async () => {
     console.log('Press Ctrl+C to stop the server');
 });
 
-// Handle graceful shutdown
+// Graceful shutdown
 process.on('SIGINT', () => {
-    console.log('\n🛑 Shutting down Drahms Vision...');
+    console.log('\n🛑 Shutting down Drahms Vision server...');
     server.close(() => {
-        console.log('Drahms Vision server stopped');
+        console.log('✅ Server stopped gracefully');
         process.exit(0);
     });
 });
