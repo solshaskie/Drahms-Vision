@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="camera_mode_entries">
+        <item>Auto</item>
+        <item>Manual</item>
+        <item>Night</item>
+        <item>Astronomy</item>
+        <item>Wildlife</item>
+    </string-array>
+    <string-array name="camera_mode_values">
+        <item>auto</item>
+        <item>manual</item>
+        <item>night</item>
+        <item>astronomy</item>
+        <item>wildlife</item>
+    </string-array>
+    <string-array name="exposure_mode_entries">
+        <item>Auto</item>
+        <item>Manual</item>
+        <item>Shutter Priority</item>
+        <item>Aperture Priority</item>
+        <item>Program</item>
+    </string-array>
+    <string-array name="exposure_mode_values">
+        <item>auto</item>
+        <item>manual</item>
+        <item>shutter_priority</item>
+        <item>aperture_priority</item>
+        <item>program</item>
+    </string-array>
+    <string-array name="focus_mode_entries">
+        <item>Auto</item>
+        <item>Manual</item>
+        <item>Continuous</item>
+        <item>Macro</item>
+        <item>Infinity</item>
+    </string-array>
+    <string-array name="focus_mode_values">
+        <item>auto</item>
+        <item>manual</item>
+        <item>continuous</item>
+        <item>macro</item>
+        <item>infinity</item>
+    </string-array>
+    <string-array name="image_quality_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Ultra High</item>
+    </string-array>
+    <string-array name="image_quality_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>ultra_high</item>
+    </string-array>
+    <string-array name="iso_entries">
+        <item>Auto</item>
+        <item>100</item>
+        <item>200</item>
+        <item>400</item>
+        <item>800</item>
+        <item>1600</item>
+        <item>3200</item>
+        <item>6400</item>
+    </string-array>
+    <string-array name="iso_values">
+        <item>auto</item>
+        <item>100</item>
+        <item>200</item>
+        <item>400</item>
+        <item>800</item>
+        <item>1600</item>
+        <item>3200</item>
+        <item>6400</item>
+    </string-array>
+    <string-array name="motion_sensitivity_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Very High</item>
+    </string-array>
+    <string-array name="motion_sensitivity_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>very_high</item>
+    </string-array>
+    <string-array name="tracking_accuracy_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Ultra High</item>
+    </string-array>
+    <string-array name="tracking_accuracy_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>ultra_high</item>
+    </string-array>
+    <string-array name="video_quality_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Ultra High</item>
+    </string-array>
+    <string-array name="video_quality_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>ultra_high</item>
+    </string-array>
+    <string-array name="white_balance_entries">
+        <item>Auto</item>
+        <item>Daylight</item>
+        <item>Cloudy</item>
+        <item>Tungsten</item>
+        <item>Fluorescent</item>
+        <item>Custom</item>
+    </string-array>
+    <string-array name="white_balance_values">
+        <item>auto</item>
+        <item>daylight</item>
+        <item>cloudy</item>
+        <item>tungsten</item>
+        <item>fluorescent</item>
+        <item>custom</item>
+    </string-array>
+    <color name="accent_blue">#4fc3f7</color>
+    <color name="accent_cyan">#00bcd4</color>
+    <color name="accent_green">#4caf50</color>
+    <color name="accent_orange">#ff9800</color>
+    <color name="accent_purple">#9c27b0</color>
+    <color name="accent_red">#f44336</color>
+    <color name="background_dark">#0f0f23</color>
+    <color name="background_light">#16213e</color>
+    <color name="background_medium">#1a1a2e</color>
+    <color name="black">#000000</color>
+    <color name="button_disabled">#666666</color>
+    <color name="button_primary">#4fc3f7</color>
+    <color name="button_secondary">#1e1e2e</color>
+    <color name="card_background">#1e1e2e</color>
+    <color name="cosmic_black">#0a0a0a</color>
+    <color name="galaxy_blue">#4169e1</color>
+    <color name="moon_gray">#c0c0c0</color>
+    <color name="nebula_purple">#9370db</color>
+    <color name="overlay_dark">#80000000</color>
+    <color name="overlay_light">#20000000</color>
+    <color name="overlay_medium">#40000000</color>
+    <color name="primary">#1a1a2e</color>
+    <color name="primary_dark">#16213e</color>
+    <color name="primary_variant">#0f3460</color>
+    <color name="secondary">#e94560</color>
+    <color name="secondary_variant">#c44569</color>
+    <color name="slider_active">#4fc3f7</color>
+    <color name="slider_inactive">#666666</color>
+    <color name="star_blue">#87ceeb</color>
+    <color name="status_green">#4caf50</color>
+    <color name="status_orange">#ff9800</color>
+    <color name="status_red">#f44336</color>
+    <color name="status_yellow">#ffeb3b</color>
+    <color name="sun_yellow">#ffd700</color>
+    <color name="text_disabled">#666666</color>
+    <color name="text_primary">#ffffff</color>
+    <color name="text_secondary">#b0b0b0</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <string name="active">Active</string>
+    <string name="ai_features">AI Features</string>
+    <string name="ai_settings">AI Settings</string>
+    <string name="animal_tracking">Animal Tracking</string>
+    <string name="app_name">Drahms Vision</string>
+    <string name="astronomy_mode">Astronomy Mode</string>
+    <string name="bird_identification">Bird Identification</string>
+    <string name="camera">Camera</string>
+    <string name="camera_controls">Camera Controls</string>
+    <string name="camera_error">Camera error occurred</string>
+    <string name="camera_permission_required">Camera permission is required for this app to function</string>
+    <string name="camera_settings">Camera Settings</string>
+    <string name="camera_settings_title">Camera Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="celestial_objects">Celestial Objects</string>
+    <string name="connect_to_server">Connect to Server</string>
+    <string name="connected">Connected</string>
+    <string name="connected_successfully">Connected to server successfully!</string>
+    <string name="connecting">Connecting...</string>
+    <string name="connection">Connection</string>
+    <string name="connection_failed">Connection failed. Please check your network and server settings.</string>
+    <string name="constellation_guide">Constellation Guide</string>
+    <string name="delete">Delete</string>
+    <string name="disconnect_from_server">Disconnect</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="error">Error</string>
+    <string name="exposure">Exposure</string>
+    <string name="focus">Focus</string>
+    <string name="image_quality">Image Quality</string>
+    <string name="inactive">Inactive</string>
+    <string name="info">Info</string>
+    <string name="insect_identification">Insect Identification</string>
+    <string name="loading">Loading...</string>
+    <string name="location_permission_required">Location permission is required for astronomy features</string>
+    <string name="motion">🎯 Motion</string>
+    <string name="motion_detection">Motion Detection</string>
+    <string name="motion_sensitivity">Motion Sensitivity</string>
+    <string name="object_tracking">Object Tracking</string>
+    <string name="ok">OK</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="photo">📸 Photo</string>
+    <string name="photo_captured">Photo captured successfully!</string>
+    <string name="plant_identification">Plant Identification</string>
+    <string name="processing">Processing...</string>
+    <string name="record_video">Record Video</string>
+    <string name="retry">Retry</string>
+    <string name="save">Save</string>
+    <string name="sensors">Sensors</string>
+    <string name="server_settings">Server Settings</string>
+    <string name="server_unreachable">Server is unreachable</string>
+    <string name="server_url">Server URL</string>
+    <string name="settings">Settings</string>
+    <string name="sky_mapping">Sky Mapping</string>
+    <string name="star_tracking">Star Tracking</string>
+    <string name="start_camera">Start Camera</string>
+    <string name="stop_recording">Stop Recording</string>
+    <string name="storage_permission_required">Storage permission is required to save photos and videos</string>
+    <string name="success">Success</string>
+    <string name="switch_camera">Switch Camera</string>
+    <string name="system_status">System Status</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="track">🎯 Track</string>
+    <string name="tracking_accuracy">Tracking Accuracy</string>
+    <string name="video">🎥 Video</string>
+    <string name="video_quality">Video Quality</string>
+    <string name="video_recording_started">Video recording started</string>
+    <string name="video_recording_stopped">Video recording stopped</string>
+    <string name="warning">Warning</string>
+    <string name="wildlife_mode">Wildlife Mode</string>
+    <string name="zoom">Zoom</string>
+    <style name="Base.Theme.DrahmsVisionAstronomy" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.DrahmsVisionAstronomy" parent="Base.Theme.DrahmsVisionAstronomy"/>
+</resources>

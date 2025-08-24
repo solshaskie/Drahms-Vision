@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.drahms.vision.astronomy.app-mergeDebugResources-31:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Ashley\\.gradle\\caches\\8.13\\transforms\\709d7fe98bf3d196035fb33626a4924c\\transformed\\appcompat-1.7.1\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,174 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.drahms.vision.astronomy"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="33"
+9        android:targetSdkVersion="36" />
+10
+11    <uses-permission android:name="android.permission.CAMERA" />
+11-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:5:5-65
+11-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:5:22-62
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:6:5-67
+12-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:7:5-79
+13-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:7:22-76
+14    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+14-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:8:5-79
+14-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:8:22-76
+15    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+15-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:9:5-81
+15-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:9:22-78
+16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+16-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:10:5-81
+16-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:10:22-78
+17    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+17-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:11:5-80
+17-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:11:22-77
+18
+19    <uses-feature
+19-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:13:5-84
+20        android:name="android.hardware.camera"
+20-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:13:19-57
+21        android:required="true" />
+21-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:13:58-81
+22    <uses-feature
+22-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:14:5-95
+23        android:name="android.hardware.camera.autofocus"
+23-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:14:19-67
+24        android:required="false" />
+24-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:14:68-92
+25
+26    <permission
+26-->[androidx.core:core:1.17.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\a62b603789c6e4530ad969fb31cec822\transformed\core-1.17.0\AndroidManifest.xml:22:5-24:47
+27        android:name="com.drahms.vision.astronomy.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+27-->[androidx.core:core:1.17.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\a62b603789c6e4530ad969fb31cec822\transformed\core-1.17.0\AndroidManifest.xml:23:9-81
+28        android:protectionLevel="signature" />
+28-->[androidx.core:core:1.17.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\a62b603789c6e4530ad969fb31cec822\transformed\core-1.17.0\AndroidManifest.xml:24:9-44
+29
+30    <uses-permission android:name="com.drahms.vision.astronomy.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+30-->[androidx.core:core:1.17.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\a62b603789c6e4530ad969fb31cec822\transformed\core-1.17.0\AndroidManifest.xml:26:5-97
+30-->[androidx.core:core:1.17.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\a62b603789c6e4530ad969fb31cec822\transformed\core-1.17.0\AndroidManifest.xml:26:22-94
+31
+32    <application
+32-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:16:5-41:19
+33        android:allowBackup="true"
+33-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:17:9-35
+34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+34-->[androidx.core:core:1.17.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\a62b603789c6e4530ad969fb31cec822\transformed\core-1.17.0\AndroidManifest.xml:28:18-86
+35        android:dataExtractionRules="@xml/data_extraction_rules"
+35-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:18:9-65
+36        android:debuggable="true"
+37        android:extractNativeLibs="false"
+38        android:fullBackupContent="@xml/backup_rules"
+38-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:19:9-54
+39        android:icon="@mipmap/ic_launcher"
+39-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:20:9-43
+40        android:label="@string/app_name"
+40-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:21:9-41
+41        android:roundIcon="@mipmap/ic_launcher_round"
+41-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:22:9-54
+42        android:supportsRtl="true"
+42-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:23:9-35
+43        android:theme="@style/Theme.DrahmsVisionAstronomy" >
+43-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:24:9-59
+44        <activity
+44-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:27:9-35:20
+45            android:name="com.drahms.vision.astronomy.MainActivity"
+45-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:28:13-41
+46            android:exported="true"
+46-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:29:13-36
+47            android:theme="@style/Theme.DrahmsVisionAstronomy" >
+47-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:30:13-63
+48            <intent-filter>
+48-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:31:13-34:29
+49                <action android:name="android.intent.action.MAIN" />
+49-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:32:17-69
+49-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:32:25-66
+50
+51                <category android:name="android.intent.category.LAUNCHER" />
+51-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:33:17-77
+51-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:33:27-74
+52            </intent-filter>
+53        </activity>
+54        <activity
+54-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:37:9-40:52
+55            android:name="com.drahms.vision.astronomy.CameraActivity"
+55-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:38:13-43
+56            android:exported="false"
+56-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:39:13-37
+57            android:screenOrientation="portrait" />
+57-->C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\AndroidManifest.xml:40:13-49
+58
+59        <provider
+59-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\5e02fc86f404d148456befc8b9b138e1\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+60            android:name="androidx.startup.InitializationProvider"
+60-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\5e02fc86f404d148456befc8b9b138e1\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+61            android:authorities="com.drahms.vision.astronomy.androidx-startup"
+61-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\5e02fc86f404d148456befc8b9b138e1\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+62            android:exported="false" >
+62-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\5e02fc86f404d148456befc8b9b138e1\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+63            <meta-data
+63-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\5e02fc86f404d148456befc8b9b138e1\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+64                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+64-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\5e02fc86f404d148456befc8b9b138e1\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+65                android:value="androidx.startup" />
+65-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\5e02fc86f404d148456befc8b9b138e1\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+66            <meta-data
+66-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Ashley\.gradle\caches\8.13\transforms\f11683ae4ef7b28b9fa4032395918195\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+67                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+67-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Ashley\.gradle\caches\8.13\transforms\f11683ae4ef7b28b9fa4032395918195\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+68                android:value="androidx.startup" />
+68-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Ashley\.gradle\caches\8.13\transforms\f11683ae4ef7b28b9fa4032395918195\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+69            <meta-data
+69-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+70                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+70-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+71                android:value="androidx.startup" />
+71-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+72        </provider>
+73
+74        <receiver
+74-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+75            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+75-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+76            android:directBootAware="false"
+76-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+77            android:enabled="true"
+77-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+78            android:exported="true"
+78-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+79            android:permission="android.permission.DUMP" >
+79-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+80            <intent-filter>
+80-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+81                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+81-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+81-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+82            </intent-filter>
+83            <intent-filter>
+83-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+84                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+84-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+84-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+85            </intent-filter>
+86            <intent-filter>
+86-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+87                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+87-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+87-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+88            </intent-filter>
+89            <intent-filter>
+89-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+90                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+90-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+90-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Ashley\.gradle\caches\8.13\transforms\6f32812172f51259f4d1b83ee6ec226b\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+91            </intent-filter>
+92        </receiver>
+93    </application>
+94
+95</manifest>

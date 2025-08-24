@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res"><file name="ic_launcher_background" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_launcher_background.xml" qualifiers="" type="drawable"/><file name="ic_launcher_foreground" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_launcher_foreground.xml" qualifiers="" type="drawable"/><file name="ic_telescope" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_telescope.xml" qualifiers="" type="drawable"/><file name="activity_camera" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\layout\activity_camera.xml" qualifiers="" type="layout"/><file name="activity_main" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\layout\activity_main.xml" qualifiers="" type="layout"/><file name="activity_settings" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\layout\activity_settings.xml" qualifiers="" type="layout"/><file name="ic_launcher" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-anydpi\ic_launcher.xml" qualifiers="anydpi-v4" type="mipmap"/><file name="ic_launcher_round" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-anydpi\ic_launcher_round.xml" qualifiers="anydpi-v4" type="mipmap"/><file name="ic_launcher" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-hdpi\ic_launcher.webp" qualifiers="hdpi-v4" type="mipmap"/><file name="ic_launcher_round" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-hdpi\ic_launcher_round.webp" qualifiers="hdpi-v4" type="mipmap"/><file name="ic_launcher" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-mdpi\ic_launcher.webp" qualifiers="mdpi-v4" type="mipmap"/><file name="ic_launcher_round" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-mdpi\ic_launcher_round.webp" qualifiers="mdpi-v4" type="mipmap"/><file name="ic_launcher" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-xhdpi\ic_launcher.webp" qualifiers="xhdpi-v4" type="mipmap"/><file name="ic_launcher_round" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-xhdpi\ic_launcher_round.webp" qualifiers="xhdpi-v4" type="mipmap"/><file name="ic_launcher" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-xxhdpi\ic_launcher.webp" qualifiers="xxhdpi-v4" type="mipmap"/><file name="ic_launcher_round" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-xxhdpi\ic_launcher_round.webp" qualifiers="xxhdpi-v4" type="mipmap"/><file name="ic_launcher" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-xxxhdpi\ic_launcher.webp" qualifiers="xxxhdpi-v4" type="mipmap"/><file name="ic_launcher_round" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\mipmap-xxxhdpi\ic_launcher_round.webp" qualifiers="xxxhdpi-v4" type="mipmap"/><file path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\values\arrays.xml" qualifiers=""><string-array name="image_quality_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Ultra High</item>
+    </string-array><string-array name="image_quality_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>ultra_high</item>
+    </string-array><string-array name="video_quality_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Ultra High</item>
+    </string-array><string-array name="video_quality_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>ultra_high</item>
+    </string-array><string-array name="motion_sensitivity_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Very High</item>
+    </string-array><string-array name="motion_sensitivity_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>very_high</item>
+    </string-array><string-array name="tracking_accuracy_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Ultra High</item>
+    </string-array><string-array name="tracking_accuracy_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>ultra_high</item>
+    </string-array><string-array name="camera_mode_entries">
+        <item>Auto</item>
+        <item>Manual</item>
+        <item>Night</item>
+        <item>Astronomy</item>
+        <item>Wildlife</item>
+    </string-array><string-array name="camera_mode_values">
+        <item>auto</item>
+        <item>manual</item>
+        <item>night</item>
+        <item>astronomy</item>
+        <item>wildlife</item>
+    </string-array><string-array name="focus_mode_entries">
+        <item>Auto</item>
+        <item>Manual</item>
+        <item>Continuous</item>
+        <item>Macro</item>
+        <item>Infinity</item>
+    </string-array><string-array name="focus_mode_values">
+        <item>auto</item>
+        <item>manual</item>
+        <item>continuous</item>
+        <item>macro</item>
+        <item>infinity</item>
+    </string-array><string-array name="exposure_mode_entries">
+        <item>Auto</item>
+        <item>Manual</item>
+        <item>Shutter Priority</item>
+        <item>Aperture Priority</item>
+        <item>Program</item>
+    </string-array><string-array name="exposure_mode_values">
+        <item>auto</item>
+        <item>manual</item>
+        <item>shutter_priority</item>
+        <item>aperture_priority</item>
+        <item>program</item>
+    </string-array><string-array name="white_balance_entries">
+        <item>Auto</item>
+        <item>Daylight</item>
+        <item>Cloudy</item>
+        <item>Tungsten</item>
+        <item>Fluorescent</item>
+        <item>Custom</item>
+    </string-array><string-array name="white_balance_values">
+        <item>auto</item>
+        <item>daylight</item>
+        <item>cloudy</item>
+        <item>tungsten</item>
+        <item>fluorescent</item>
+        <item>custom</item>
+    </string-array><string-array name="iso_entries">
+        <item>Auto</item>
+        <item>100</item>
+        <item>200</item>
+        <item>400</item>
+        <item>800</item>
+        <item>1600</item>
+        <item>3200</item>
+        <item>6400</item>
+    </string-array><string-array name="iso_values">
+        <item>auto</item>
+        <item>100</item>
+        <item>200</item>
+        <item>400</item>
+        <item>800</item>
+        <item>1600</item>
+        <item>3200</item>
+        <item>6400</item>
+    </string-array></file><file path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\values\colors.xml" qualifiers=""><color name="primary">#1a1a2e</color><color name="primary_dark">#16213e</color><color name="primary_variant">#0f3460</color><color name="secondary">#e94560</color><color name="secondary_variant">#c44569</color><color name="background_dark">#0f0f23</color><color name="background_medium">#1a1a2e</color><color name="background_light">#16213e</color><color name="card_background">#1e1e2e</color><color name="text_primary">#ffffff</color><color name="text_secondary">#b0b0b0</color><color name="text_disabled">#666666</color><color name="accent_blue">#4fc3f7</color><color name="accent_cyan">#00bcd4</color><color name="accent_purple">#9c27b0</color><color name="accent_green">#4caf50</color><color name="accent_orange">#ff9800</color><color name="accent_red">#f44336</color><color name="status_green">#4caf50</color><color name="status_orange">#ff9800</color><color name="status_red">#f44336</color><color name="status_yellow">#ffeb3b</color><color name="button_primary">#4fc3f7</color><color name="button_secondary">#1e1e2e</color><color name="button_disabled">#666666</color><color name="slider_inactive">#666666</color><color name="slider_active">#4fc3f7</color><color name="overlay_dark">#80000000</color><color name="overlay_medium">#40000000</color><color name="overlay_light">#20000000</color><color name="black">#000000</color><color name="white">#ffffff</color><color name="transparent">#00000000</color><color name="star_blue">#87ceeb</color><color name="nebula_purple">#9370db</color><color name="galaxy_blue">#4169e1</color><color name="cosmic_black">#0a0a0a</color><color name="moon_gray">#c0c0c0</color><color name="sun_yellow">#ffd700</color></file><file path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\values\strings.xml" qualifiers=""><string name="app_name">Drahms Vision</string><string name="connect_to_server">Connect to Server</string><string name="disconnect_from_server">Disconnect</string><string name="start_camera">Start Camera</string><string name="settings">Settings</string><string name="system_status">System Status</string><string name="connection">Connection</string><string name="camera">Camera</string><string name="sensors">Sensors</string><string name="camera_controls">Camera Controls</string><string name="zoom">Zoom</string><string name="focus">Focus</string><string name="exposure">Exposure</string><string name="photo">📸 Photo</string><string name="video">🎥 Video</string><string name="ai_features">AI Features</string><string name="motion_detection">Motion Detection</string><string name="object_tracking">Object Tracking</string><string name="connected">Connected</string><string name="disconnected">Disconnected</string><string name="connecting">Connecting...</string><string name="active">Active</string><string name="inactive">Inactive</string><string name="switch_camera">Switch Camera</string><string name="camera_settings">Camera Settings</string><string name="take_photo">Take Photo</string><string name="record_video">Record Video</string><string name="stop_recording">Stop Recording</string><string name="motion">🎯 Motion</string><string name="track">🎯 Track</string><string name="server_settings">Server Settings</string><string name="server_url">Server URL</string><string name="camera_settings_title">Camera Settings</string><string name="image_quality">Image Quality</string><string name="video_quality">Video Quality</string><string name="ai_settings">AI Settings</string><string name="motion_sensitivity">Motion Sensitivity</string><string name="tracking_accuracy">Tracking Accuracy</string><string name="camera_permission_required">Camera permission is required for this app to function</string><string name="location_permission_required">Location permission is required for astronomy features</string><string name="storage_permission_required">Storage permission is required to save photos and videos</string><string name="connection_failed">Connection failed. Please check your network and server settings.</string><string name="camera_error">Camera error occurred</string><string name="permission_denied">Permission denied</string><string name="server_unreachable">Server is unreachable</string><string name="connected_successfully">Connected to server successfully!</string><string name="photo_captured">Photo captured successfully!</string><string name="video_recording_started">Video recording started</string><string name="video_recording_stopped">Video recording stopped</string><string name="astronomy_mode">Astronomy Mode</string><string name="sky_mapping">Sky Mapping</string><string name="celestial_objects">Celestial Objects</string><string name="star_tracking">Star Tracking</string><string name="constellation_guide">Constellation Guide</string><string name="wildlife_mode">Wildlife Mode</string><string name="bird_identification">Bird Identification</string><string name="animal_tracking">Animal Tracking</string><string name="plant_identification">Plant Identification</string><string name="insect_identification">Insect Identification</string><string name="ok">OK</string><string name="cancel">Cancel</string><string name="save">Save</string><string name="delete">Delete</string><string name="retry">Retry</string><string name="loading">Loading...</string><string name="processing">Processing...</string><string name="error">Error</string><string name="success">Success</string><string name="warning">Warning</string><string name="info">Info</string></file><file path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\values\themes.xml" qualifiers=""><style name="Base.Theme.DrahmsVisionAstronomy" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style><style name="Theme.DrahmsVisionAstronomy" parent="Base.Theme.DrahmsVisionAstronomy"/></file><file path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\values-night\themes.xml" qualifiers="night-v8"><style name="Base.Theme.DrahmsVisionAstronomy" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style></file><file name="backup_rules" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\xml\backup_rules.xml" qualifiers="" type="xml"/><file name="data_extraction_rules" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\xml\data_extraction_rules.xml" qualifiers="" type="xml"/><file name="preferences" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\xml\preferences.xml" qualifiers="" type="xml"/><file name="gradient_top" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\gradient_top.xml" qualifiers="" type="drawable"/><file name="ic_switch_camera" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_switch_camera.xml" qualifiers="" type="drawable"/><file name="circle_button" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\circle_button.xml" qualifiers="" type="drawable"/><file name="ic_settings" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_settings.xml" qualifiers="" type="drawable"/><file name="gradient_bottom" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\gradient_bottom.xml" qualifiers="" type="drawable"/><file name="ic_camera" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_camera.xml" qualifiers="" type="drawable"/><file name="capture_button" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\capture_button.xml" qualifiers="" type="drawable"/><file name="ic_close" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_close.xml" qualifiers="" type="drawable"/><file name="ic_delete" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_delete.xml" qualifiers="" type="drawable"/><file name="ic_error" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_error.xml" qualifiers="" type="drawable"/><file name="ic_flash" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_flash.xml" qualifiers="" type="drawable"/><file name="ic_flash_off" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_flash_off.xml" qualifiers="" type="drawable"/><file name="ic_gallery" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_gallery.xml" qualifiers="" type="drawable"/><file name="ic_grid" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_grid.xml" qualifiers="" type="drawable"/><file name="ic_info" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_info.xml" qualifiers="" type="drawable"/><file name="ic_pause" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_pause.xml" qualifiers="" type="drawable"/><file name="ic_play" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_play.xml" qualifiers="" type="drawable"/><file name="ic_rotate_left" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_rotate_left.xml" qualifiers="" type="drawable"/><file name="ic_rotate_right" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_rotate_right.xml" qualifiers="" type="drawable"/><file name="ic_share" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_share.xml" qualifiers="" type="drawable"/><file name="ic_stop" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_stop.xml" qualifiers="" type="drawable"/><file name="ic_success" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_success.xml" qualifiers="" type="drawable"/><file name="ic_timer" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_timer.xml" qualifiers="" type="drawable"/><file name="ic_warning" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_warning.xml" qualifiers="" type="drawable"/><file name="ic_zoom_in" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_zoom_in.xml" qualifiers="" type="drawable"/><file name="ic_zoom_out" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_zoom_out.xml" qualifiers="" type="drawable"/><file name="ic_bluetooth" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_bluetooth.xml" qualifiers="" type="drawable"/><file name="ic_cloud" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_cloud.xml" qualifiers="" type="drawable"/><file name="ic_compass" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_compass.xml" qualifiers="" type="drawable"/><file name="ic_gyroscope" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_gyroscope.xml" qualifiers="" type="drawable"/><file name="ic_location" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_location.xml" qualifiers="" type="drawable"/><file name="ic_mic" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_mic.xml" qualifiers="" type="drawable"/><file name="ic_mic_off" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_mic_off.xml" qualifiers="" type="drawable"/><file name="ic_moon" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_moon.xml" qualifiers="" type="drawable"/><file name="ic_photo" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_photo.xml" qualifiers="" type="drawable"/><file name="ic_planet" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_planet.xml" qualifiers="" type="drawable"/><file name="ic_rain" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_rain.xml" qualifiers="" type="drawable"/><file name="ic_snow" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_snow.xml" qualifiers="" type="drawable"/><file name="ic_star" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_star.xml" qualifiers="" type="drawable"/><file name="ic_sun" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_sun.xml" qualifiers="" type="drawable"/><file name="ic_video" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_video.xml" qualifiers="" type="drawable"/><file name="ic_visibility" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_visibility.xml" qualifiers="" type="drawable"/><file name="ic_wifi" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_wifi.xml" qualifiers="" type="drawable"/><file name="ic_wind" path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\main\res\drawable\ic_wind.xml" qualifiers="" type="drawable"/></source></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated" generated-set="generated$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\build\generated\res\resValues\debug"/></dataSet><mergedItems/></merger>
