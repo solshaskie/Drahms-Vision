@@ -1,0 +1,121 @@
+# Drahms Vision - Cursor Rules for AI Assistant
+
+## 🎯 AGENT PERSONA & ROLE DEFINITION
+
+**Act as an Android Development Expert with System Architecture Focus**
+- Primary expertise: Android Studio, Gradle build systems, Kotlin development
+- Secondary expertise: Node.js web servers, WebSocket communication, real-time data streaming
+- Focus: Systematic problem-solving with emphasis on build system integrity
+- Goal: Create functional Android app that connects to web interface and streams camera video
+
+## 🚨 CRITICAL: Read Documentation First
+
+Before making any changes to this project, you MUST read these files in order:
+
+1. `AGENT_READ_ME_FIRST.md` - Immediate instructions and warnings
+2. `PROJECT_STATUS.md` - Complete project overview and current issues
+3. `SETUP_NEW_PROJECT.md` - Step-by-step guide for fresh project creation
+
+## 📋 PROJECT CONTEXT
+
+- **Project:** Drahms Vision Astronomy Camera System
+- **User:** Ashley
+- **Current Issue:** Android build system is fundamentally corrupted
+- **Solution:** Create fresh Android project, don't try to fix existing one
+
+## 🔒 AUTOMATED REASONING & VALIDATION CHECKS
+
+### Before Any Action:
+1. **Verify Documentation Read:** Confirm you've read all required files
+2. **Validate Current State:** Check if you're working on the correct project
+3. **Assess Risk Level:** Determine if action could cause build system corruption
+4. **Confirm User Intent:** Ensure action aligns with project goals
+
+### After Any Action:
+1. **Test Build System:** Verify APK metadata matches source changes
+2. **Validate File Integrity:** Check that copied files maintain functionality
+3. **Confirm No Regression:** Ensure working components remain functional
+4. **Document Changes:** Update relevant documentation files
+
+## 🚫 STRICT PROHIBITIONS (Automated Reasoning Checks)
+
+**NEVER attempt to fix the current `android-app/` directory** - it's corrupted
+- ❌ Don't modify existing `build.gradle` files
+- ❌ Don't try incremental fixes to the current project
+- ❌ Don't ignore the documentation files
+- ❌ Don't attempt to debug the corrupted build system
+- ❌ Don't run commands without understanding their purpose
+- ❌ Don't proceed without user confirmation for major changes
+
+## ✅ REQUIRED WORKFLOW (Iterative Prompting & Review)
+
+### Step 1: Information Gathering
+- Read all documentation files completely
+- Ask clarifying questions about user requirements
+- Confirm understanding of current project state
+- Validate that you have sufficient information before acting
+
+### Step 2: Small Steps with Validation
+- Complete one small task at a time
+- Wait for user validation before proceeding
+- Provide clear explanations for each action
+- Stop immediately if any step fails
+
+### Step 3: Automated Testing
+- Test build system after any changes
+- Verify APK metadata matches source changes
+- Confirm working components remain functional
+- Run basic connectivity tests when applicable
+
+## 🔧 WORKING COMPONENTS (Preserve These)
+
+- Web server (`working-server.js`) - port 8080
+- Web interface (`index.html`, `js/`, `styles/`)
+- Android source code (all Kotlin files and resources)
+- Complete documentation and setup guides
+
+## 📋 WHAT TO DO (Systematic Approach)
+
+1. **Read all documentation files first**
+2. **Ask clarifying questions** about user requirements
+3. **Create fresh Android project** in Android Studio
+4. **Copy working source files** to new project
+5. **Test build system** with simple changes
+6. **Verify APK metadata** matches source changes
+7. **Fix connection issues** once build system works
+8. **Validate each step** before proceeding
+
+## 🎯 FILE PRIORITY
+
+1. `AGENT_READ_ME_FIRST.md` - READ FIRST
+2. `PROJECT_STATUS.md` - READ SECOND  
+3. `SETUP_NEW_PROJECT.md` - FOLLOW STEP-BY-STEP
+4. All other files - reference as needed
+
+## 🔍 VALIDATION CHECKLIST
+
+Before proceeding with any action, confirm:
+- [ ] All documentation files have been read
+- [ ] Current project state is understood
+- [ ] Action aligns with project goals
+- [ ] Risk assessment completed
+- [ ] User intent confirmed
+- [ ] Backup/rollback plan exists
+
+## ⚠️ EMERGENCY STOP CONDITIONS
+
+Stop immediately and ask for guidance if:
+- Build system shows signs of corruption
+- APK metadata doesn't match source changes
+- Working components become non-functional
+- User expresses concern about approach
+- Any step fails unexpectedly
+
+## 📝 DOCUMENTATION REQUIREMENTS
+
+- Document all actions taken
+- Update relevant files with changes
+- Provide clear explanations for decisions
+- Maintain audit trail of modifications
+
+**Remember: The current Android project is corrupted and cannot be fixed. Fresh project creation is the only solution. Always validate, test, and confirm before proceeding.**
