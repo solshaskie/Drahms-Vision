@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Server Settings -->
+    <PreferenceCategory
+        android:title="Server Settings"
+        android:key="server_settings"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:key="server_url"
+            android:title="Server URL"
+            android:summary="http://10.0.0.60:3001"
+            android:defaultValue="http://10.0.0.60:3001"
+            android:inputType="textUri"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <!-- Camera Settings -->
+    <PreferenceCategory
+        android:title="Camera Settings"
+        android:key="camera_settings"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:key="image_quality"
+            android:title="Image Quality"
+            android:summary="High"
+            android:defaultValue="high"
+            android:entries="@array/image_quality_entries"
+            android:entryValues="@array/image_quality_values"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:key="video_quality"
+            android:title="Video Quality"
+            android:summary="High"
+            android:defaultValue="high"
+            android:entries="@array/video_quality_entries"
+            android:entryValues="@array/video_quality_values"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="auto_focus"
+            android:title="Auto Focus"
+            android:summary="Automatically focus camera"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="flash_enabled"
+            android:title="Flash"
+            android:summary="Enable camera flash"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <!-- AI Settings -->
+    <PreferenceCategory
+        android:title="AI Features"
+        android:key="ai_settings"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:key="ai_enabled"
+            android:title="Enable AI Features"
+            android:summary="Enable object identification and tracking"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:key="motion_sensitivity"
+            android:title="Motion Sensitivity"
+            android:summary="Medium"
+            android:defaultValue="medium"
+            android:entries="@array/motion_sensitivity_entries"
+            android:entryValues="@array/motion_sensitivity_values"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:key="tracking_accuracy"
+            android:title="Tracking Accuracy"
+            android:summary="High"
+            android:defaultValue="high"
+            android:entries="@array/tracking_accuracy_entries"
+            android:entryValues="@array/tracking_accuracy_values"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="bird_identification"
+            android:title="Bird Identification"
+            android:summary="Enable bird species identification"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="plant_identification"
+            android:title="Plant Identification"
+            android:summary="Enable plant species identification"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="astronomy_mode"
+            android:title="Astronomy Mode"
+            android:summary="Enable celestial object identification"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <!-- Sensor Settings -->
+    <PreferenceCategory
+        android:title="Sensor Settings"
+        android:key="sensor_settings"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:key="gyroscope_enabled"
+            android:title="Gyroscope"
+            android:summary="Enable gyroscope for orientation tracking"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="compass_enabled"
+            android:title="Compass"
+            android:summary="Enable compass for direction tracking"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="accelerometer_enabled"
+            android:title="Accelerometer"
+            android:summary="Enable accelerometer for motion detection"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <!-- Storage Settings -->
+    <PreferenceCategory
+        android:title="Storage Settings"
+        android:key="storage_settings"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:key="auto_save"
+            android:title="Auto Save"
+            android:summary="Automatically save captured images"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="compress_images"
+            android:title="Compress Images"
+            android:summary="Compress images to save storage space"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

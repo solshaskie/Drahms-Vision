@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    tools:context=".CameraActivity">
+
+    <!-- Camera Preview -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/controlsPanel" />
+
+    <!-- Top Controls -->
+    <LinearLayout
+        android:id="@+id/topControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="@drawable/gradient_top"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btnSwitchCamera"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_switch_camera"
+            android:background="@drawable/circle_button"
+            android:tint="@color/text_primary"
+            android:contentDescription="Switch Camera" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_settings"
+            android:background="@drawable/circle_button"
+            android:tint="@color/text_primary"
+            android:contentDescription="Camera Settings" />
+    </LinearLayout>
+
+    <!-- Bottom Controls Panel -->
+    <LinearLayout
+        android:id="@+id/controlsPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:background="@drawable/gradient_bottom"
+        android:padding="16dp">
+
+        <!-- Camera Parameter Controls -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+            <!-- Zoom Control -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔍"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderZoom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:value="1.0"
+                    android:valueFrom="1.0"
+                    android:valueTo="10.0"
+                    app:thumbColor="@color/accent_blue"
+                    app:trackColorActive="@color/accent_blue"
+                    app:trackColorInactive="@color/slider_inactive" />
+            </LinearLayout>
+
+            <!-- Focus Control -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🎯"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderFocus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:value="0.5"
+                    android:valueFrom="0.0"
+                    android:valueTo="1.0"
+                    app:thumbColor="@color/accent_blue"
+                    app:trackColorActive="@color/accent_blue"
+                    app:trackColorInactive="@color/slider_inactive" />
+            </LinearLayout>
+
+            <!-- Exposure Control -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="☀️"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderExposure"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:value="0.5"
+                    android:valueFrom="0.0"
+                    android:valueTo="1.0"
+                    app:thumbColor="@color/accent_blue"
+                    app:trackColorActive="@color/accent_blue"
+                    app:trackColorInactive="@color/slider_inactive" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- AI Features -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <!-- Motion Detection -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🎯 Motion"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="8dp" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchMotionDetection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    app:thumbTint="@color/accent_blue"
+                    app:trackTint="@color/accent_blue" />
+            </LinearLayout>
+
+            <!-- Object Tracking -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginStart="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🎯 Track"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="8dp" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchObjectTracking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    app:thumbTint="@color/accent_blue"
+                    app:trackTint="@color/accent_blue" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Capture Controls -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Photo Capture Button -->
+            <ImageButton
+                android:id="@+id/btnCapture"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_camera"
+                android:background="@drawable/capture_button"
+                android:tint="@color/text_primary"
+                android:contentDescription="Take Photo"
+                android:layout_marginEnd="16dp" />
+
+            <!-- Video Record Button -->
+            <ImageButton
+                android:id="@+id/btnRecord"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_video"
+                android:background="@drawable/record_button"
+                android:tint="@color/text_primary"
+                android:contentDescription="Record Video"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

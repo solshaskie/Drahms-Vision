@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Image Quality Options -->
+    <string-array name="image_quality_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Ultra High</item>
+    </string-array>
+
+    <string-array name="image_quality_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>ultra_high</item>
+    </string-array>
+
+    <!-- Video Quality Options -->
+    <string-array name="video_quality_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Ultra High</item>
+    </string-array>
+
+    <string-array name="video_quality_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>ultra_high</item>
+    </string-array>
+
+    <!-- Motion Sensitivity Options -->
+    <string-array name="motion_sensitivity_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Very High</item>
+    </string-array>
+
+    <string-array name="motion_sensitivity_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>very_high</item>
+    </string-array>
+
+    <!-- Tracking Accuracy Options -->
+    <string-array name="tracking_accuracy_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Ultra High</item>
+    </string-array>
+
+    <string-array name="tracking_accuracy_values">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+        <item>ultra_high</item>
+    </string-array>
+
+    <!-- Camera Modes -->
+    <string-array name="camera_mode_entries">
+        <item>Auto</item>
+        <item>Manual</item>
+        <item>Night</item>
+        <item>Astronomy</item>
+        <item>Wildlife</item>
+    </string-array>
+
+    <string-array name="camera_mode_values">
+        <item>auto</item>
+        <item>manual</item>
+        <item>night</item>
+        <item>astronomy</item>
+        <item>wildlife</item>
+    </string-array>
+
+    <!-- Focus Modes -->
+    <string-array name="focus_mode_entries">
+        <item>Auto</item>
+        <item>Manual</item>
+        <item>Continuous</item>
+        <item>Macro</item>
+        <item>Infinity</item>
+    </string-array>
+
+    <string-array name="focus_mode_values">
+        <item>auto</item>
+        <item>manual</item>
+        <item>continuous</item>
+        <item>macro</item>
+        <item>infinity</item>
+    </string-array>
+
+    <!-- Exposure Modes -->
+    <string-array name="exposure_mode_entries">
+        <item>Auto</item>
+        <item>Manual</item>
+        <item>Shutter Priority</item>
+        <item>Aperture Priority</item>
+        <item>Program</item>
+    </string-array>
+
+    <string-array name="exposure_mode_values">
+        <item>auto</item>
+        <item>manual</item>
+        <item>shutter_priority</item>
+        <item>aperture_priority</item>
+        <item>program</item>
+    </string-array>
+
+    <!-- White Balance Options -->
+    <string-array name="white_balance_entries">
+        <item>Auto</item>
+        <item>Daylight</item>
+        <item>Cloudy</item>
+        <item>Tungsten</item>
+        <item>Fluorescent</item>
+        <item>Custom</item>
+    </string-array>
+
+    <string-array name="white_balance_values">
+        <item>auto</item>
+        <item>daylight</item>
+        <item>cloudy</item>
+        <item>tungsten</item>
+        <item>fluorescent</item>
+        <item>custom</item>
+    </string-array>
+
+    <!-- ISO Options -->
+    <string-array name="iso_entries">
+        <item>Auto</item>
+        <item>100</item>
+        <item>200</item>
+        <item>400</item>
+        <item>800</item>
+        <item>1600</item>
+        <item>3200</item>
+        <item>6400</item>
+    </string-array>
+
+    <string-array name="iso_values">
+        <item>auto</item>
+        <item>100</item>
+        <item>200</item>
+        <item>400</item>
+        <item>800</item>
+        <item>1600</item>
+        <item>3200</item>
+        <item>6400</item>
+    </string-array>
+</resources>
