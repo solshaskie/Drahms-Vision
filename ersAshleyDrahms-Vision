@@ -1,0 +1,19 @@
+[1mdiff --git a/mobile-app/build.gradle b/mobile-app/build.gradle[m
+[1mindex e239569..4470b0a 100644[m
+[1m--- a/mobile-app/build.gradle[m
+[1m+++ b/mobile-app/build.gradle[m
+[36m@@ -4,14 +4,6 @@[m [mplugins {[m
+     id 'org.jetbrains.kotlin.android' version '1.9.10' apply false[m
+ }[m
+ [m
+[31m-allprojects {[m
+[31m-    repositories {[m
+[31m-        google()[m
+[31m-        mavenCentral()[m
+[31m-        maven { url "https://jitpack.io" }[m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+ task clean(type: Delete) {[m
+     delete rootProject.buildDir[m
+ }[m
