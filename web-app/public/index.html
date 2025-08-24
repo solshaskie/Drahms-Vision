@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔭 Drahms Vision - Astronomy Camera System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-telescope"></i> Drahms Vision</h1>
+                <div class="status-indicators">
+                    <div class="status-item" id="camera-status">
+                        <i class="fas fa-camera"></i>
+                        <span>Camera: Disconnected</span>
+                    </div>
+                    <div class="status-item" id="motion-status">
+                        <i class="fas fa-eye"></i>
+                        <span>Motion: Inactive</span>
+                    </div>
+                    <div class="status-item" id="tracking-status">
+                        <i class="fas fa-crosshairs"></i>
+                        <span>Tracking: Off</span>
+                    </div>
+                    <div class="status-item" id="identification-status">
+                        <i class="fas fa-brain"></i>
+                        <span>AI: Ready</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Camera Feed Section -->
+            <section class="camera-section">
+                <div class="camera-container">
+                    <div class="camera-feed" id="camera-feed">
+                        <div class="camera-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <p>Camera Feed</p>
+                            <button class="connect-btn" id="connect-camera">
+                                <i class="fas fa-plug"></i> Connect Camera
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Camera Controls -->
+                    <div class="camera-controls">
+                        <div class="control-group">
+                            <h3>Camera Settings</h3>
+                            <div class="control-row">
+                                <label>Zoom:</label>
+                                <input type="range" id="zoom-control" min="1" max="10" value="1">
+                                <span id="zoom-value">1x</span>
+                            </div>
+                            <div class="control-row">
+                                <label>Focus:</label>
+                                <input type="range" id="focus-control" min="0" max="100" value="50">
+                                <span id="focus-value">50%</span>
+                            </div>
+                            <div class="control-row">
+                                <label>Exposure:</label>
+                                <input type="range" id="exposure-control" min="0" max="100" value="50">
+                                <span id="exposure-value">50%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <h3>Capture</h3>
+                            <div class="capture-buttons">
+                                <button class="capture-btn photo" id="capture-photo">
+                                    <i class="fas fa-camera"></i> Photo
+                                </button>
+                                <button class="capture-btn video" id="capture-video">
+                                    <i class="fas fa-video"></i> Video
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Astronomy Section -->
+            <section class="astronomy-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-star"></i> Astronomy</h2>
+                </div>
+                
+                <div class="astronomy-content">
+                    <div class="sky-map" id="sky-map">
+                        <div class="map-placeholder">
+                            <i class="fas fa-star"></i>
+                            <p>Sky Map</p>
+                        </div>
+                    </div>
+                    
+                    <div class="celestial-objects">
+                        <h3>Visible Objects</h3>
+                        <div class="objects-list" id="objects-list">
+                            <!-- Objects will be populated by JavaScript -->
+                        </div>
+                        
+                        <div class="search-section">
+                            <input type="text" id="object-search" placeholder="Search for stars, planets...">
+                            <button id="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wildlife Section -->
+            <section class="wildlife-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-dove"></i> Wildlife & AI Identification</h2>
+                </div>
+                
+                <div class="wildlife-content">
+                    <div class="motion-detection">
+                        <h3>Motion Detection</h3>
+                        <div class="motion-controls">
+                            <button class="motion-btn" id="toggle-motion">
+                                <i class="fas fa-eye"></i> Enable Motion
+                            </button>
+                            <button class="tracking-btn" id="toggle-tracking">
+                                <i class="fas fa-crosshairs"></i> Enable Tracking
+                            </button>
+                            <button class="identify-btn" id="identify-object">
+                                <i class="fas fa-brain"></i> Identify Object
+                            </button>
+                        </div>
+                        
+                        <div class="detection-area" id="detection-area">
+                            <div class="detection-overlay">
+                                <div class="detection-box" id="detection-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="identification-panel">
+                        <h3>Multi-API Object Identification</h3>
+                        <div class="api-status" id="api-status">
+                            <div class="api-item">
+                                <span>eBird:</span>
+                                <span class="status-ok">Ready</span>
+                            </div>
+                            <div class="api-item">
+                                <span>iNaturalist:</span>
+                                <span class="status-ok">Ready</span>
+                            </div>
+                            <div class="api-item">
+                                <span>PlantNet:</span>
+                                <span class="status-ok">Ready</span>
+                            </div>
+                            <div class="api-item">
+                                <span>NASA:</span>
+                                <span class="status-ok">Ready</span>
+                            </div>
+                        </div>
+                        
+                        <div class="identification-results" id="identification-results">
+                            <div class="no-results">
+                                <i class="fas fa-search"></i>
+                                <p>No objects identified</p>
+                                <small>Click "Identify Object" to start AI analysis</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Image Gallery -->
+            <section class="gallery-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-images"></i> Gallery</h2>
+                </div>
+                
+                <div class="gallery-content">
+                    <div class="gallery-grid" id="gallery-grid">
+                        <!-- Images will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <div class="sidebar-section">
+                    <h3>Quick Actions</h3>
+                    <button class="sidebar-btn" id="night-mode">
+                        <i class="fas fa-moon"></i> Night Mode
+                    </button>
+                    <button class="sidebar-btn" id="auto-focus">
+                        <i class="fas fa-crosshairs"></i> Auto Focus
+                    </button>
+                    <button class="sidebar-btn" id="image-enhance">
+                        <i class="fas fa-magic"></i> Enhance Image
+                    </button>
+                    <button class="sidebar-btn" id="identify-all">
+                        <i class="fas fa-brain"></i> Identify All
+                    </button>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>AI Settings</h3>
+                    <button class="sidebar-btn" id="api-settings">
+                        <i class="fas fa-cog"></i> API Configuration
+                    </button>
+                    <button class="sidebar-btn" id="confidence-threshold">
+                        <i class="fas fa-sliders-h"></i> Confidence: 70%
+                    </button>
+                    <button class="sidebar-btn" id="context-aware">
+                        <i class="fas fa-map-marker-alt"></i> Context Aware: ON
+                    </button>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>System Status</h3>
+                    <div class="system-status">
+                        <div class="status-line">
+                            <span>Server:</span>
+                            <span class="status-ok">Connected</span>
+                        </div>
+                        <div class="status-line">
+                            <span>Camera:</span>
+                            <span class="status-error" id="camera-status-text">Disconnected</span>
+                        </div>
+                        <div class="status-line">
+                            <span>Sensors:</span>
+                            <span class="status-ok">Active</span>
+                        </div>
+                        <div class="status-line">
+                            <span>AI APIs:</span>
+                            <span class="status-ok" id="ai-status-text">Ready</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="identification-system.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

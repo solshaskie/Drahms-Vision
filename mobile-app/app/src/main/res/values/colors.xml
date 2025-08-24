@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors -->
+    <color name="primary">#1a1a2e</color>
+    <color name="primary_dark">#16213e</color>
+    <color name="primary_variant">#0f3460</color>
+    
+    <!-- Secondary Colors -->
+    <color name="secondary">#e94560</color>
+    <color name="secondary_variant">#c44569</color>
+    
+    <!-- Background Colors -->
+    <color name="background_dark">#0f0f23</color>
+    <color name="background_medium">#1a1a2e</color>
+    <color name="background_light">#16213e</color>
+    <color name="card_background">#1e1e2e</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#ffffff</color>
+    <color name="text_secondary">#b0b0b0</color>
+    <color name="text_disabled">#666666</color>
+    
+    <!-- Accent Colors -->
+    <color name="accent_blue">#4fc3f7</color>
+    <color name="accent_cyan">#00bcd4</color>
+    <color name="accent_purple">#9c27b0</color>
+    <color name="accent_green">#4caf50</color>
+    <color name="accent_orange">#ff9800</color>
+    <color name="accent_red">#f44336</color>
+    
+    <!-- Status Colors -->
+    <color name="status_green">#4caf50</color>
+    <color name="status_orange">#ff9800</color>
+    <color name="status_red">#f44336</color>
+    <color name="status_yellow">#ffeb3b</color>
+    
+    <!-- Button Colors -->
+    <color name="button_primary">#4fc3f7</color>
+    <color name="button_secondary">#1e1e2e</color>
+    <color name="button_disabled">#666666</color>
+    
+    <!-- Slider Colors -->
+    <color name="slider_inactive">#666666</color>
+    <color name="slider_active">#4fc3f7</color>
+    
+    <!-- Overlay Colors -->
+    <color name="overlay_dark">#80000000</color>
+    <color name="overlay_medium">#40000000</color>
+    <color name="overlay_light">#20000000</color>
+    
+    <!-- System Colors -->
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
+    
+    <!-- Astronomy Theme Colors -->
+    <color name="star_blue">#87ceeb</color>
+    <color name="nebula_purple">#9370db</color>
+    <color name="galaxy_blue">#4169e1</color>
+    <color name="cosmic_black">#0a0a0a</color>
+    <color name="moon_gray">#c0c0c0</color>
+    <color name="sun_yellow">#ffd700</color>
+</resources>

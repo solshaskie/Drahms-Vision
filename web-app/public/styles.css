@@ -1,0 +1,797 @@
+/* Drahms Vision Astronomy Camera System - Dark Theme */
+
+:root {
+    /* Color Palette - Astronomy Optimized */
+    --primary-bg: #0a0a0f;
+    --secondary-bg: #1a1a2e;
+    --accent-bg: #16213e;
+    --surface-bg: #0f3460;
+    
+    /* Text Colors */
+    --primary-text: #ffffff;
+    --secondary-text: #b8b8b8;
+    --accent-text: #00d4ff;
+    --success-text: #00ff88;
+    --error-text: #ff4757;
+    --warning-text: #ffa502;
+    
+    /* Accent Colors */
+    --stellar-gold: #ffd700;
+    --aurora-green: #00ff88;
+    --deep-space-blue: #00d4ff;
+    --cosmic-purple: #a855f7;
+    
+    /* UI Elements */
+    --border-color: #2a2a3e;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --overlay-color: rgba(0, 0, 0, 0.8);
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    
+    /* Border Radius */
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--primary-bg);
+    color: var(--primary-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* App Container */
+.app-container {
+    display: grid;
+    grid-template-areas: 
+        "header header"
+        "main sidebar";
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: 80px 1fr;
+    height: 100vh;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+}
+
+/* Header */
+.header {
+    grid-area: header;
+    background: var(--secondary-bg);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
+    box-shadow: 0 4px 20px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--stellar-gold);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.status-indicators {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--accent-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.status-item i {
+    color: var(--deep-space-blue);
+}
+
+/* Main Content */
+.main-content {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    overflow-y: auto;
+    padding-right: var(--spacing-md);
+}
+
+/* Sections */
+.camera-section,
+.astronomy-section,
+.wildlife-section,
+.gallery-section {
+    background: var(--secondary-bg);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 20px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+.section-header {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-header h2 {
+    color: var(--stellar-gold);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.section-header h2 i {
+    margin-right: var(--spacing-sm);
+    color: var(--deep-space-blue);
+}
+
+/* Camera Section */
+.camera-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+.camera-feed {
+    background: var(--primary-bg);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--border-color);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.camera-placeholder {
+    text-align: center;
+    color: var(--secondary-text);
+}
+
+.camera-placeholder i {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--deep-space-blue);
+}
+
+.connect-btn {
+    background: var(--aurora-green);
+    color: var(--primary-bg);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: var(--spacing-md);
+}
+
+.connect-btn:hover {
+    background: #00cc77;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+/* Camera Controls */
+.camera-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.control-group {
+    background: var(--accent-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+.control-group h3 {
+    color: var(--deep-space-blue);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.1rem;
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+}
+
+.control-row label {
+    min-width: 80px;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+
+.control-row input[type="range"] {
+    flex: 1;
+    height: 6px;
+    background: var(--border-color);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.control-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--deep-space-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.control-row span {
+    min-width: 50px;
+    text-align: right;
+    color: var(--accent-text);
+    font-weight: 600;
+}
+
+/* Capture Buttons */
+.capture-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.capture-btn {
+    flex: 1;
+    padding: var(--spacing-md);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.capture-btn.photo {
+    background: var(--stellar-gold);
+    color: var(--primary-bg);
+}
+
+.capture-btn.video {
+    background: var(--cosmic-purple);
+    color: var(--primary-text);
+}
+
+.capture-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.capture-btn.video:hover {
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+}
+
+/* Astronomy Section */
+.astronomy-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+.sky-map {
+    background: var(--primary-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-placeholder {
+    text-align: center;
+    color: var(--secondary-text);
+}
+
+.map-placeholder i {
+    font-size: 2.5rem;
+    color: var(--stellar-gold);
+    margin-bottom: var(--spacing-sm);
+}
+
+.celestial-objects {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.objects-list {
+    background: var(--accent-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    min-height: 200px;
+    padding: var(--spacing-md);
+}
+
+.search-section {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.search-section input {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--primary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--primary-text);
+    font-size: 0.9rem;
+}
+
+.search-section input::placeholder {
+    color: var(--secondary-text);
+}
+
+.search-section button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--deep-space-blue);
+    color: var(--primary-bg);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-section button:hover {
+    background: #00b8e6;
+}
+
+/* Wildlife Section */
+.wildlife-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+.motion-detection,
+.identification-panel {
+    background: var(--accent-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+.motion-controls {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.motion-btn,
+.tracking-btn,
+.identify-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--surface-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.motion-btn:hover,
+.tracking-btn:hover {
+    background: var(--deep-space-blue);
+    color: var(--primary-bg);
+}
+
+.identify-btn {
+    background: var(--cosmic-purple);
+    color: var(--primary-text);
+}
+
+.identify-btn:hover {
+    background: #9333ea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+}
+
+.detection-area {
+    background: var(--primary-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    min-height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.detection-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.detection-box {
+    position: absolute;
+    border: 2px solid var(--aurora-green);
+    background: rgba(0, 255, 136, 0.1);
+    border-radius: var(--border-radius);
+    display: none;
+}
+
+/* API Status */
+.api-status {
+    margin-bottom: var(--spacing-md);
+}
+
+.api-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--primary-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+.identification-results {
+    min-height: 150px;
+}
+
+.no-results {
+    text-align: center;
+    color: var(--secondary-text);
+    padding: var(--spacing-lg);
+}
+
+.no-results i {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--deep-space-blue);
+}
+
+.no-results small {
+    display: block;
+    margin-top: var(--spacing-sm);
+    color: var(--secondary-text);
+    font-size: 0.8rem;
+}
+
+/* Gallery Section */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* Sidebar */
+.sidebar {
+    grid-area: sidebar;
+    background: var(--secondary-bg);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 20px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    overflow-y: auto;
+}
+
+.sidebar-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.sidebar-section h3 {
+    color: var(--deep-space-blue);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-sm);
+}
+
+.sidebar-btn {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--accent-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: var(--spacing-sm);
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.sidebar-btn:hover {
+    background: var(--deep-space-blue);
+    color: var(--primary-bg);
+    transform: translateX(4px);
+}
+
+.system-status {
+    background: var(--accent-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-color);
+}
+
+.status-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9rem;
+}
+
+.status-ok {
+    color: var(--success-text);
+}
+
+.status-error {
+    color: var(--error-text);
+}
+
+.status-warning {
+    color: var(--warning-text);
+}
+
+/* Identification Results */
+.identification-result {
+    background: var(--primary-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    border: 1px solid var(--border-color);
+}
+
+.identification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.identification-name {
+    font-weight: 600;
+    color: var(--stellar-gold);
+}
+
+.identification-confidence {
+    background: var(--deep-space-blue);
+    color: var(--primary-bg);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.identification-details {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+}
+
+.identification-apis {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+}
+
+.api-badge {
+    background: var(--accent-bg);
+    color: var(--deep-space-blue);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    font-size: 0.7rem;
+    border: 1px solid var(--border-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .app-container {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "main";
+    }
+    
+    .sidebar {
+        display: none;
+    }
+    
+    .camera-container,
+    .astronomy-content,
+    .wildlife-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        padding: var(--spacing-sm);
+        gap: var(--spacing-sm);
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .status-indicators {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .motion-controls {
+        flex-direction: column;
+    }
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px var(--deep-space-blue); }
+    50% { box-shadow: 0 0 20px var(--deep-space-blue); }
+    100% { box-shadow: 0 0 5px var(--deep-space-blue); }
+}
+
+.glow {
+    animation: glow 2s infinite;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease;
+}
+
+.notification.success {
+    background: var(--aurora-green);
+    color: var(--primary-bg);
+}
+
+.notification.error {
+    background: var(--error-text);
+}
+
+.notification.warning {
+    background: var(--warning-text);
+    color: var(--primary-bg);
+}
+
+.notification.info {
+    background: var(--deep-space-blue);
+    color: var(--primary-bg);
+}
+
+.notification button {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+}
+
+/* Celestial Object Styles */
+.celestial-object {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    background: var(--primary-bg);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.celestial-object.highlight {
+    background: var(--deep-space-blue);
+    color: var(--primary-bg);
+}
+
+.object-type {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+    margin-left: 8px;
+}
+
+.object-status.visible {
+    color: var(--success-text);
+}
+
+.object-status.hidden {
+    color: var(--error-text);
+}
+
+/* Camera Active State */
+.camera-active {
+    text-align: center;
+    color: var(--success-text);
+}
+
+.camera-active i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Gallery Items */
+.gallery-item {
+    background: var(--accent-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.gallery-placeholder {
+    padding: 2rem;
+    text-align: center;
+    color: var(--secondary-text);
+}
+
+.gallery-placeholder i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--deep-space-blue);
+}
