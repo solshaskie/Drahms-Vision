@@ -111,11 +111,43 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton("Test Connection") { _, _ ->
                 // Test the connection
-                connectToWebApp()
+                testServerConnection()
             }
             .create()
         
         settingsDialog.show()
+    }
+    
+    private fun testServerConnection() {
+        Toast.makeText(this, "Testing server connection...", Toast.LENGTH_SHORT).show()
+        
+        // Run network test in background
+        Thread {
+            try {
+                val url = java.net.URL("http://10.0.0.60:3003/api/status")
+                val connection = url.openConnection() as java.net.HttpURLConnection
+                connection.connectTimeout = 5000
+                connection.readTimeout = 5000
+                connection.requestMethod = "GET"
+                
+                val responseCode = connection.responseCode
+                
+                runOnUiThread {
+                    if (responseCode == 200) {
+                        Toast.makeText(this, "✅ Server is reachable!", Toast.LENGTH_LONG).show()
+                        // Now try WebSocket connection
+                        connectToWebApp()
+                    } else {
+                        Toast.makeText(this, "❌ Server responded with code: $responseCode", Toast.LENGTH_LONG).show()
+                    }
+                }
+                
+            } catch (e: Exception) {
+                runOnUiThread {
+                    Toast.makeText(this, "❌ Cannot reach server: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+        }.start()
     }
     
     private fun connectToWebApp() {
@@ -123,18 +155,21 @@ class MainActivity : AppCompatActivity() {
         
         // Create WebSocket manager and connect
         val webSocketManager = WebSocketManager()
-        webSocketManager.connect()
         
-        // Update UI after a short delay to show connection attempt
-        binding.connectionStatus.postDelayed({
-            if (webSocketManager.isConnected()) {
-                updateConnectionStatus(true)
-                Toast.makeText(this, "Connected to web app!", Toast.LENGTH_SHORT).show()
-            } else {
-                updateConnectionStatus(false)
-                Toast.makeText(this, "Connection failed. Check network.", Toast.LENGTH_SHORT).show()
+        // Set up connection callback
+        webSocketManager.setConnectionCallback { connected ->
+            runOnUiThread {
+                if (connected) {
+                    updateConnectionStatus(true)
+                    Toast.makeText(this, "✅ Connected to web app!", Toast.LENGTH_LONG).show()
+                } else {
+                    updateConnectionStatus(false)
+                    Toast.makeText(this, "❌ Connection failed. Check network and server.", Toast.LENGTH_LONG).show()
+                }
             }
-        }, 2000) // 2 second delay
+        }
+        
+        webSocketManager.connect()
     }
     
     private fun updateConnectionStatus(connected: Boolean) {

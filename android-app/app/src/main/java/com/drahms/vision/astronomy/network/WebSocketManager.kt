@@ -9,35 +9,61 @@ class WebSocketManager {
     
     companion object {
         private const val TAG = "WebSocketManager"
-        private const val SERVER_URL = "http://10.0.2.2:3003"  // 10.0.2.2 is localhost for Android emulator
+        private const val SERVER_URL = "http://10.0.0.60:3003"  // Your computer's IP address
     }
     
     private var socket: Socket? = null
     private var isConnected = false
+    private var connectionCallback: ((Boolean) -> Unit)? = null
+    
+    fun setConnectionCallback(callback: (Boolean) -> Unit) {
+        connectionCallback = callback
+    }
     
     fun connect() {
         try {
-            socket = IO.socket(SERVER_URL)
+            Log.d(TAG, "Attempting to connect to: $SERVER_URL")
+            
+            val options = IO.Options().apply {
+                timeout = 10000 // 10 second timeout
+                reconnection = true
+                reconnectionAttempts = 5
+                reconnectionDelay = 1000
+            }
+            
+            socket = IO.socket(SERVER_URL, options)
             
             socket?.on(Socket.EVENT_CONNECT) {
-                Log.d(TAG, "Connected to server")
+                Log.d(TAG, "✅ Successfully connected to server")
                 isConnected = true
+                connectionCallback?.invoke(true)
             }
             
             socket?.on(Socket.EVENT_DISCONNECT) {
-                Log.d(TAG, "Disconnected from server")
+                Log.d(TAG, "❌ Disconnected from server")
                 isConnected = false
+                connectionCallback?.invoke(false)
             }
             
             socket?.on(Socket.EVENT_CONNECT_ERROR) { args ->
-                Log.e(TAG, "Connection error: ${args[0]}")
+                val error = args.getOrNull(0)?.toString() ?: "Unknown error"
+                Log.e(TAG, "❌ Connection error: $error")
                 isConnected = false
+                connectionCallback?.invoke(false)
             }
             
+            // Note: Socket.IO reconnection events are handled automatically by the library
+            // The reconnection options we set will handle retries automatically
+            
+            Log.d(TAG, "Initiating connection...")
             socket?.connect()
             
         } catch (e: URISyntaxException) {
-            Log.e(TAG, "Invalid server URL: $SERVER_URL", e)
+            Log.e(TAG, "❌ Invalid server URL: $SERVER_URL", e)
+            connectionCallback?.invoke(false)
+        } catch (e: Exception) {
+            Log.e(TAG, "❌ Unexpected error during connection", e)
+            connectionCallback?.invoke(false)
         }
     }
     
