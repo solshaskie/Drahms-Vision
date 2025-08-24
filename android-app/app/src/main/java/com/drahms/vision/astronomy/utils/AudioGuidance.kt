@@ -1,4 +1,4 @@
-package com.astronomy.camera.utils
+package com.drahms.vision.astronomy.utils
 
 import android.content.Context
 import android.media.MediaPlayer

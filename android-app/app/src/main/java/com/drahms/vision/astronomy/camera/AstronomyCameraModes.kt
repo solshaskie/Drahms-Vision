@@ -1,4 +1,4 @@
-package com.astronomy.camera.camera
+package com.drahms.vision.astronomy.camera
 
 import android.content.Context
 import android.util.Log

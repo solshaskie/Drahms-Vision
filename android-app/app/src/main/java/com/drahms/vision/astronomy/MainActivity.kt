@@ -1,4 +1,4 @@
-package com.astronomy.camera
+package com.drahms.vision.astronomy
 
 import android.Manifest
 import android.content.Intent
@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.astronomy.camera.databinding.ActivityMainBinding
-import com.astronomy.camera.network.WebSocketManager
+import com.drahms.vision.astronomy.databinding.ActivityMainBinding
+import com.drahms.vision.astronomy.network.WebSocketManager
 
 class MainActivity : AppCompatActivity() {
     

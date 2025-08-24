@@ -1,4 +1,4 @@
-package com.astronomy.camera.sensors
+package com.drahms.vision.astronomy.sensors
 
 import android.content.Context
 import android.hardware.Sensor

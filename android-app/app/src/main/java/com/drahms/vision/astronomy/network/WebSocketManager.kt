@@ -1,4 +1,4 @@
-package com.astronomy.camera.network
+package com.drahms.vision.astronomy.network
 
 import android.util.Log
 import io.socket.client.IO

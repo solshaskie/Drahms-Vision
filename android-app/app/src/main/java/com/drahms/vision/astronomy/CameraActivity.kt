@@ -1,4 +1,4 @@
-package com.astronomy.camera
+package com.drahms.vision.astronomy
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -10,13 +10,13 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.astronomy.camera.databinding.ActivityCameraBinding
-import com.astronomy.camera.camera.A25CameraManager
-import com.astronomy.camera.camera.AstronomyCameraModes
-import com.astronomy.camera.sensors.SensorDataManager
-import com.astronomy.camera.network.WebSocketManager
-import com.astronomy.camera.utils.AudioGuidance
-import com.astronomy.camera.utils.PowerManager
+import com.drahms.vision.astronomy.databinding.ActivityCameraBinding
+import com.drahms.vision.astronomy.camera.A25CameraManager
+import com.drahms.vision.astronomy.camera.AstronomyCameraModes
+import com.drahms.vision.astronomy.sensors.SensorDataManager
+import com.drahms.vision.astronomy.network.WebSocketManager
+import com.drahms.vision.astronomy.utils.AudioGuidance
+import com.drahms.vision.astronomy.utils.PowerManager
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
