@@ -15,6 +15,7 @@ import com.drahms.vision.astronomy.network.WebSocketManager
 import com.drahms.vision.astronomy.service.CameraService
 import com.drahms.vision.astronomy.utils.PermissionHelper
 import com.drahms.vision.astronomy.utils.SensorManager
+import com.drahms.vision.astronomy.utils.NetworkUtils
 import io.socket.client.IO
 import io.socket.client.Socket
 import kotlinx.coroutines.CoroutineScope
@@ -31,10 +32,11 @@ class MainActivity : AppCompatActivity() {
     
     private var isConnected = false
     private var isCameraActive = false
+    private var serverUrl = DEFAULT_SERVER_URL
     
             companion object {
             private const val TAG = "MainActivity"
-            private const val SERVER_URL = "http://10.0.0.60:3001" // Updated to new server port
+            private const val DEFAULT_SERVER_URL = "http://10.0.0.60:3001" // Fallback URL
         }
     
     // Permission request launcher
@@ -62,7 +64,11 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun initializeManagers() {
-        webSocketManager = WebSocketManager(SERVER_URL)
+        // Discover server URL dynamically
+        serverUrl = NetworkUtils.discoverServer(this) ?: DEFAULT_SERVER_URL
+        Log.d(TAG, "Using server URL: $serverUrl")
+        
+        webSocketManager = WebSocketManager(serverUrl)
         sensorManager = SensorManager(this)
         permissionHelper = PermissionHelper(this)
     }
@@ -174,7 +180,7 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun connectToServer() {
-        Log.d(TAG, "🔌 Connecting to server: $SERVER_URL")
+        Log.d(TAG, "🔌 Connecting to server: $serverUrl")
         
         binding.btnConnect.text = "Connecting..."
         binding.btnConnect.isEnabled = false

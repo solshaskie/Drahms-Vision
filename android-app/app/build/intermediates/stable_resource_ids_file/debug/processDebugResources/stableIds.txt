@@ -1050,7 +1050,6 @@ com.drahms.vision.astronomy:macro/m3_comp_checkbox_selected_icon_color = 0x7f0d0
 com.drahms.vision.astronomy:layout/material_timepicker_textinput_display = 0x7f0c0043
 com.drahms.vision.astronomy:style/Widget.Design.TabLayout = 0x7f11033b
 com.drahms.vision.astronomy:layout/material_timepicker = 0x7f0c0041
-com.drahms.vision.astronomy:xml/preferences = 0x7f130002
 com.drahms.vision.astronomy:styleable/View = 0x7f120095
 com.drahms.vision.astronomy:layout/material_time_chip = 0x7f0c003f
 com.drahms.vision.astronomy:macro/m3_comp_outlined_text_field_disabled_input_text_color = 0x7f0d00b2

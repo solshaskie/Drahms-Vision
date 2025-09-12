@@ -66,20 +66,21 @@ The web interface will be available at: **http://localhost:3001**
 
 ### 2. **Build and Install Android App**
 ```bash
-cd mobile-app
+cd android-app
 # Open in Android Studio
 # Build and install on device
 ```
 
-### 3. **Configure Network**
-- Ensure both devices are on the same network
-- Update server URL in Android app to match your computer's IP
-- Default: `http://10.0.0.60:3001`
+### 3. **Automatic Network Discovery**
+- **No manual configuration needed!** 
+- Android app automatically discovers the server on your network
+- Supports common network ranges: 192.168.x.x, 10.0.0.x
+- Fallback to default: `http://10.0.0.60:3001`
 
 ## 📁 Project Structure
 
 ```
-drahms-vision-astronomy/
+drahms-vision/
 ├── 📱 mobile-app/                 # Android application
 │   ├── app/src/main/
 │   │   ├── java/com/drahms/vision/astronomy/

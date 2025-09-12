@@ -42,18 +42,37 @@ class DrahmsVisionApp {
     }
     
     connectWebSocket() {
-        this.socket = io();
+        this.socket = io({
+            transports: ['websocket', 'polling'],
+            timeout: 10000,
+            forceNew: true
+        });
         
         this.socket.on('connect', () => {
             console.log('🔭 Connected to Drahms Vision server');
             this.isConnected = true;
             this.updateStatus();
+            this.showNotification('✅ Connected to server', 'success');
         });
         
-        this.socket.on('disconnect', () => {
-            console.log('❌ Disconnected from server');
+        this.socket.on('disconnect', (reason) => {
+            console.log('❌ Disconnected from server:', reason);
             this.isConnected = false;
             this.updateStatus();
+            this.showNotification(`❌ Disconnected: ${reason}`, 'error');
+            
+            // Auto-reconnect after 3 seconds
+            if (reason === 'io server disconnect') {
+                setTimeout(() => {
+                    console.log('🔄 Attempting to reconnect...');
+                    this.connectWebSocket();
+                }, 3000);
+            }
+        });
+        
+        this.socket.on('connect_error', (error) => {
+            console.error('🔌 Connection error:', error);
+            this.showNotification('❌ Connection failed - check server', 'error');
         });
         
         this.socket.on('live_feed', (data) => {
@@ -160,11 +179,33 @@ class DrahmsVisionApp {
         
         this.showNotification('🧠 Starting AI identification...', 'info');
         
-        // Simulate image data (in real app, this would come from camera)
-        const mockImageData = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD...';
+        // Get actual camera feed data if available
+        const cameraFeed = document.getElementById('camera-feed');
+        let imageData = null;
+        
+        // Try to get real image data from camera feed
+        const img = cameraFeed.querySelector('img');
+        if (img && img.src) {
+            try {
+                // Convert image to base64
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = img.naturalWidth || 640;
+                canvas.height = img.naturalHeight || 480;
+                ctx.drawImage(img, 0, 0);
+                imageData = canvas.toDataURL('image/jpeg', 0.8); // Compress to 80%
+            } catch (error) {
+                console.warn('Could not extract image from camera feed:', error);
+            }
+        }
+        
+        // Fallback to mock data
+        if (!imageData) {
+            imageData = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD...';
+        }
         
         try {
-            const result = await this.identificationSystem.identifyWithContext(mockImageData, 'auto');
+            const result = await this.identificationSystem.identifyWithContext(imageData, 'auto');
             this.displayIdentificationResults(result);
         } catch (error) {
             console.error('Identification error:', error);

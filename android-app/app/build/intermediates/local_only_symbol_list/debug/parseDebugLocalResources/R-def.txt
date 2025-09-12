@@ -203,4 +203,3 @@ style Base.Theme.DrahmsVisionAstronomy
 style Theme.DrahmsVisionAstronomy
 xml backup_rules
 xml data_extraction_rules
-xml preferences

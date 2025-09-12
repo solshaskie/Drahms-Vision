@@ -1,6 +1,0 @@
-com.drahms.vision.astronomy.test.app-core-1.7.0-0 C:\Users\Ashley\.gradle\caches\8.13\transforms\0f6163678ea399053d133c7150567b27\transformed\core-1.7.0\res
-com.drahms.vision.astronomy.test.app-tracing-1.2.0-1 C:\Users\Ashley\.gradle\caches\8.13\transforms\928d3ced009d3cf42dac0c545d0cce51\transformed\tracing-1.2.0\res
-com.drahms.vision.astronomy.test.app-androidTest-2 C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\build\generated\res\resValues\androidTest\debug
-com.drahms.vision.astronomy.test.app-mergeDebugAndroidTestResources-3 C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.drahms.vision.astronomy.test.app-mergeDebugAndroidTestResources-4 C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.drahms.vision.astronomy.test.app-debugAndroidTest-5 C:\Users\Ashley\Drahms-Vision-Astronomy\android-app\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
