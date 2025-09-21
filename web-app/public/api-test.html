@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - Drahms Vision</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ui-components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .test-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        
+        .test-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
+        }
+        
+        .test-card h3 {
+            color: #00ffff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .test-button {
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        
+        .test-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .test-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .test-result {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #00ffff;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-success { background: #00ff00; }
+        .status-error { background: #ff0000; }
+        .status-warning { background: #ffaa00; }
+        .status-info { background: #00ffff; }
+        
+        .api-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .api-status-item {
+            background: #1a1a2e;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="hero-section">
+            <h1><i class="fas fa-vial"></i> API Integration Test Suite</h1>
+            <p>Test all your configured APIs to ensure they're working correctly</p>
+        </div>
+        
+        <div class="test-grid">
+            <!-- NASA API Test -->
+            <div class="test-card">
+                <h3><i class="fas fa-rocket"></i> NASA APIs</h3>
+                <p>Test NASA's Astronomy Picture of the Day and other space data</p>
+                <button class="test-button" onclick="testNASA()">Test NASA APOD</button>
+                <button class="test-button" onclick="testNASAEPIC()">Test NASA EPIC</button>
+                <div id="nasa-result" class="test-result" style="display: none;"></div>
+            </div>
+            
+            <!-- Weather API Test -->
+            <div class="test-card">
+                <h3><i class="fas fa-cloud-sun"></i> Weather APIs</h3>
+                <p>Test OpenWeather and Open-Meteo weather data</p>
+                <button class="test-button" onclick="testOpenWeather()">Test OpenWeather</button>
+                <button class="test-button" onclick="testOpenMeteo()">Test Open-Meteo</button>
+                <div id="weather-result" class="test-result" style="display: none;"></div>
+            </div>
+            
+            <!-- Bird API Test -->
+            <div class="test-card">
+                <h3><i class="fas fa-dove"></i> Bird APIs</h3>
+                <p>Test eBird and BirdNET for bird identification</p>
+                <button class="test-button" onclick="testEBird()">Test eBird</button>
+                <button class="test-button" onclick="testBirdNET()">Test BirdNET</button>
+                <div id="bird-result" class="test-result" style="display: none;"></div>
+            </div>
+            
+            <!-- Plant API Test -->
+            <div class="test-card">
+                <h3><i class="fas fa-seedling"></i> Plant APIs</h3>
+                <p>Test PlantNet and Trefle for plant identification</p>
+                <button class="test-button" onclick="testPlantNet()">Test PlantNet</button>
+                <button class="test-button" onclick="testTrefle()">Test Trefle</button>
+                <div id="plant-result" class="test-result" style="display: none;"></div>
+            </div>
+            
+            <!-- Vision API Test -->
+            <div class="test-card">
+                <h3><i class="fas fa-eye"></i> Vision APIs</h3>
+                <p>Test Google Vision, Imagga, and Roboflow for object detection</p>
+                <button class="test-button" onclick="testGoogleVision()">Test Google Vision</button>
+                <button class="test-button" onclick="testImagga()">Test Imagga</button>
+                <button class="test-button" onclick="testRoboflow()">Test Roboflow</button>
+                <div id="vision-result" class="test-result" style="display: none;"></div>
+            </div>
+            
+            <!-- General Test -->
+            <div class="test-card">
+                <h3><i class="fas fa-cogs"></i> System Test</h3>
+                <p>Test the complete identification system</p>
+                <button class="test-button" onclick="testAllAPIs()">Test All APIs</button>
+                <button class="test-button" onclick="getAPIStatus()">Get API Status</button>
+                <div id="system-result" class="test-result" style="display: none;"></div>
+            </div>
+        </div>
+        
+        <div class="api-status" id="api-status">
+            <!-- API status will be loaded here -->
+        </div>
+    </div>
+    
+    <script src="api-keys-config.js"></script>
+    <script src="open-meteo-integration.js"></script>
+    <script src="openweather-integration.js"></script>
+    <script src="real-api-integration.js"></script>
+    <script>
+        // Initialize test system
+        let realAPI = null;
+        let openMeteo = null;
+        let openWeather = null;
+        
+        // Initialize APIs when page loads
+        window.addEventListener('load', function() {
+            initializeAPIs();
+        });
+        
+        function initializeAPIs() {
+            try {
+                // Initialize Real API Integration
+                realAPI = new RealAPIIntegration();
+                realAPI.setAPIKeys(window.API_KEYS || {});
+                
+                // Initialize Weather APIs
+                openMeteo = new OpenMeteoIntegration();
+                if (window.API_KEYS && window.API_KEYS.OPENWEATHER_API_KEY) {
+                    openWeather = new OpenWeatherIntegration(window.API_KEYS.OPENWEATHER_API_KEY);
+                }
+                
+                console.log('✅ APIs initialized successfully');
+                updateAPIStatus();
+            } catch (error) {
+                console.error('❌ Failed to initialize APIs:', error);
+            }
+        }
+        
+        function updateAPIStatus() {
+            const statusContainer = document.getElementById('api-status');
+            const status = realAPI ? realAPI.getAPIStatus() : {};
+            
+            let html = '';
+            Object.keys(status).forEach(category => {
+                Object.keys(status[category]).forEach(service => {
+                    const api = status[category][service];
+                    const statusClass = api.available ? 'status-success' : 'status-error';
+                    const statusText = api.available ? 'Available' : 'Not Available';
+                    
+                    html += `
+                        <div class="api-status-item">
+                            <span class="status-indicator ${statusClass}"></span>
+                            <strong>${api.name}</strong><br>
+                            <small>${statusText}</small>
+                        </div>
+                    `;
+                });
+            });
+            
+            statusContainer.innerHTML = html;
+        }
+        
+        function showResult(elementId, result, isError = false) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+            element.style.borderLeftColor = isError ? '#ff0000' : '#00ff00';
+        }
+        
+        async function testNASA() {
+            try {
+                showResult('nasa-result', { status: 'Testing NASA APOD...' }, false);
+                
+                const result = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${window.API_KEYS.NASA_API_KEY}`);
+                const data = await result.json();
+                
+                showResult('nasa-result', data, false);
+            } catch (error) {
+                showResult('nasa-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testNASAEPIC() {
+            try {
+                showResult('nasa-result', { status: 'Testing NASA EPIC...' }, false);
+                
+                const result = await fetch(`https://api.nasa.gov/EPIC/api/natural?api_key=${window.API_KEYS.NASA_API_KEY}`);
+                const data = await result.json();
+                
+                showResult('nasa-result', data, false);
+            } catch (error) {
+                showResult('nasa-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testOpenWeather() {
+            try {
+                showResult('weather-result', { status: 'Testing OpenWeather...' }, false);
+                
+                if (!openWeather) {
+                    throw new Error('OpenWeather API key not configured');
+                }
+                
+                const result = await openWeather.getCurrentWeather(40.7128, -74.0060);
+                showResult('weather-result', result, false);
+            } catch (error) {
+                showResult('weather-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testOpenMeteo() {
+            try {
+                showResult('weather-result', { status: 'Testing Open-Meteo...' }, false);
+                
+                const result = await openMeteo.getWeatherAndAstronomy(40.7128, -74.0060);
+                showResult('weather-result', result, false);
+            } catch (error) {
+                showResult('weather-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testEBird() {
+            try {
+                showResult('bird-result', { status: 'Testing eBird...' }, false);
+                
+                const result = await fetch('https://api.ebird.org/v2/data/obs/geo/recent?lat=40.7128&lng=-74.0060&dist=25&back=7', {
+                    headers: {
+                        'X-eBirdApiToken': window.API_KEYS.EBIRD_API_KEY
+                    }
+                });
+                
+                if (!result.ok) {
+                    throw new Error(`eBird API error: ${result.status}`);
+                }
+                
+                const data = await result.json();
+                showResult('bird-result', data, false);
+            } catch (error) {
+                showResult('bird-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testBirdNET() {
+            try {
+                showResult('bird-result', { status: 'Testing BirdNET...' }, false);
+                
+                // BirdNET requires audio file, so we'll test the endpoint
+                const result = await fetch('https://birdnet.cornell.edu/api/species');
+                
+                if (!result.ok) {
+                    throw new Error(`BirdNET API error: ${result.status}`);
+                }
+                
+                const data = await result.json();
+                showResult('bird-result', { message: 'BirdNET endpoint accessible', data: data.slice(0, 5) }, false);
+            } catch (error) {
+                showResult('bird-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testPlantNet() {
+            try {
+                showResult('plant-result', { status: 'Testing PlantNet...' }, false);
+                
+                // PlantNet requires image upload, so we'll test the endpoint
+                const result = await fetch('https://my-api.plantnet.org/v2/identify', {
+                    method: 'POST',
+                    headers: {
+                        'Api-Key': window.API_KEYS.PLANTNET_API_KEY
+                    }
+                });
+                
+                showResult('plant-result', { message: 'PlantNet endpoint accessible', status: result.status }, false);
+            } catch (error) {
+                showResult('plant-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testTrefle() {
+            try {
+                showResult('plant-result', { status: 'Testing Trefle...' }, false);
+                
+                const result = await fetch(`https://trefle.io/api/v1/species?token=${window.API_KEYS.TREFLE_API_KEY}&page=1&page_size=5`);
+                const data = await result.json();
+                
+                showResult('plant-result', data, false);
+            } catch (error) {
+                showResult('plant-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testGoogleVision() {
+            try {
+                showResult('vision-result', { status: 'Testing Google Vision...' }, false);
+                
+                // Google Vision requires image data, so we'll test the endpoint
+                const result = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${window.API_KEYS.GOOGLE_VISION_API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        requests: [{
+                            image: { content: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==' },
+                            features: [{ type: 'LABEL_DETECTION', maxResults: 1 }]
+                        }]
+                    })
+                });
+                
+                if (!result.ok) {
+                    throw new Error(`Google Vision API error: ${result.status}`);
+                }
+                
+                const data = await result.json();
+                showResult('vision-result', data, false);
+            } catch (error) {
+                showResult('vision-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testImagga() {
+            try {
+                showResult('vision-result', { status: 'Testing Imagga...' }, false);
+                
+                const auth = btoa(`${window.API_KEYS.IMAGGA_API_KEY}:${window.API_KEYS.IMAGGA_API_SECRET}`);
+                const result = await fetch('https://api.imagga.com/v2/tags?image_url=https://docs.imagga.com/static/images/docs/sample/japan-605234_1280.jpg', {
+                    headers: {
+                        'Authorization': `Basic ${auth}`
+                    }
+                });
+                
+                if (!result.ok) {
+                    throw new Error(`Imagga API error: ${result.status}`);
+                }
+                
+                const data = await result.json();
+                showResult('vision-result', data, false);
+            } catch (error) {
+                showResult('vision-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testRoboflow() {
+            try {
+                showResult('vision-result', { status: 'Testing Roboflow...' }, false);
+                
+                // Roboflow requires specific model setup, so we'll test the endpoint
+                const result = await fetch(`https://detect.roboflow.com/your-model/1?api_key=${window.API_KEYS.ROBOFLOW_API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ image: 'test' })
+                });
+                
+                showResult('vision-result', { message: 'Roboflow endpoint accessible', status: result.status }, false);
+            } catch (error) {
+                showResult('vision-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testAllAPIs() {
+            try {
+                showResult('system-result', { status: 'Testing all APIs...' }, false);
+                
+                const results = {};
+                
+                // Test each category
+                results.nasa = await realAPI.identifyAstronomicalObject(null, { latitude: 40.7128, longitude: -74.0060 });
+                results.birds = await realAPI.identifyBird(null, null, { latitude: 40.7128, longitude: -74.0060 });
+                results.plants = await realAPI.identifyPlant(null, { latitude: 40.7128, longitude: -74.0060 });
+                results.animals = await realAPI.identifyAnimal(null, { latitude: 40.7128, longitude: -74.0060 });
+                results.insects = await realAPI.identifyInsect(null, { latitude: 40.7128, longitude: -74.0060 });
+                
+                showResult('system-result', results, false);
+            } catch (error) {
+                showResult('system-result', { error: error.message }, true);
+            }
+        }
+        
+        function getAPIStatus() {
+            const status = realAPI ? realAPI.getAPIStatus() : {};
+            showResult('system-result', status, false);
+        }
+    </script>
+</body>
+</html>

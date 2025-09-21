@@ -1,258 +1,262 @@
 [
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_circle_button.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\circle_button.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_rotate_right.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_rotate_right.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-anydpi\\ic_launcher.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_video.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_video.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_photo.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_photo.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_share.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_share.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_flash_off.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_flash_off.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_switch_camera.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_switch_camera.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_timer.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_timer.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_success.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_success.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_gallery.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_gallery.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_location.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_location.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_mic_off.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_mic_off.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_close.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_close.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\layout_activity_settings.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\layout\\activity_settings.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_zoom_out.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_zoom_out.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_zoom_in.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_zoom_in.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_wind.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_wind.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "com.drahms.vision.astronomy.app-debug-48:/layout_activity_camera.xml.flat",
+        "source": "com.drahms.vision.astronomy.app-main-50:/layout/activity_camera.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_mic.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_mic.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_star.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_star.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_error.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_error.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/layout_activity_settings.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/layout/activity_settings.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_location.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_location.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_planet.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_planet.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-anydpi_ic_launcher.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-anydpi/ic_launcher.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_sun.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_sun.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_camera.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_camera.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_compass.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_compass.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_zoom_out.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_zoom_out.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_cloud.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_cloud.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_stop.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_stop.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_pause.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_pause.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_pause.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_pause.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_snow.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_snow.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-anydpi_ic_launcher_round.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-anydpi/ic_launcher_round.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_gradient_top.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\gradient_top.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/xml_data_extraction_rules.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/xml/data_extraction_rules.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_star.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_star.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_capture_button.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/capture_button.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_gyroscope.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_gyroscope.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_share.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_share.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_grid.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_grid.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\xml\\data_extraction_rules.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_rain.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_rain.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_compass.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_compass.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_flash.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_flash.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_snow.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_snow.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/layout_activity_main.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/layout/activity_main.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_grid.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_grid.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_stop.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_stop.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_gyroscope.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_gyroscope.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-anydpi\\ic_launcher_round.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_wind.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_wind.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_mic.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_mic.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_rain.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_rain.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_timer.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_timer.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_close.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_close.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_mic_off.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_mic_off.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_success.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_success.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_bluetooth.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_bluetooth.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_telescope.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_telescope.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_video.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_video.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_gallery.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_gallery.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_photo.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_photo.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_delete.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_delete.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_sun.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_sun.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_gradient_top.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/gradient_top.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_wifi.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_wifi.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\layout\\activity_main.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_warning.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_warning.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_info.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_info.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_gradient_bottom.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\gradient_bottom.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_launcher_background.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_play.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_play.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_settings.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_settings.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_capture_button.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\capture_button.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_gradient_bottom.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/gradient_bottom.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_bluetooth.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_bluetooth.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_camera.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_camera.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\layout_activity_camera.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\layout\\activity_camera.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_info.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_info.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\xml\\backup_rules.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_rotate_left.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_rotate_left.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_wifi.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_wifi.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_flash.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_flash.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_telescope.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_telescope.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_planet.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_planet.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_visibility.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_visibility.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_settings.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_settings.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_moon.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_moon.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\mipmap-xxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_play.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_play.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_delete.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_delete.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_zoom_in.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_zoom_in.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_warning.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_warning.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/xml_backup_rules.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/xml/backup_rules.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_flash_off.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_flash_off.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/layout_activity_camera.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/layout/activity_camera.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_rotate_left.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_rotate_left.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_error.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_error.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_rotate_right.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_rotate_right.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_circle_button.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/circle_button.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_cloud.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_cloud.xml"
     },
     {
-        "merged": "com.drahms.vision.astronomy.app-debug-33:/drawable_ic_switch_camera.xml.flat",
-        "source": "com.drahms.vision.astronomy.app-main-35:/drawable/ic_switch_camera.xml"
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_moon.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_moon.xml"
+    },
+    {
+        "merged": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-debug-48:\\drawable_ic_visibility.xml.flat",
+        "source": "C:\\Users\\solsh\\.gradle\\daemon\\8.13\\com.drahms.vision.astronomy.app-main-50:\\drawable\\ic_visibility.xml"
     }
 ]

@@ -19,3 +19,35 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Socket.IO rules
+-keep class io.socket.** { *; }
+-keep class io.socket.client.** { *; }
+-keep class io.socket.emitter.** { *; }
+-dontwarn io.socket.**
+-dontwarn org.json.**
+
+# OkHttp rules
+-keep class okhttp3.** { *; }
+-keep class okio.** { *; }
+-dontwarn okhttp3.**
+-dontwarn okio.**
+
+# CameraX rules
+-keep class androidx.camera.core.** { *; }
+-keep class androidx.camera.lifecycle.** { *; }
+-keep class androidx.camera.view.** { *; }
+-dontwarn androidx.camera.**
+
+# Google Play Services
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.android.gms.**
+
+# Kotlin coroutines
+-keep class kotlin.coroutines.Continuation { *; }
+-keep class kotlinx.coroutines.** { *; }
+-dontwarn kotlinx.coroutines.**
+
+# JSON rules for Sensor data
+-keep class org.json.** { *; }
+-dontwarn org.json.**

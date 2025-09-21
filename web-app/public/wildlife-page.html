@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦋 Wildlife & Insects - Drahms Vision</title>
+    <link rel="stylesheet" href="ui-components.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .wildlife-hero {
+            background: linear-gradient(135deg, 
+                rgba(255, 105, 180, 0.1) 0%, 
+                rgba(255, 140, 0, 0.1) 50%, 
+                rgba(0, 255, 127, 0.1) 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wildlife-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(255, 105, 180, 0.1) 0%, transparent 50%),
+                radial-gradient(circle, rgba(255, 140, 0, 0.1) 0%, transparent 50%);
+            animation: flutter 15s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes flutter {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(5deg); }
+            50% { transform: translateY(-20px) rotate(0deg); }
+            75% { transform: translateY(-10px) rotate(-5deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin: 0 0 var(--space-md) 0;
+            background: linear-gradient(135deg, var(--aurora-pink), var(--aurora-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .wildlife-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .wildlife-card {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .wildlife-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+        
+        .wildlife-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .wildlife-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--aurora-pink);
+        }
+        
+        .wildlife-card.active {
+            border-color: var(--aurora-pink);
+            background: rgba(255, 105, 180, 0.1);
+        }
+        
+        .wildlife-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-3xl);
+            background: var(--gradient-accent);
+            color: var(--primary-bg);
+            margin: 0 auto var(--space-lg) auto;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .wildlife-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin: 0 0 var(--space-md) 0;
+            color: var(--primary-text);
+        }
+        
+        .wildlife-description {
+            color: var(--secondary-text);
+            line-height: 1.6;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .wildlife-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--aurora-pink);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .stat-label {
+            font-size: var(--font-size-xs);
+            color: var(--muted-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .identification-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .tool-card {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: all var(--transition-normal);
+        }
+        
+        .tool-card:hover {
+            border-color: var(--aurora-pink);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            background: var(--gradient-accent);
+            color: var(--primary-bg);
+        }
+        
+        .tool-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin: 0;
+            color: var(--primary-text);
+        }
+        
+        .tool-description {
+            color: var(--secondary-text);
+            line-height: 1.6;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .tool-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 var(--space-lg) 0;
+        }
+        
+        .tool-features li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) 0;
+            color: var(--secondary-text);
+            font-size: var(--font-size-sm);
+        }
+        
+        .tool-features li::before {
+            content: '✓';
+            color: var(--aurora-pink);
+            font-weight: bold;
+        }
+        
+        .behavior-tracking {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .tracking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .tracking-item {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: all var(--transition-normal);
+        }
+        
+        .tracking-item:hover {
+            border-color: var(--aurora-pink);
+            transform: translateY(-2px);
+        }
+        
+        .tracking-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            background: var(--gradient-accent);
+            color: var(--primary-bg);
+            margin: 0 auto var(--space-md) auto;
+        }
+        
+        .tracking-title {
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .tracking-description {
+            font-size: var(--font-size-sm);
+            color: var(--secondary-text);
+        }
+        
+        .recent-identifications {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .identification-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            transition: all var(--transition-normal);
+        }
+        
+        .identification-item:hover {
+            border-color: var(--aurora-pink);
+            transform: translateX(4px);
+        }
+        
+        .identification-image {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-md);
+            background: var(--surface-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            color: var(--aurora-pink);
+        }
+        
+        .identification-info {
+            flex: 1;
+        }
+        
+        .identification-name {
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .identification-scientific {
+            font-size: var(--font-size-sm);
+            color: var(--secondary-text);
+            font-style: italic;
+        }
+        
+        .identification-confidence {
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--aurora-pink);
+            color: var(--primary-bg);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+        }
+        
+        .api-status-section {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+        
+        .api-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .api-card {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            text-align: center;
+            transition: all var(--transition-normal);
+        }
+        
+        .api-card:hover {
+            border-color: var(--aurora-pink);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .api-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-lg);
+            background: var(--gradient-accent);
+            color: var(--primary-bg);
+            margin: 0 auto var(--space-sm) auto;
+        }
+        
+        .api-name {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .api-status {
+            font-size: var(--font-size-xs);
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Main</span>
+        </a>
+        
+        <div class="page-header">
+            <div class="page-content">
+                <h1 class="page-title">🦋 Wildlife & Insects</h1>
+                <p class="page-subtitle">Identify insects, mammals, reptiles, and other wildlife using advanced AI recognition</p>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <!-- Hero Section -->
+            <div class="wildlife-hero">
+                <div class="hero-content">
+                    <h2 class="hero-title">Explore the Animal Kingdom</h2>
+                    <p class="hero-subtitle">From tiny insects to majestic mammals - discover the wildlife around you</p>
+                    <div class="flex gap-3 justify-center">
+                        <button class="btn btn-primary btn-lg" id="identify-wildlife">
+                            <i class="fas fa-camera"></i>
+                            Identify Wildlife
+                        </button>
+                        <button class="btn btn-secondary btn-lg" id="track-behavior">
+                            <i class="fas fa-eye"></i>
+                            Track Behavior
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Wildlife Categories -->
+            <div class="wildlife-categories">
+                <div class="wildlife-card active" data-category="insects">
+                    <div class="wildlife-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3 class="wildlife-title">Insects</h3>
+                    <p class="wildlife-description">
+                        Identify butterflies, beetles, bees, and other insects with high accuracy using iNaturalist and BugGuide.
+                    </p>
+                    <div class="wildlife-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">1M+</div>
+                            <div class="stat-label">Species</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Accuracy</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 justify-center">
+                        <span class="status-badge success">iNaturalist</span>
+                        <span class="status-badge success">BugGuide</span>
+                    </div>
+                </div>
+                
+                <div class="wildlife-card" data-category="mammals">
+                    <div class="wildlife-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3 class="wildlife-title">Mammals</h3>
+                    <p class="wildlife-description">
+                        Recognize mammals from squirrels to deer using Wildlife Insights and MammalNet databases.
+                    </p>
+                    <div class="wildlife-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">6,400+</div>
+                            <div class="stat-label">Species</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">92%</div>
+                            <div class="stat-label">Accuracy</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 justify-center">
+                        <span class="status-badge success">Wildlife Insights</span>
+                        <span class="status-badge success">MammalNet</span>
+                    </div>
+                </div>
+                
+                <div class="wildlife-card" data-category="reptiles">
+                    <div class="wildlife-icon">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <h3 class="wildlife-title">Reptiles & Amphibians</h3>
+                    <p class="wildlife-description">
+                        Identify snakes, lizards, frogs, and salamanders using specialized herpetology databases.
+                    </p>
+                    <div class="wildlife-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">10,000+</div>
+                            <div class="stat-label">Species</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">88%</div>
+                            <div class="stat-label">Accuracy</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 justify-center">
+                        <span class="status-badge success">AmphibiaWeb</span>
+                        <span class="status-badge success">iNaturalist</span>
+                    </div>
+                </div>
+                
+                <div class="wildlife-card" data-category="marine">
+                    <div class="wildlife-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h3 class="wildlife-title">Marine Life</h3>
+                    <p class="wildlife-description">
+                        Identify fish, marine mammals, and other aquatic creatures using specialized marine databases.
+                    </p>
+                    <div class="wildlife-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">33,000+</div>
+                            <div class="stat-label">Species</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">90%</div>
+                            <div class="stat-label">Accuracy</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 justify-center">
+                        <span class="status-badge success">FishBase</span>
+                        <span class="status-badge success">Marine Life</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Identification Tools -->
+            <div class="identification-tools">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3 class="tool-title">Photo Identification</h3>
+                    </div>
+                    <p class="tool-description">
+                        Take photos of wildlife and get instant identification using multiple AI models and databases.
+                    </p>
+                    <ul class="tool-features">
+                        <li>Multi-angle recognition</li>
+                        <li>Behavior pattern analysis</li>
+                        <li>Habitat context matching</li>
+                        <li>Size and scale estimation</li>
+                    </ul>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-camera"></i>
+                        Take Photo
+                    </button>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="tool-title">Behavior Analysis</h3>
+                    </div>
+                    <p class="tool-description">
+                        Analyze animal behavior patterns to help with identification and understanding.
+                    </p>
+                    <ul class="tool-features">
+                        <li>Movement pattern recognition</li>
+                        <li>Feeding behavior analysis</li>
+                        <li>Social interaction tracking</li>
+                        <li>Territorial behavior mapping</li>
+                    </ul>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-eye"></i>
+                        Analyze Behavior
+                    </button>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-map"></i>
+                        </div>
+                        <h3 class="tool-title">Habitat Mapping</h3>
+                    </div>
+                    <p class="tool-description">
+                        Map wildlife habitats and track species distribution in your area.
+                    </p>
+                    <ul class="tool-features">
+                        <li>GPS location tracking</li>
+                        <li>Habitat type identification</li>
+                        <li>Species distribution maps</li>
+                        <li>Migration pattern tracking</li>
+                    </ul>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-map"></i>
+                        Map Habitat
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Behavior Tracking -->
+            <div class="behavior-tracking">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Behavior Tracking</h3>
+                        <p class="card-description">Monitor and analyze wildlife behavior patterns</p>
+                    </div>
+                </div>
+                
+                <div class="tracking-grid">
+                    <div class="tracking-item">
+                        <div class="tracking-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h4 class="tracking-title">Movement</h4>
+                        <p class="tracking-description">Track animal movement patterns and speed</p>
+                    </div>
+                    
+                    <div class="tracking-item">
+                        <div class="tracking-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h4 class="tracking-title">Feeding</h4>
+                        <p class="tracking-description">Monitor feeding behavior and food sources</p>
+                    </div>
+                    
+                    <div class="tracking-item">
+                        <div class="tracking-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 class="tracking-title">Social</h4>
+                        <p class="tracking-description">Analyze social interactions and group behavior</p>
+                    </div>
+                    
+                    <div class="tracking-item">
+                        <div class="tracking-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h4 class="tracking-title">Territory</h4>
+                        <p class="tracking-description">Map territorial boundaries and nesting sites</p>
+                    </div>
+                    
+                    <div class="tracking-item">
+                        <div class="tracking-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <h4 class="tracking-title">Activity</h4>
+                        <p class="tracking-description">Track daily and seasonal activity patterns</p>
+                    </div>
+                    
+                    <div class="tracking-item">
+                        <div class="tracking-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4 class="tracking-title">Health</h4>
+                        <p class="tracking-description">Monitor health indicators and stress levels</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Identifications -->
+            <div class="recent-identifications">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Recent Identifications</h3>
+                        <p class="card-description">Your latest wildlife discoveries</p>
+                    </div>
+                </div>
+                
+                <div class="identification-item">
+                    <div class="identification-image">
+                        <i class="fas fa-butterfly"></i>
+                    </div>
+                    <div class="identification-info">
+                        <div class="identification-name">Monarch Butterfly</div>
+                        <div class="identification-scientific">Danaus plexippus</div>
+                    </div>
+                    <div class="identification-confidence">96%</div>
+                </div>
+                
+                <div class="identification-item">
+                    <div class="identification-image">
+                        <i class="fas fa-spider"></i>
+                    </div>
+                    <div class="identification-info">
+                        <div class="identification-name">Garden Spider</div>
+                        <div class="identification-scientific">Araneus diadematus</div>
+                    </div>
+                    <div class="identification-confidence">89%</div>
+                </div>
+                
+                <div class="identification-item">
+                    <div class="identification-image">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <div class="identification-info">
+                        <div class="identification-name">Mourning Dove</div>
+                        <div class="identification-scientific">Zenaida macroura</div>
+                    </div>
+                    <div class="identification-confidence">94%</div>
+                </div>
+                
+                <div class="identification-item">
+                    <div class="identification-image">
+                        <i class="fas fa-frog"></i>
+                    </div>
+                    <div class="identification-info">
+                        <div class="identification-name">American Bullfrog</div>
+                        <div class="identification-scientific">Lithobates catesbeianus</div>
+                    </div>
+                    <div class="identification-confidence">91%</div>
+                </div>
+            </div>
+            
+            <!-- API Status -->
+            <div class="api-status-section">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Wildlife API Status</h3>
+                        <p class="card-description">Real-time data from wildlife identification services</p>
+                    </div>
+                </div>
+                
+                <div class="api-grid">
+                    <div class="api-card">
+                        <div class="api-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h4 class="api-name">iNaturalist</h4>
+                        <p class="api-status">
+                            <span class="status-badge success">Active</span>
+                        </p>
+                    </div>
+                    
+                    <div class="api-card">
+                        <div class="api-icon">
+                            <i class="fas fa-spider"></i>
+                        </div>
+                        <h4 class="api-name">BugGuide</h4>
+                        <p class="api-status">
+                            <span class="status-badge success">Active</span>
+                        </p>
+                    </div>
+                    
+                    <div class="api-card">
+                        <div class="api-icon">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <h4 class="api-name">Wildlife Insights</h4>
+                        <p class="api-status">
+                            <span class="status-badge success">Active</span>
+                        </p>
+                    </div>
+                    
+                    <div class="api-card">
+                        <div class="api-icon">
+                            <i class="fas fa-dragon"></i>
+                        </div>
+                        <h4 class="api-name">AmphibiaWeb</h4>
+                        <p class="api-status">
+                            <span class="status-badge success">Active</span>
+                        </p>
+                    </div>
+                    
+                    <div class="api-card">
+                        <div class="api-icon">
+                            <i class="fas fa-fish"></i>
+                        </div>
+                        <h4 class="api-name">FishBase</h4>
+                        <p class="api-status">
+                            <span class="status-badge warning">Limited</span>
+                        </p>
+                    </div>
+                    
+                    <div class="api-card">
+                        <div class="api-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h4 class="api-name">Google Vision</h4>
+                        <p class="api-status">
+                            <span class="status-badge success">Active</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Wildlife & Insects Page JavaScript
+        class WildlifePage {
+            constructor() {
+                this.currentCategory = 'insects';
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                console.log('🦋 Wildlife & Insects Page initialized');
+            }
+            
+            setupEventListeners() {
+                // Category selection
+                document.querySelectorAll('.wildlife-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        this.selectCategory(card.dataset.category);
+                    });
+                });
+                
+                // Hero buttons
+                document.getElementById('identify-wildlife').addEventListener('click', () => {
+                    this.identifyWildlife();
+                });
+                
+                document.getElementById('track-behavior').addEventListener('click', () => {
+                    this.trackBehavior();
+                });
+            }
+            
+            selectCategory(category) {
+                this.currentCategory = category;
+                
+                // Update UI
+                document.querySelectorAll('.wildlife-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                document.querySelector(`[data-category="${category}"]`).classList.add('active');
+                
+                this.showNotification(`Selected ${category} category`, 'info');
+            }
+            
+            identifyWildlife() {
+                this.showNotification('Starting wildlife identification...', 'info');
+                
+                // Simulate identification process
+                setTimeout(() => {
+                    this.showNotification('Wildlife identification complete!', 'success');
+                }, 2000);
+            }
+            
+            trackBehavior() {
+                this.showNotification('Starting behavior tracking...', 'info');
+                
+                // Simulate behavior tracking
+                setTimeout(() => {
+                    this.showNotification('Behavior tracking started!', 'success');
+                }, 1000);
+            }
+            
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    color: white;
+                    font-weight: 500;
+                    z-index: 10000;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                    animation: slideIn 0.3s ease-out;
+                `;
+                
+                if (type === 'success') notification.style.background = 'var(--aurora-green)';
+                else if (type === 'warning') notification.style.background = 'var(--aurora-orange)';
+                else if (type === 'error') notification.style.background = 'var(--aurora-red)';
+                else notification.style.background = 'var(--aurora-pink)';
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            new WildlifePage();
+        });
+    </script>
+</body>
+</html>

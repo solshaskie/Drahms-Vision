@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 Drahms Vision Dashboard</title>
+    <link rel="stylesheet" href="ui-components.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .dashboard-hero {
+            background: linear-gradient(135deg, 
+                rgba(0, 191, 255, 0.1) 0%, 
+                rgba(138, 43, 226, 0.1) 25%,
+                rgba(0, 255, 127, 0.1) 50%,
+                rgba(255, 105, 180, 0.1) 75%,
+                rgba(255, 140, 0, 0.1) 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dashboard-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle, rgba(0, 255, 127, 0.1) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin: 0 0 var(--space-md) 0;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--secondary-text);
+            margin: 0 0 var(--space-xl) 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .stat-card {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+        
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--aurora-blue);
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-2xl);
+            background: var(--gradient-primary);
+            color: var(--primary-bg);
+            margin: 0 auto var(--space-md) auto;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .stat-number {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: var(--aurora-blue);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .stat-label {
+            font-size: var(--font-size-base);
+            color: var(--secondary-text);
+            font-weight: 500;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .feature-card {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--aurora-green);
+        }
+        
+        .feature-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            background: var(--gradient-secondary);
+            color: var(--primary-bg);
+        }
+        
+        .feature-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin: 0;
+            color: var(--primary-text);
+        }
+        
+        .feature-description {
+            color: var(--secondary-text);
+            line-height: 1.6;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .feature-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .api-status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .api-status-card {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            transition: all var(--transition-normal);
+        }
+        
+        .api-status-card:hover {
+            border-color: var(--aurora-blue);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .api-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .api-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-lg);
+            background: var(--gradient-primary);
+            color: var(--primary-bg);
+        }
+        
+        .api-info h4 {
+            margin: 0;
+            font-size: var(--font-size-base);
+            color: var(--primary-text);
+        }
+        
+        .api-info p {
+            margin: 0;
+            font-size: var(--font-size-sm);
+            color: var(--secondary-text);
+        }
+        
+        .api-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-sm);
+        }
+        
+        .api-detail {
+            text-align: center;
+        }
+        
+        .api-detail-label {
+            font-size: var(--font-size-xs);
+            color: var(--muted-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .api-detail-value {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-top: var(--space-xs);
+        }
+        
+        .recent-activity {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            transition: all var(--transition-normal);
+        }
+        
+        .activity-item:hover {
+            border-color: var(--aurora-blue);
+            transform: translateX(4px);
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-lg);
+            background: var(--gradient-primary);
+            color: var(--primary-bg);
+        }
+        
+        .activity-info {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .activity-description {
+            font-size: var(--font-size-sm);
+            color: var(--secondary-text);
+        }
+        
+        .activity-time {
+            font-size: var(--font-size-xs);
+            color: var(--muted-text);
+        }
+        
+        .quick-actions {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+        
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .action-card {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+        }
+        
+        .action-card:hover {
+            border-color: var(--aurora-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            background: var(--gradient-primary);
+            color: var(--primary-bg);
+            margin: 0 auto var(--space-md) auto;
+        }
+        
+        .action-title {
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .action-description {
+            font-size: var(--font-size-sm);
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Main</span>
+        </a>
+        
+        <div class="page-header">
+            <div class="page-content">
+                <h1 class="page-title">🌟 Drahms Vision Dashboard</h1>
+                <p class="page-subtitle">Your comprehensive astronomy and wildlife identification system</p>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <!-- Hero Section -->
+            <div class="dashboard-hero">
+                <div class="hero-content">
+                    <h2 class="hero-title">Welcome to Drahms Vision</h2>
+                    <p class="hero-subtitle">The ultimate astronomy camera system with AI-powered identification</p>
+                    <div class="flex gap-3 justify-center">
+                        <button class="btn btn-primary btn-lg" id="start-session">
+                            <i class="fas fa-play"></i>
+                            Start New Session
+                        </button>
+                        <button class="btn btn-secondary btn-lg" id="view-gallery">
+                            <i class="fas fa-images"></i>
+                            View Gallery
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-number">1,247</div>
+                    <div class="stat-label">Celestial Objects</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <div class="stat-number">89</div>
+                    <div class="stat-label">Birds Identified</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="stat-number">156</div>
+                    <div class="stat-label">Plants Cataloged</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="stat-number">234</div>
+                    <div class="stat-label">Wildlife Spotted</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="stat-number">2,847</div>
+                    <div class="stat-label">Photos Captured</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">APIs Connected</div>
+                </div>
+            </div>
+            
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="feature-title">Astronomy & Celestial Overlay</h3>
+                    </div>
+                    <p class="feature-description">
+                        Real-time sky mapping with GPS and gyroscope integration. Identify constellations, planets, and celestial objects with AR overlay.
+                    </p>
+                    <div class="feature-actions">
+                        <a href="astronomy-page.html" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Open
+                        </a>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-info-circle"></i>
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-dove"></i>
+                        </div>
+                        <h3 class="feature-title">Bird Identification</h3>
+                    </div>
+                    <p class="feature-description">
+                        Identify birds by sight and sound using eBird, BirdNET, and Xeno-Canto. Includes audio recognition for bird songs.
+                    </p>
+                    <div class="feature-actions">
+                        <a href="birds-page.html" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Open
+                        </a>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-info-circle"></i>
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3 class="feature-title">Plant Identification</h3>
+                    </div>
+                    <p class="feature-description">
+                        Identify plants, flowers, trees, and fungi using PlantNet, Trefle, and Flora Incognita with 50,000+ species database.
+                    </p>
+                    <div class="feature-actions">
+                        <a href="plants-page.html" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Open
+                        </a>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-info-circle"></i>
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h3 class="feature-title">Wildlife & Insects</h3>
+                    </div>
+                    <p class="feature-description">
+                        Identify insects, mammals, reptiles, and marine life using iNaturalist, BugGuide, and Wildlife Insights.
+                    </p>
+                    <div class="feature-actions">
+                        <a href="wildlife-page.html" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Open
+                        </a>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-info-circle"></i>
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- API Status -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">API Status Overview</h3>
+                        <p class="card-description">Real-time status of all connected identification services</p>
+                    </div>
+                </div>
+                
+                <div class="api-status-grid">
+                    <div class="api-status-card">
+                        <div class="api-header">
+                            <div class="api-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="api-info">
+                                <h4>NASA APIs</h4>
+                                <p>Astronomy data</p>
+                            </div>
+                        </div>
+                        <div class="api-details">
+                            <div class="api-detail">
+                                <div class="api-detail-label">Status</div>
+                                <div class="api-detail-value">
+                                    <span class="status-badge success">Active</span>
+                                </div>
+                            </div>
+                            <div class="api-detail">
+                                <div class="api-detail-label">Rate Limit</div>
+                                <div class="api-detail-value">1000/hour</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="api-status-card">
+                        <div class="api-header">
+                            <div class="api-icon">
+                                <i class="fas fa-dove"></i>
+                            </div>
+                            <div class="api-info">
+                                <h4>eBird API</h4>
+                                <p>Bird database</p>
+                            </div>
+                        </div>
+                        <div class="api-details">
+                            <div class="api-detail">
+                                <div class="api-detail-label">Status</div>
+                                <div class="api-detail-value">
+                                    <span class="status-badge success">Active</span>
+                                </div>
+                            </div>
+                            <div class="api-detail">
+                                <div class="api-detail-label">Rate Limit</div>
+                                <div class="api-detail-value">10k/day</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="api-status-card">
+                        <div class="api-header">
+                            <div class="api-icon">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <div class="api-info">
+                                <h4>BirdNET</h4>
+                                <p>Audio ID</p>
+                            </div>
+                        </div>
+                        <div class="api-details">
+                            <div class="api-detail">
+                                <div class="api-detail-label">Status</div>
+                                <div class="api-detail-value">
+                                    <span class="status-badge success">Active</span>
+                                </div>
+                            </div>
+                            <div class="api-detail">
+                                <div class="api-detail-label">Rate Limit</div>
+                                <div class="api-detail-value">100/day</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="api-status-card">
+                        <div class="api-header">
+                            <div class="api-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <div class="api-info">
+                                <h4>PlantNet</h4>
+                                <p>Plant ID</p>
+                            </div>
+                        </div>
+                        <div class="api-details">
+                            <div class="api-detail">
+                                <div class="api-detail-label">Status</div>
+                                <div class="api-detail-value">
+                                    <span class="status-badge warning">Pending</span>
+                                </div>
+                            </div>
+                            <div class="api-detail">
+                                <div class="api-detail-label">Rate Limit</div>
+                                <div class="api-detail-value">500/day</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="api-status-card">
+                        <div class="api-header">
+                            <div class="api-icon">
+                                <i class="fas fa-bug"></i>
+                            </div>
+                            <div class="api-info">
+                                <h4>iNaturalist</h4>
+                                <p>Wildlife ID</p>
+                            </div>
+                        </div>
+                        <div class="api-details">
+                            <div class="api-detail">
+                                <div class="api-detail-label">Status</div>
+                                <div class="api-detail-value">
+                                    <span class="status-badge success">Active</span>
+                                </div>
+                            </div>
+                            <div class="api-detail">
+                                <div class="api-detail-label">Rate Limit</div>
+                                <div class="api-detail-value">10k/hour</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="api-status-card">
+                        <div class="api-header">
+                            <div class="api-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="api-info">
+                                <h4>Google Vision</h4>
+                                <p>General ID</p>
+                            </div>
+                        </div>
+                        <div class="api-details">
+                            <div class="api-detail">
+                                <div class="api-detail-label">Status</div>
+                                <div class="api-detail-value">
+                                    <span class="status-badge warning">Pending</span>
+                                </div>
+                            </div>
+                            <div class="api-detail">
+                                <div class="api-detail-label">Rate Limit</div>
+                                <div class="api-detail-value">1k/month</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Recent Activity</h3>
+                        <p class="card-description">Your latest discoveries and identifications</p>
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="activity-info">
+                        <div class="activity-title">Orion Constellation Identified</div>
+                        <div class="activity-description">Successfully identified Orion constellation with 98% confidence</div>
+                    </div>
+                    <div class="activity-time">2 minutes ago</div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <div class="activity-info">
+                        <div class="activity-title">American Robin Spotted</div>
+                        <div class="activity-description">Identified American Robin by both sight and sound</div>
+                    </div>
+                    <div class="activity-time">15 minutes ago</div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="activity-info">
+                        <div class="activity-title">Oak Tree Identified</div>
+                        <div class="activity-description">Red Oak tree identified using PlantNet with 94% confidence</div>
+                    </div>
+                    <div class="activity-time">1 hour ago</div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="activity-info">
+                        <div class="activity-title">Monarch Butterfly</div>
+                        <div class="activity-description">Beautiful Monarch butterfly identified in the garden</div>
+                    </div>
+                    <div class="activity-time">2 hours ago</div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Quick Actions</h3>
+                        <p class="card-description">Fast access to common features</p>
+                    </div>
+                </div>
+                
+                <div class="actions-grid">
+                    <div class="action-card" onclick="window.location.href='index.html'">
+                        <div class="action-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h4 class="action-title">Camera Control</h4>
+                        <p class="action-description">Access main camera interface</p>
+                    </div>
+                    
+                    <div class="action-card" onclick="window.location.href='api-key-config.html'">
+                        <div class="action-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h4 class="action-title">API Settings</h4>
+                        <p class="action-description">Configure API keys</p>
+                    </div>
+                    
+                    <div class="action-card" onclick="window.location.href='demo-celestial-overlay.html'">
+                        <div class="action-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4 class="action-title">Demo Overlay</h4>
+                        <p class="action-description">Test celestial overlay</p>
+                    </div>
+                    
+                    <div class="action-card" onclick="window.location.href='index.html#gallery'">
+                        <div class="action-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <h4 class="action-title">Photo Gallery</h4>
+                        <p class="action-description">View captured photos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Dashboard JavaScript
+        class Dashboard {
+            constructor() {
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.updateStats();
+                console.log('🌟 Dashboard initialized');
+            }
+            
+            setupEventListeners() {
+                document.getElementById('start-session').addEventListener('click', () => {
+                    this.startNewSession();
+                });
+                
+                document.getElementById('view-gallery').addEventListener('click', () => {
+                    this.viewGallery();
+                });
+            }
+            
+            startNewSession() {
+                this.showNotification('Starting new identification session...', 'info');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+            
+            viewGallery() {
+                this.showNotification('Opening photo gallery...', 'info');
+                setTimeout(() => {
+                    window.location.href = 'index.html#gallery';
+                }, 1000);
+            }
+            
+            updateStats() {
+                // Simulate real-time stats updates
+                setInterval(() => {
+                    // Update stats with random variations
+                    const statNumbers = document.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const currentValue = parseInt(stat.textContent.replace(/,/g, ''));
+                        const variation = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+                        const newValue = Math.max(0, currentValue + variation);
+                        stat.textContent = newValue.toLocaleString();
+                    });
+                }, 30000); // Update every 30 seconds
+            }
+            
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    color: white;
+                    font-weight: 500;
+                    z-index: 10000;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                    animation: slideIn 0.3s ease-out;
+                `;
+                
+                if (type === 'success') notification.style.background = 'var(--aurora-green)';
+                else if (type === 'warning') notification.style.background = 'var(--aurora-orange)';
+                else if (type === 'error') notification.style.background = 'var(--aurora-red)';
+                else notification.style.background = 'var(--aurora-blue)';
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+        }
+        
+        // Initialize the dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            new Dashboard();
+        });
+    </script>
+</body>
+</html>

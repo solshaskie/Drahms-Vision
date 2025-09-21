@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦅 Bird Identification - Drahms Vision</title>
+    <link rel="stylesheet" href="ui-components.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .birds-hero {
+            background: linear-gradient(135deg, 
+                rgba(0, 255, 127, 0.1) 0%, 
+                rgba(0, 191, 255, 0.1) 50%, 
+                rgba(255, 105, 180, 0.1) 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .birds-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(0, 255, 127, 0.1) 0%, transparent 50%),
+                radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 50%);
+            animation: float 15s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin: 0 0 var(--space-md) 0;
+            background: linear-gradient(135deg, var(--aurora-green), var(--aurora-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .identification-modes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .mode-card {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .mode-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+        
+        .mode-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .mode-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--aurora-green);
+        }
+        
+        .mode-card.active {
+            border-color: var(--aurora-green);
+            background: rgba(0, 255, 127, 0.1);
+        }
+        
+        .mode-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-3xl);
+            background: var(--gradient-secondary);
+            color: var(--primary-bg);
+            margin: 0 auto var(--space-lg) auto;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .mode-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin: 0 0 var(--space-md) 0;
+            color: var(--primary-text);
+        }
+        
+        .mode-description {
+            color: var(--secondary-text);
+            line-height: 1.6;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .audio-visual-section {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .recording-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .record-button {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-full);
+            border: none;
+            background: var(--gradient-secondary);
+            color: var(--primary-bg);
+            font-size: var(--font-size-2xl);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .record-button:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .record-button.recording {
+            background: var(--aurora-red);
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .audio-visualizer {
+            width: 100%;
+            height: 100px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            margin: var(--space-lg) 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .visualizer-bar {
+            position: absolute;
+            bottom: 0;
+            width: 4px;
+            background: var(--aurora-green);
+            border-radius: 2px 2px 0 0;
+            animation: visualize 0.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes visualize {
+            0% { height: 20%; }
+            100% { height: 80%; }
+        }
+        
+        .results-section {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .result-card {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+            transition: all var(--transition-normal);
+        }
+        
+        .result-card:hover {
+            border-color: var(--aurora-green);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .result-confidence {
+            margin-left: auto;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--aurora-green);
+            color: var(--primary-bg);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+        }
+        
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-md);
+        }
+        
+        .result-detail {
+            text-align: center;
+        }
+        
+        .result-detail-label {
+            font-size: var(--font-size-xs);
+            color: var(--muted-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .result-detail-value {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-top: var(--space-xs);
+        }
+        
+        .api-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .api-result {
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            text-align: center;
+        }
+        
+        .api-result h4 {
+            margin: 0 0 var(--space-sm) 0;
+            font-size: var(--font-size-sm);
+            color: var(--primary-text);
+        }
+        
+        .api-result p {
+            margin: 0;
+            font-size: var(--font-size-xs);
+            color: var(--secondary-text);
+        }
+        
+        .location-context {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .context-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-md);
+        }
+        
+        .context-item {
+            text-align: center;
+        }
+        
+        .context-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-lg);
+            background: var(--gradient-primary);
+            color: var(--primary-bg);
+            margin: 0 auto var(--space-sm) auto;
+        }
+        
+        .context-label {
+            font-size: var(--font-size-xs);
+            color: var(--muted-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .context-value {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-top: var(--space-xs);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Main</span>
+        </a>
+        
+        <div class="page-header">
+            <div class="page-content">
+                <h1 class="page-title">🦅 Bird Identification</h1>
+                <p class="page-subtitle">Identify birds by sight and sound using advanced AI and audio recognition</p>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <!-- Hero Section -->
+            <div class="birds-hero">
+                <div class="hero-content">
+                    <h2 class="hero-title">Discover Your Feathered Friends</h2>
+                    <p class="hero-subtitle">From visual identification to bird song recognition - identify any bird you encounter</p>
+                    <div class="flex gap-3 justify-center">
+                        <button class="btn btn-primary btn-lg" id="start-identification">
+                            <i class="fas fa-camera"></i>
+                            Start Identification
+                        </button>
+                        <button class="btn btn-secondary btn-lg" id="record-audio">
+                            <i class="fas fa-microphone"></i>
+                            Record Bird Song
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Identification Modes -->
+            <div class="identification-modes">
+                <div class="mode-card active" data-mode="visual">
+                    <div class="mode-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="mode-title">Visual Identification</h3>
+                    <p class="mode-description">
+                        Take a photo or use live camera feed to identify birds by their appearance, markings, and behavior.
+                    </p>
+                    <div class="flex gap-2 justify-center">
+                        <span class="status-badge success">eBird API</span>
+                        <span class="status-badge success">Google Vision</span>
+                    </div>
+                </div>
+                
+                <div class="mode-card" data-mode="audio">
+                    <div class="mode-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3 class="mode-title">Audio Identification</h3>
+                    <p class="mode-description">
+                        Record bird songs and calls to identify species using Cornell Lab's BirdNET technology.
+                    </p>
+                    <div class="flex gap-2 justify-center">
+                        <span class="status-badge success">BirdNET</span>
+                        <span class="status-badge success">Xeno-Canto</span>
+                    </div>
+                </div>
+                
+                <div class="mode-card" data-mode="combined">
+                    <div class="mode-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="mode-title">Combined Analysis</h3>
+                    <p class="mode-description">
+                        Use both visual and audio data for the most accurate bird identification possible.
+                    </p>
+                    <div class="flex gap-2 justify-center">
+                        <span class="status-badge success">Multi-API</span>
+                        <span class="status-badge success">AI Fusion</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Location Context -->
+            <div class="location-context">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Location Context</h3>
+                        <p class="card-description">Current location data for accurate bird identification</p>
+                    </div>
+                </div>
+                
+                <div class="context-grid">
+                    <div class="context-item">
+                        <div class="context-icon">
+                            <i class="fas fa-map-pin"></i>
+                        </div>
+                        <div class="context-label">Location</div>
+                        <div class="context-value">New York, NY</div>
+                    </div>
+                    
+                    <div class="context-item">
+                        <div class="context-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="context-label">Date</div>
+                        <div class="context-value">Dec 2024</div>
+                    </div>
+                    
+                    <div class="context-item">
+                        <div class="context-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="context-label">Time</div>
+                        <div class="context-value">Morning</div>
+                    </div>
+                    
+                    <div class="context-item">
+                        <div class="context-icon">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <div class="context-label">Weather</div>
+                        <div class="context-value">Clear, 15°C</div>
+                    </div>
+                    
+                    <div class="context-item">
+                        <div class="context-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="context-label">Habitat</div>
+                        <div class="context-value">Urban Park</div>
+                    </div>
+                    
+                    <div class="context-item">
+                        <div class="context-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="context-label">Visibility</div>
+                        <div class="context-value">Good</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Audio/Visual Section -->
+            <div class="audio-visual-section">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Audio Recording & Analysis</h3>
+                        <p class="card-description">Record bird songs for identification using BirdNET technology</p>
+                    </div>
+                </div>
+                
+                <div class="recording-controls">
+                    <button class="btn btn-secondary" id="play-sample">
+                        <i class="fas fa-play"></i>
+                        Play Sample
+                    </button>
+                    
+                    <button class="record-button" id="record-button">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    
+                    <button class="btn btn-secondary" id="stop-recording" disabled>
+                        <i class="fas fa-stop"></i>
+                        Stop
+                    </button>
+                </div>
+                
+                <div class="audio-visualizer" id="audio-visualizer">
+                    <!-- Audio visualization bars will be generated here -->
+                </div>
+                
+                <div class="flex gap-3 justify-center">
+                    <button class="btn btn-primary" id="analyze-audio">
+                        <i class="fas fa-brain"></i>
+                        Analyze Recording
+                    </button>
+                    <button class="btn btn-secondary" id="save-recording">
+                        <i class="fas fa-save"></i>
+                        Save Recording
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Results Section -->
+            <div class="results-section">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Identification Results</h3>
+                        <p class="card-description">AI-powered bird identification from multiple sources</p>
+                    </div>
+                </div>
+                
+                <div id="identification-results">
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="api-icon">
+                                <i class="fas fa-dove"></i>
+                            </div>
+                            <div class="api-info">
+                                <h4>American Robin</h4>
+                                <p>Turdus migratorius</p>
+                            </div>
+                            <div class="result-confidence">95%</div>
+                        </div>
+                        
+                        <div class="result-details">
+                            <div class="result-detail">
+                                <div class="result-detail-label">Size</div>
+                                <div class="result-detail-value">Medium</div>
+                            </div>
+                            <div class="result-detail">
+                                <div class="result-detail-label">Color</div>
+                                <div class="result-detail-value">Orange Breast</div>
+                            </div>
+                            <div class="result-detail">
+                                <div class="result-detail-label">Habitat</div>
+                                <div class="result-detail-value">Urban</div>
+                            </div>
+                            <div class="result-detail">
+                                <div class="result-detail-label">Season</div>
+                                <div class="result-detail-value">Year-round</div>
+                            </div>
+                        </div>
+                        
+                        <div class="api-comparison">
+                            <div class="api-result">
+                                <h4>eBird</h4>
+                                <p>Common in area</p>
+                            </div>
+                            <div class="api-result">
+                                <h4>BirdNET</h4>
+                                <p>Song match: 95%</p>
+                            </div>
+                            <div class="api-result">
+                                <h4>Google Vision</h4>
+                                <p>Visual match: 92%</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="api-icon">
+                                <i class="fas fa-dove"></i>
+                            </div>
+                            <div class="api-info">
+                                <h4>Northern Cardinal</h4>
+                                <p>Cardinalis cardinalis</p>
+                            </div>
+                            <div class="result-confidence">87%</div>
+                        </div>
+                        
+                        <div class="result-details">
+                            <div class="result-detail">
+                                <div class="result-detail-label">Size</div>
+                                <div class="result-detail-value">Medium</div>
+                            </div>
+                            <div class="result-detail">
+                                <div class="result-detail-label">Color</div>
+                                <div class="result-detail-value">Bright Red</div>
+                            </div>
+                            <div class="result-detail">
+                                <div class="result-detail-label">Habitat</div>
+                                <div class="result-detail-value">Woodland</div>
+                            </div>
+                            <div class="result-detail">
+                                <div class="result-detail-label">Season</div>
+                                <div class="result-detail-value">Year-round</div>
+                            </div>
+                        </div>
+                        
+                        <div class="api-comparison">
+                            <div class="api-result">
+                                <h4>eBird</h4>
+                                <p>Frequent visitor</p>
+                            </div>
+                            <div class="api-result">
+                                <h4>BirdNET</h4>
+                                <p>Song match: 87%</p>
+                            </div>
+                            <div class="api-result">
+                                <h4>Google Vision</h4>
+                                <p>Visual match: 89%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Bird Identification Page JavaScript
+        class BirdIdentificationPage {
+            constructor() {
+                this.currentMode = 'visual';
+                this.isRecording = false;
+                this.audioContext = null;
+                this.mediaRecorder = null;
+                this.audioChunks = [];
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.initializeAudioVisualizer();
+                console.log('🦅 Bird Identification Page initialized');
+            }
+            
+            setupEventListeners() {
+                // Mode selection
+                document.querySelectorAll('.mode-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        this.selectMode(card.dataset.mode);
+                    });
+                });
+                
+                // Hero buttons
+                document.getElementById('start-identification').addEventListener('click', () => {
+                    this.startIdentification();
+                });
+                
+                document.getElementById('record-audio').addEventListener('click', () => {
+                    this.toggleRecording();
+                });
+                
+                // Recording controls
+                document.getElementById('record-button').addEventListener('click', () => {
+                    this.toggleRecording();
+                });
+                
+                document.getElementById('stop-recording').addEventListener('click', () => {
+                    this.stopRecording();
+                });
+                
+                document.getElementById('play-sample').addEventListener('click', () => {
+                    this.playSample();
+                });
+                
+                document.getElementById('analyze-audio').addEventListener('click', () => {
+                    this.analyzeAudio();
+                });
+                
+                document.getElementById('save-recording').addEventListener('click', () => {
+                    this.saveRecording();
+                });
+            }
+            
+            selectMode(mode) {
+                this.currentMode = mode;
+                
+                // Update UI
+                document.querySelectorAll('.mode-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
+                
+                this.showNotification(`Switched to ${mode} identification mode`, 'info');
+            }
+            
+            startIdentification() {
+                this.showNotification('Starting bird identification...', 'info');
+                
+                // Simulate identification process
+                setTimeout(() => {
+                    this.showNotification('Bird identification complete!', 'success');
+                }, 2000);
+            }
+            
+            async toggleRecording() {
+                if (this.isRecording) {
+                    this.stopRecording();
+                } else {
+                    await this.startRecording();
+                }
+            }
+            
+            async startRecording() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    this.mediaRecorder = new MediaRecorder(stream);
+                    this.audioChunks = [];
+                    
+                    this.mediaRecorder.ondataavailable = (event) => {
+                        this.audioChunks.push(event.data);
+                    };
+                    
+                    this.mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });
+                        this.audioBlob = audioBlob;
+                        this.showNotification('Recording completed!', 'success');
+                    };
+                    
+                    this.mediaRecorder.start();
+                    this.isRecording = true;
+                    
+                    // Update UI
+                    document.getElementById('record-button').classList.add('recording');
+                    document.getElementById('stop-recording').disabled = false;
+                    
+                    this.showNotification('Recording started...', 'info');
+                } catch (error) {
+                    this.showNotification('Error accessing microphone', 'error');
+                    console.error('Error starting recording:', error);
+                }
+            }
+            
+            stopRecording() {
+                if (this.mediaRecorder && this.isRecording) {
+                    this.mediaRecorder.stop();
+                    this.isRecording = false;
+                    
+                    // Update UI
+                    document.getElementById('record-button').classList.remove('recording');
+                    document.getElementById('stop-recording').disabled = true;
+                }
+            }
+            
+            playSample() {
+                this.showNotification('Playing sample bird song...', 'info');
+                // Simulate playing a sample
+            }
+            
+            analyzeAudio() {
+                if (!this.audioBlob) {
+                    this.showNotification('Please record audio first', 'warning');
+                    return;
+                }
+                
+                this.showNotification('Analyzing audio with BirdNET...', 'info');
+                
+                // Simulate analysis
+                setTimeout(() => {
+                    this.showNotification('Audio analysis complete!', 'success');
+                }, 3000);
+            }
+            
+            saveRecording() {
+                if (!this.audioBlob) {
+                    this.showNotification('No recording to save', 'warning');
+                    return;
+                }
+                
+                const url = URL.createObjectURL(this.audioBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'bird-recording.wav';
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                this.showNotification('Recording saved!', 'success');
+            }
+            
+            initializeAudioVisualizer() {
+                const visualizer = document.getElementById('audio-visualizer');
+                
+                // Create visualization bars
+                for (let i = 0; i < 50; i++) {
+                    const bar = document.createElement('div');
+                    bar.className = 'visualizer-bar';
+                    bar.style.left = `${i * 2}%`;
+                    bar.style.animationDelay = `${i * 0.1}s`;
+                    visualizer.appendChild(bar);
+                }
+            }
+            
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    color: white;
+                    font-weight: 500;
+                    z-index: 10000;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                    animation: slideIn 0.3s ease-out;
+                `;
+                
+                if (type === 'success') notification.style.background = 'var(--aurora-green)';
+                else if (type === 'warning') notification.style.background = 'var(--aurora-orange)';
+                else if (type === 'error') notification.style.background = 'var(--aurora-red)';
+                else notification.style.background = 'var(--aurora-blue)';
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            new BirdIdentificationPage();
+        });
+    </script>
+</body>
+</html>

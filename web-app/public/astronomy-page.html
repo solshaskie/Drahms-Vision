@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 Astronomy - Drahms Vision</title>
+    <link rel="stylesheet" href="ui-components.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .astronomy-hero {
+            background: linear-gradient(135deg, 
+                rgba(0, 191, 255, 0.1) 0%, 
+                rgba(138, 43, 226, 0.1) 50%, 
+                rgba(0, 255, 127, 0.1) 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .astronomy-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin: 0 0 var(--space-md) 0;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--secondary-text);
+            margin: 0 0 var(--space-xl) 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .feature-card {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--aurora-blue);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-3xl);
+            background: var(--gradient-primary);
+            color: var(--primary-bg);
+            margin: 0 auto var(--space-lg) auto;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feature-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin: 0 0 var(--space-md) 0;
+            color: var(--primary-text);
+        }
+        
+        .feature-description {
+            color: var(--secondary-text);
+            line-height: 1.6;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .api-status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .api-status-card {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            transition: all var(--transition-normal);
+        }
+        
+        .api-status-card:hover {
+            border-color: var(--aurora-blue);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .api-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .api-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-lg);
+            background: var(--gradient-secondary);
+            color: var(--primary-bg);
+        }
+        
+        .api-info h4 {
+            margin: 0;
+            font-size: var(--font-size-base);
+            color: var(--primary-text);
+        }
+        
+        .api-info p {
+            margin: 0;
+            font-size: var(--font-size-sm);
+            color: var(--secondary-text);
+        }
+        
+        .api-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+        
+        .api-detail {
+            text-align: center;
+        }
+        
+        .api-detail-label {
+            font-size: var(--font-size-xs);
+            color: var(--muted-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .api-detail-value {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-top: var(--space-xs);
+        }
+        
+        .controls-section {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .control-group {
+            text-align: center;
+        }
+        
+        .control-label {
+            display: block;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            color: var(--primary-text);
+            margin-bottom: var(--space-md);
+        }
+        
+        .control-button {
+            width: 100%;
+            padding: var(--space-lg);
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--primary-text);
+            font-size: var(--font-size-lg);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .control-button:hover {
+            background: var(--hover-bg);
+            border-color: var(--aurora-blue);
+            transform: translateY(-2px);
+        }
+        
+        .control-button.active {
+            background: var(--aurora-blue);
+            border-color: var(--aurora-blue);
+            color: var(--primary-bg);
+        }
+        
+        .control-icon {
+            font-size: var(--font-size-2xl);
+        }
+        
+        .control-text {
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: var(--space-lg);
+            left: var(--space-lg);
+            z-index: 100;
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            color: var(--primary-text);
+            padding: var(--space-md);
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            background: var(--hover-bg);
+            border-color: var(--aurora-blue);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Main</span>
+        </a>
+        
+        <div class="page-header">
+            <div class="page-content">
+                <h1 class="page-title">🌌 Astronomy & Celestial Overlay</h1>
+                <p class="page-subtitle">Real-time sky mapping, constellation identification, and celestial object tracking</p>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <!-- Hero Section -->
+            <div class="astronomy-hero">
+                <div class="hero-content">
+                    <h2 class="hero-title">Explore the Universe</h2>
+                    <p class="hero-subtitle">Point your phone at the sky and discover constellations, planets, and celestial objects in real-time</p>
+                    <div class="flex gap-3 justify-center">
+                        <button class="btn btn-primary btn-lg" id="start-overlay">
+                            <i class="fas fa-play"></i>
+                            Start Celestial Overlay
+                        </button>
+                        <button class="btn btn-secondary btn-lg" id="calibrate-sensors">
+                            <i class="fas fa-compass"></i>
+                            Calibrate Sensors
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Features Grid -->
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="feature-title">Real-time Sky Mapping</h3>
+                    <p class="feature-description">
+                        Advanced astronomy calculations provide accurate positions of stars, planets, and constellations based on your location and time.
+                    </p>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-map"></i>
+                        View Sky Map
+                    </button>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">AR Constellation Overlay</h3>
+                    <p class="feature-description">
+                        Augmented reality overlay shows constellations and celestial objects directly on your phone's camera view.
+                    </p>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-eye"></i>
+                        Enable AR Overlay
+                    </button>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="feature-title">Celestial Object Search</h3>
+                    <p class="feature-description">
+                        Search for specific stars, planets, constellations, or deep-sky objects and get guided to them.
+                    </p>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                        Search Objects
+                    </button>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <h3 class="feature-title">Satellite Tracking</h3>
+                    <p class="feature-description">
+                        Track the International Space Station and other satellites as they pass overhead.
+                    </p>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-satellite"></i>
+                        Track Satellites
+                    </button>
+                </div>
+            </div>
+            
+            <!-- API Status -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Astronomy API Status</h3>
+                        <p class="card-description">Real-time data from NASA and other astronomy services</p>
+                    </div>
+                </div>
+                
+                <div class="api-status-grid">
+                    <div class="api-status-card">
+                        <div class="api-header">
+                            <div class="api-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="api-info">
+                                <h4>NASA APIs</h4>
+                                <p>Astronomy Picture of the Day</p>
+                            </div>
+                        </div>
+                        <div class="api-details">
+                            <div class="api-detail">
+                                <div class="api-detail-label">Status</div>
+                                <div class="api-detail-value">
+                                    <span class="status-badge success">Active</span>
+                                </div>
+                            </div>
+                            <div class="api-detail">
+                                <div class="api-detail-label">Rate Limit</div>
+                                <div class="api-detail-value">1000/hour</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="api-status-card">
+                        <div class="api-header">
+                            <div class="api-icon">
+                                <i class="fas fa-cloud-sun"></i>
+                            </div>
+                            <div class="api-info">
+                                <h4>OpenWeather</h4>
+                                <p>Sun/Moon Position Data</p>
+                            </div>
+                        </div>
+                        <div class="api-details">
+                            <div class="api-detail">
+                                <div class="api-detail-label">Status</div>
+                                <div class="api-detail-value">
+                                    <span class="status-badge warning">Pending</span>
+                                </div>
+                            </div>
+                            <div class="api-detail">
+                                <div class="api-detail-label">Rate Limit</div>
+                                <div class="api-detail-value">1000/month</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="api-status-card">
+                        <div class="api-header">
+                            <div class="api-icon">
+                                <i class="fas fa-satellite"></i>
+                            </div>
+                            <div class="api-info">
+                                <h4>Heavens Above</h4>
+                                <p>Satellite Tracking</p>
+                            </div>
+                        </div>
+                        <div class="api-details">
+                            <div class="api-detail">
+                                <div class="api-detail-label">Status</div>
+                                <div class="api-detail-value">
+                                    <span class="status-badge success">Active</span>
+                                </div>
+                            </div>
+                            <div class="api-detail">
+                                <div class="api-detail-label">Rate Limit</div>
+                                <div class="api-detail-value">100/hour</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controls Section -->
+            <div class="controls-section">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Celestial Overlay Controls</h3>
+                        <p class="card-description">Customize what you see in the AR overlay</p>
+                    </div>
+                </div>
+                
+                <div class="controls-grid">
+                    <div class="control-group">
+                        <label class="control-label">Constellations</label>
+                        <button class="control-button active" id="toggle-constellations">
+                            <i class="fas fa-star control-icon"></i>
+                            <span class="control-text">Show Lines</span>
+                        </button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Stars</label>
+                        <button class="control-button active" id="toggle-stars">
+                            <i class="fas fa-circle control-icon"></i>
+                            <span class="control-text">Show Stars</span>
+                        </button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Planets</label>
+                        <button class="control-button active" id="toggle-planets">
+                            <i class="fas fa-globe control-icon"></i>
+                            <span class="control-text">Show Planets</span>
+                        </button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Labels</label>
+                        <button class="control-button active" id="toggle-labels">
+                            <i class="fas fa-tag control-icon"></i>
+                            <span class="control-text">Show Names</span>
+                        </button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Grid</label>
+                        <button class="control-button" id="toggle-grid">
+                            <i class="fas fa-th control-icon"></i>
+                            <span class="control-text">Show Grid</span>
+                        </button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Compass</label>
+                        <button class="control-button" id="toggle-compass">
+                            <i class="fas fa-compass control-icon"></i>
+                            <span class="control-text">Show Compass</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Search Section -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Search Celestial Objects</h3>
+                        <p class="card-description">Find and highlight specific objects in the sky</p>
+                    </div>
+                </div>
+                
+                <div class="card-content">
+                    <div class="input-group">
+                        <label class="input-label">Object Name</label>
+                        <input type="text" class="input" id="object-search" placeholder="e.g., Orion, Mars, Sirius, Andromeda Galaxy">
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button class="btn btn-primary" id="search-object">
+                            <i class="fas fa-search"></i>
+                            Search Object
+                        </button>
+                        <button class="btn btn-secondary" id="highlight-object">
+                            <i class="fas fa-highlighter"></i>
+                            Highlight Found
+                        </button>
+                    </div>
+                    
+                    <div id="search-results" class="mt-4" style="display: none;">
+                        <!-- Search results will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="astronomy-engine.js"></script>
+    <script src="ar-overlay.js"></script>
+    <script>
+        // Astronomy Page JavaScript
+        class AstronomyPage {
+            constructor() {
+                this.astronomyEngine = new AstronomyEngine();
+                this.arOverlay = new AROverlaySystem();
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.initializeOverlay();
+                console.log('🌌 Astronomy Page initialized');
+            }
+            
+            setupEventListeners() {
+                // Hero buttons
+                document.getElementById('start-overlay').addEventListener('click', () => {
+                    this.startCelestialOverlay();
+                });
+                
+                document.getElementById('calibrate-sensors').addEventListener('click', () => {
+                    this.calibrateSensors();
+                });
+                
+                // Control buttons
+                document.getElementById('toggle-constellations').addEventListener('click', (e) => {
+                    this.toggleControl(e.target, 'constellations');
+                });
+                
+                document.getElementById('toggle-stars').addEventListener('click', (e) => {
+                    this.toggleControl(e.target, 'stars');
+                });
+                
+                document.getElementById('toggle-planets').addEventListener('click', (e) => {
+                    this.toggleControl(e.target, 'planets');
+                });
+                
+                document.getElementById('toggle-labels').addEventListener('click', (e) => {
+                    this.toggleControl(e.target, 'labels');
+                });
+                
+                document.getElementById('toggle-grid').addEventListener('click', (e) => {
+                    this.toggleControl(e.target, 'grid');
+                });
+                
+                document.getElementById('toggle-compass').addEventListener('click', (e) => {
+                    this.toggleControl(e.target, 'compass');
+                });
+                
+                // Search functionality
+                document.getElementById('search-object').addEventListener('click', () => {
+                    this.searchObject();
+                });
+                
+                document.getElementById('highlight-object').addEventListener('click', () => {
+                    this.highlightObject();
+                });
+            }
+            
+            initializeOverlay() {
+                this.arOverlay.initialize(this.astronomyEngine);
+                this.arOverlay.setObserverLocation(40.7128, -74.0060, 0);
+            }
+            
+            startCelestialOverlay() {
+                this.arOverlay.start();
+                this.showNotification('🌌 Celestial overlay started!', 'success');
+            }
+            
+            calibrateSensors() {
+                this.showNotification('🧭 Calibrating sensors...', 'info');
+                // Simulate sensor calibration
+                setTimeout(() => {
+                    this.showNotification('✅ Sensors calibrated successfully!', 'success');
+                }, 2000);
+            }
+            
+            toggleControl(button, type) {
+                button.classList.toggle('active');
+                const isActive = button.classList.contains('active');
+                
+                switch (type) {
+                    case 'constellations':
+                        this.arOverlay.toggleConstellations();
+                        break;
+                    case 'stars':
+                        this.arOverlay.toggleStars();
+                        break;
+                    case 'planets':
+                        this.arOverlay.togglePlanets();
+                        break;
+                    case 'labels':
+                        this.arOverlay.toggleLabels();
+                        break;
+                }
+                
+                this.showNotification(`${type} ${isActive ? 'enabled' : 'disabled'}`, 'info');
+            }
+            
+            searchObject() {
+                const query = document.getElementById('object-search').value.trim();
+                if (!query) {
+                    this.showNotification('Please enter an object name', 'warning');
+                    return;
+                }
+                
+                const results = this.astronomyEngine.searchObjects(query);
+                this.displaySearchResults(results);
+            }
+            
+            displaySearchResults(results) {
+                const resultsContainer = document.getElementById('search-results');
+                
+                if (results.length === 0) {
+                    resultsContainer.innerHTML = `
+                        <div class="card">
+                            <p>No objects found matching "${document.getElementById('object-search').value}"</p>
+                        </div>
+                    `;
+                } else {
+                    let html = '<div class="card"><h4>Search Results:</h4>';
+                    results.forEach(result => {
+                        html += `
+                            <div class="api-status-card">
+                                <div class="api-header">
+                                    <div class="api-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="api-info">
+                                        <h4>${result.name}</h4>
+                                        <p>${result.type} - ${result.constellation}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                    resultsContainer.innerHTML = html;
+                }
+                
+                resultsContainer.style.display = 'block';
+            }
+            
+            highlightObject() {
+                const query = document.getElementById('object-search').value.trim();
+                if (!query) {
+                    this.showNotification('Please search for an object first', 'warning');
+                    return;
+                }
+                
+                this.arOverlay.highlightObject(query);
+                this.showNotification(`Highlighting ${query}`, 'info');
+            }
+            
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    color: white;
+                    font-weight: 500;
+                    z-index: 10000;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                    animation: slideIn 0.3s ease-out;
+                `;
+                
+                if (type === 'success') notification.style.background = 'var(--aurora-green)';
+                else if (type === 'warning') notification.style.background = 'var(--aurora-orange)';
+                else if (type === 'error') notification.style.background = 'var(--aurora-red)';
+                else notification.style.background = 'var(--aurora-blue)';
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            new AstronomyPage();
+        });
+    </script>
+</body>
+</html>

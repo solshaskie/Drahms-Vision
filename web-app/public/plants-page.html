@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌿 Plant Identification - Drahms Vision</title>
+    <link rel="stylesheet" href="ui-components.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .plants-hero {
+            background: linear-gradient(135deg, 
+                rgba(0, 255, 127, 0.1) 0%, 
+                rgba(34, 139, 34, 0.1) 50%, 
+                rgba(50, 205, 50, 0.1) 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plants-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(0, 255, 127, 0.1) 0%, transparent 50%),
+                radial-gradient(circle, rgba(34, 139, 34, 0.1) 0%, transparent 50%);
+            animation: grow 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes grow {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin: 0 0 var(--space-md) 0;
+            background: linear-gradient(135deg, var(--aurora-green), #32cd32);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .plant-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .category-card {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+        
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--aurora-green);
+        }
+        
+        .category-card.active {
+            border-color: var(--aurora-green);
+            background: rgba(0, 255, 127, 0.1);
+        }
+        
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-2xl);
+            background: var(--gradient-secondary);
+            color: var(--primary-bg);
+            margin: 0 auto var(--space-md) auto;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .category-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin: 0 0 var(--space-sm) 0;
+            color: var(--primary-text);
+        }
+        
+        .category-count {
+            font-size: var(--font-size-sm);
+            color: var(--secondary-text);
+        }
+        
+        .identification-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .method-card {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: all var(--transition-normal);
+        }
+        
+        .method-card:hover {
+            border-color: var(--aurora-green);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .method-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .method-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            background: var(--gradient-secondary);
+            color: var(--primary-bg);
+        }
+        
+        .method-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin: 0;
+            color: var(--primary-text);
+        }
+        
+        .method-description {
+            color: var(--secondary-text);
+            line-height: 1.6;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .method-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 var(--space-lg) 0;
+        }
+        
+        .method-features li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) 0;
+            color: var(--secondary-text);
+            font-size: var(--font-size-sm);
+        }
+        
+        .method-features li::before {
+            content: '✓';
+            color: var(--aurora-green);
+            font-weight: bold;
+        }
+        
+        .plant-database {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .database-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .stat-card {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--aurora-green);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--secondary-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .search-section {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .search-tabs {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .search-tab {
+            padding: var(--space-md) var(--space-lg);
+            background: none;
+            border: none;
+            color: var(--secondary-text);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all var(--transition-normal);
+        }
+        
+        .search-tab.active {
+            color: var(--primary-text);
+            border-bottom-color: var(--aurora-green);
+        }
+        
+        .search-tab:hover {
+            color: var(--primary-text);
+        }
+        
+        .search-content {
+            display: none;
+        }
+        
+        .search-content.active {
+            display: block;
+        }
+        
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .search-input {
+            padding: var(--space-md);
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--primary-text);
+            font-size: var(--font-size-base);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--aurora-green);
+            box-shadow: 0 0 0 3px rgba(0, 255, 127, 0.1);
+        }
+        
+        .search-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-md);
+        }
+        
+        .plant-result {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            text-align: center;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+        }
+        
+        .plant-result:hover {
+            border-color: var(--aurora-green);
+            transform: translateY(-2px);
+        }
+        
+        .plant-image {
+            width: 100%;
+            height: 120px;
+            background: var(--surface-bg);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-2xl);
+            color: var(--aurora-green);
+        }
+        
+        .plant-name {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .plant-scientific {
+            font-size: var(--font-size-xs);
+            color: var(--secondary-text);
+            font-style: italic;
+        }
+        
+        .identification-results {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+        
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .result-confidence {
+            margin-left: auto;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--aurora-green);
+            color: var(--primary-bg);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+        }
+        
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .result-section {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+        }
+        
+        .result-section h4 {
+            margin: 0 0 var(--space-sm) 0;
+            font-size: var(--font-size-sm);
+            color: var(--primary-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .result-section p {
+            margin: 0;
+            font-size: var(--font-size-sm);
+            color: var(--secondary-text);
+        }
+        
+        .api-sources {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+        
+        .api-source {
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Main</span>
+        </a>
+        
+        <div class="page-header">
+            <div class="page-content">
+                <h1 class="page-title">🌿 Plant Identification</h1>
+                <p class="page-subtitle">Identify plants, flowers, trees, and fungi using advanced AI and botanical databases</p>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <!-- Hero Section -->
+            <div class="plants-hero">
+                <div class="hero-content">
+                    <h2 class="hero-title">Discover the Green World</h2>
+                    <p class="hero-subtitle">From common houseplants to rare wildflowers - identify any plant you encounter</p>
+                    <div class="flex gap-3 justify-center">
+                        <button class="btn btn-primary btn-lg" id="identify-plant">
+                            <i class="fas fa-camera"></i>
+                            Identify Plant
+                        </button>
+                        <button class="btn btn-secondary btn-lg" id="browse-database">
+                            <i class="fas fa-search"></i>
+                            Browse Database
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Plant Categories -->
+            <div class="plant-categories">
+                <div class="category-card active" data-category="all">
+                    <div class="category-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="category-title">All Plants</h3>
+                    <p class="category-count">50,000+ species</p>
+                </div>
+                
+                <div class="category-card" data-category="flowers">
+                    <div class="category-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="category-title">Flowers</h3>
+                    <p class="category-count">15,000+ species</p>
+                </div>
+                
+                <div class="category-card" data-category="trees">
+                    <div class="category-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3 class="category-title">Trees</h3>
+                    <p class="category-count">8,000+ species</p>
+                </div>
+                
+                <div class="category-card" data-category="herbs">
+                    <div class="category-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="category-title">Herbs</h3>
+                    <p class="category-count">5,000+ species</p>
+                </div>
+                
+                <div class="category-card" data-category="fungi">
+                    <div class="category-icon">
+                        <i class="fas fa-mushroom"></i>
+                    </div>
+                    <h3 class="category-title">Fungi</h3>
+                    <p class="category-count">3,000+ species</p>
+                </div>
+                
+                <div class="category-card" data-category="succulents">
+                    <div class="category-icon">
+                        <i class="fas fa-cactus"></i>
+                    </div>
+                    <h3 class="category-title">Succulents</h3>
+                    <p class="category-count">2,000+ species</p>
+                </div>
+            </div>
+            
+            <!-- Identification Methods -->
+            <div class="identification-methods">
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3 class="method-title">Photo Identification</h3>
+                    </div>
+                    <p class="method-description">
+                        Take a photo of any plant part - leaves, flowers, bark, or fruit - and get instant identification.
+                    </p>
+                    <ul class="method-features">
+                        <li>PlantNet AI recognition</li>
+                        <li>Multiple plant parts supported</li>
+                        <li>High accuracy results</li>
+                        <li>Scientific names included</li>
+                    </ul>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-camera"></i>
+                        Take Photo
+                    </button>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="method-title">Visual Search</h3>
+                    </div>
+                    <p class="method-description">
+                        Search by visual characteristics like leaf shape, flower color, or plant size.
+                    </p>
+                    <ul class="method-features">
+                        <li>Leaf shape recognition</li>
+                        <li>Color-based filtering</li>
+                        <li>Size and habitat filters</li>
+                        <li>Interactive search tools</li>
+                    </ul>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                        Visual Search
+                    </button>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 class="method-title">Database Browse</h3>
+                    </div>
+                    <p class="method-description">
+                        Explore our comprehensive plant database with detailed information and images.
+                    </p>
+                    <ul class="method-features">
+                        <li>50,000+ plant species</li>
+                        <li>Detailed descriptions</li>
+                        <li>Care instructions</li>
+                        <li>Habitat information</li>
+                    </ul>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-book"></i>
+                        Browse Database
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Plant Database Stats -->
+            <div class="plant-database">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Plant Database</h3>
+                        <p class="card-description">Comprehensive botanical information from multiple sources</p>
+                    </div>
+                </div>
+                
+                <div class="database-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">50,000+</div>
+                        <div class="stat-label">Plant Species</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number">2M+</div>
+                        <div class="stat-label">Plant Images</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Botanical APIs</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Accuracy Rate</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Search Section -->
+            <div class="search-section">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Plant Search</h3>
+                        <p class="card-description">Find plants by name, characteristics, or location</p>
+                    </div>
+                </div>
+                
+                <div class="search-tabs">
+                    <button class="search-tab active" data-tab="name">By Name</button>
+                    <button class="search-tab" data-tab="characteristics">By Characteristics</button>
+                    <button class="search-tab" data-tab="location">By Location</button>
+                </div>
+                
+                <div class="search-content active" id="name-search">
+                    <div class="search-form">
+                        <input type="text" class="search-input" placeholder="Enter plant name (e.g., Rose, Oak, Lavender)">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="search-content" id="characteristics-search">
+                    <div class="grid grid-3">
+                        <div class="input-group">
+                            <label class="input-label">Leaf Shape</label>
+                            <select class="input">
+                                <option>Any</option>
+                                <option>Oval</option>
+                                <option>Lanceolate</option>
+                                <option>Heart-shaped</option>
+                                <option>Needle-like</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">Flower Color</label>
+                            <select class="input">
+                                <option>Any</option>
+                                <option>Red</option>
+                                <option>Blue</option>
+                                <option>Yellow</option>
+                                <option>White</option>
+                                <option>Purple</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">Size</label>
+                            <select class="input">
+                                <option>Any</option>
+                                <option>Small (under 1ft)</option>
+                                <option>Medium (1-6ft)</option>
+                                <option>Large (6-20ft)</option>
+                                <option>Tree (20ft+)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                        Search by Characteristics
+                    </button>
+                </div>
+                
+                <div class="search-content" id="location-search">
+                    <div class="grid grid-2">
+                        <div class="input-group">
+                            <label class="input-label">Region</label>
+                            <select class="input">
+                                <option>North America</option>
+                                <option>Europe</option>
+                                <option>Asia</option>
+                                <option>Africa</option>
+                                <option>South America</option>
+                                <option>Australia</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label">Habitat</label>
+                            <select class="input">
+                                <option>Any</option>
+                                <option>Forest</option>
+                                <option>Grassland</option>
+                                <option>Desert</option>
+                                <option>Wetland</option>
+                                <option>Mountain</option>
+                                <option>Coastal</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                        Search by Location
+                    </button>
+                </div>
+                
+                <div class="search-results" id="search-results">
+                    <!-- Search results will appear here -->
+                </div>
+            </div>
+            
+            <!-- Identification Results -->
+            <div class="identification-results">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Identification Results</h3>
+                        <p class="card-description">AI-powered plant identification from multiple botanical sources</p>
+                    </div>
+                </div>
+                
+                <div class="result-header">
+                    <div class="api-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="api-info">
+                        <h4>Red Maple</h4>
+                        <p>Acer rubrum</p>
+                    </div>
+                    <div class="result-confidence">94%</div>
+                </div>
+                
+                <div class="result-details">
+                    <div class="result-section">
+                        <h4>Description</h4>
+                        <p>Deciduous tree with distinctive red fall foliage. Native to eastern North America.</p>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h4>Characteristics</h4>
+                        <p>Height: 40-70ft, Leaves: 3-5 lobed, Flowers: Red in spring</p>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h4>Habitat</h4>
+                        <p>Moist soils, forests, wetlands, and urban areas</p>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h4>Uses</h4>
+                        <p>Ornamental tree, syrup production, wildlife habitat</p>
+                    </div>
+                </div>
+                
+                <div class="api-sources">
+                    <span class="api-source">PlantNet</span>
+                    <span class="api-source">Trefle</span>
+                    <span class="api-source">Flora Incognita</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Plant Identification Page JavaScript
+        class PlantIdentificationPage {
+            constructor() {
+                this.currentCategory = 'all';
+                this.currentTab = 'name';
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                console.log('🌿 Plant Identification Page initialized');
+            }
+            
+            setupEventListeners() {
+                // Category selection
+                document.querySelectorAll('.category-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        this.selectCategory(card.dataset.category);
+                    });
+                });
+                
+                // Search tabs
+                document.querySelectorAll('.search-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        this.selectTab(tab.dataset.tab);
+                    });
+                });
+                
+                // Hero buttons
+                document.getElementById('identify-plant').addEventListener('click', () => {
+                    this.identifyPlant();
+                });
+                
+                document.getElementById('browse-database').addEventListener('click', () => {
+                    this.browseDatabase();
+                });
+            }
+            
+            selectCategory(category) {
+                this.currentCategory = category;
+                
+                // Update UI
+                document.querySelectorAll('.category-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                document.querySelector(`[data-category="${category}"]`).classList.add('active');
+                
+                this.showNotification(`Selected ${category} category`, 'info');
+            }
+            
+            selectTab(tab) {
+                this.currentTab = tab;
+                
+                // Update UI
+                document.querySelectorAll('.search-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+                
+                document.querySelectorAll('.search-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(`${tab}-search`).classList.add('active');
+            }
+            
+            identifyPlant() {
+                this.showNotification('Starting plant identification...', 'info');
+                
+                // Simulate identification process
+                setTimeout(() => {
+                    this.showNotification('Plant identification complete!', 'success');
+                }, 2000);
+            }
+            
+            browseDatabase() {
+                this.showNotification('Opening plant database...', 'info');
+                // Simulate database browsing
+            }
+            
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    color: white;
+                    font-weight: 500;
+                    z-index: 10000;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                    animation: slideIn 0.3s ease-out;
+                `;
+                
+                if (type === 'success') notification.style.background = 'var(--aurora-green)';
+                else if (type === 'warning') notification.style.background = 'var(--aurora-orange)';
+                else if (type === 'error') notification.style.background = 'var(--aurora-red)';
+                else notification.style.background = 'var(--aurora-blue)';
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            new PlantIdentificationPage();
+        });
+    </script>
+</body>
+</html>

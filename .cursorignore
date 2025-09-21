@@ -1,0 +1,12 @@
+mobile-app/
+android-app/
+*.gradle
+*.gradle.kts
+gradle/
+.gradle/
+build/
+*.apk
+*.aab
+local.properties
+.gradle/
+.idea/

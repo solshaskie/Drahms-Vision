@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: #fff; }
+        .test { margin: 10px 0; padding: 10px; border-radius: 5px; background: #333; }
+        .error { background: #5a2d2d; }
+        .success { background: #2d5a2d; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Minimal Test</h1>
+    <div id="results"></div>
+
+    <!-- Minimal HTML structure -->
+    <button id="connect-camera">Connect Camera</button>
+    <input type="range" id="zoom-control" min="1" max="10" value="1">
+
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(message, type = 'test') {
+            const div = document.createElement('div');
+            div.className = `test ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+            console.log(message);
+        }
+        
+        // Test 1: Check if DOM elements exist
+        function testDOM() {
+            addResult('🧪 Testing DOM elements...');
+            
+            const connectBtn = document.getElementById('connect-camera');
+            const zoomControl = document.getElementById('zoom-control');
+            
+            if (connectBtn) {
+                addResult('✅ connect-camera found', 'success');
+            } else {
+                addResult('❌ connect-camera not found', 'error');
+            }
+            
+            if (zoomControl) {
+                addResult('✅ zoom-control found', 'success');
+            } else {
+                addResult('❌ zoom-control not found', 'error');
+            }
+        }
+        
+        // Test 2: Try to load API keys
+        function testAPIKeys() {
+            addResult('🧪 Testing API keys...');
+            
+            try {
+                // Create a script element to load API keys
+                const script = document.createElement('script');
+                script.src = 'api-keys-config.js';
+                script.onload = () => {
+                    if (typeof window.API_KEYS !== 'undefined') {
+                        addResult('✅ API keys loaded', 'success');
+                    } else {
+                        addResult('❌ API keys not loaded', 'error');
+                    }
+                };
+                script.onerror = () => {
+                    addResult('❌ Failed to load API keys script', 'error');
+                };
+                document.head.appendChild(script);
+            } catch (error) {
+                addResult(`❌ API keys error: ${error.message}`, 'error');
+            }
+        }
+        
+        // Test 3: Try to load app.js
+        function testApp() {
+            addResult('🧪 Testing app.js...');
+            
+            try {
+                const script = document.createElement('script');
+                script.src = 'app.js';
+                script.onload = () => {
+                    if (typeof DrahmsVisionApp !== 'undefined') {
+                        addResult('✅ DrahmsVisionApp class loaded', 'success');
+                    } else {
+                        addResult('❌ DrahmsVisionApp class not found', 'error');
+                    }
+                };
+                script.onerror = () => {
+                    addResult('❌ Failed to load app.js', 'error');
+                };
+                document.head.appendChild(script);
+            } catch (error) {
+                addResult(`❌ app.js error: ${error.message}`, 'error');
+            }
+        }
+        
+        // Run tests when page loads
+        window.addEventListener('load', () => {
+            addResult('🚀 Page loaded, running tests...');
+            testDOM();
+            testAPIKeys();
+            
+            // Test app.js after a delay
+            setTimeout(() => {
+                testApp();
+            }, 1000);
+        });
+        
+        // Catch all errors
+        window.addEventListener('error', (e) => {
+            addResult(`❌ JavaScript Error: ${e.message} at ${e.filename}:${e.lineno}`, 'error');
+        });
+    </script>
+</body>
+</html>

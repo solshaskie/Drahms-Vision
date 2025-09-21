@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: #fff; }
+        .test { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background: #2d5a2d; }
+        .error { background: #5a2d2d; }
+        pre { background: #333; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Simple Test</h1>
+    <div id="results"></div>
+
+    <!-- Load scripts in order -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="api-keys-config.js"></script>
+    <script src="api-key-manager.js"></script>
+    <script src="astronomy-engine.js"></script>
+    <script src="ar-overlay.js"></script>
+    <script src="android-ar-overlay.js"></script>
+    <script src="google-lens-integration.js"></script>
+    <script src="network-discovery.js"></script>
+    <script src="real-api-integration.js"></script>
+    <script src="identification-system.js"></script>
+    <script src="app.js"></script>
+    
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(message, type = 'success') {
+            const div = document.createElement('div');
+            div.className = `test ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+            console.log(message);
+        }
+        
+        function testStep(stepName, testFunction) {
+            try {
+                addResult(`🧪 Testing ${stepName}...`);
+                const result = testFunction();
+                if (result) {
+                    addResult(`✅ ${stepName} passed`);
+                } else {
+                    addResult(`❌ ${stepName} failed`, 'error');
+                }
+            } catch (error) {
+                addResult(`❌ ${stepName} error: ${error.message}`, 'error');
+            }
+        }
+        
+        // Test 1: API Keys
+        testStep('API Keys Loading', () => {
+            return typeof window.API_KEYS !== 'undefined' && Object.keys(window.API_KEYS).length > 0;
+        });
+        
+        // Test 2: API Key Manager
+        testStep('API Key Manager', () => {
+            const manager = new APIKeyManager();
+            return manager !== null;
+        });
+        
+        // Test 3: Real API Integration
+        testStep('Real API Integration', () => {
+            const realAPI = new RealAPIIntegration();
+            return realAPI !== null;
+        });
+        
+        // Test 4: Google Lens Integration
+        testStep('Google Lens Integration', () => {
+            const googleLens = new GoogleLensIntegration(window.API_KEYS.GOOGLE_VISION_API_KEY);
+            return googleLens !== null;
+        });
+        
+        // Test 5: Check API Key Manager methods
+        testStep('API Key Manager Methods', () => {
+            const manager = new APIKeyManager();
+            const realKeys = {};
+            Object.keys(window.API_KEYS).forEach(key => {
+                if (window.API_KEYS[key] && 
+                    !window.API_KEYS[key].includes('your_') && 
+                    !window.API_KEYS[key].includes('_here')) {
+                    realKeys[key] = window.API_KEYS[key];
+                }
+            });
+            
+            manager.setAPIKeys(realKeys);
+            const status = manager.getAPIStatus();
+            return Object.keys(status).length > 0;
+        });
+        
+        // Test 6: Check Real API Integration methods
+        testStep('Real API Integration Methods', () => {
+            const realAPI = new RealAPIIntegration();
+            const realKeys = {};
+            Object.keys(window.API_KEYS).forEach(key => {
+                if (window.API_KEYS[key] && 
+                    !window.API_KEYS[key].includes('your_') && 
+                    !window.API_KEYS[key].includes('_here')) {
+                    realKeys[key] = window.API_KEYS[key];
+                }
+            });
+            
+            realAPI.setAPIKeys(realKeys);
+            return realAPI.apis !== null;
+        });
+        
+        // Test 7: Check if main app can initialize
+        testStep('Main App Initialization', () => {
+            // Try to create the main app
+            try {
+                // This will fail if any dependencies are missing
+                const app = new DrahmsVisionApp();
+                return app !== null;
+            } catch (error) {
+                addResult(`❌ Main App error: ${error.message}`, 'error');
+                return false;
+            }
+        });
+        
+        // Run tests when page loads
+        window.addEventListener('load', () => {
+            addResult('🚀 Starting tests...');
+        });
+        
+        // Catch all errors
+        window.addEventListener('error', (e) => {
+            addResult(`❌ JavaScript Error: ${e.message} at ${e.filename}:${e.lineno}`, 'error');
+        });
+    </script>
+</body>
+</html>

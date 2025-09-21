@@ -107,12 +107,10 @@ drawable ic_zoom_out
 id btnCapture
 id btnCapturePhoto
 id btnConnect
-id btnRecord
 id btnSettings
 id btnStartCamera
 id btnStartVideo
-id btnSwitchCamera
-id controlsPanel
+id previewView
 id settings_container
 id sliderExposure
 id sliderFocus
@@ -122,8 +120,6 @@ id statusConnection
 id statusSensors
 id switchMotionDetection
 id switchObjectTracking
-id topControls
-id viewFinder
 layout activity_camera
 layout activity_main
 layout activity_settings

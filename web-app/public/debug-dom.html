@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: #fff; }
+        .debug { margin: 10px 0; padding: 10px; border-radius: 5px; background: #333; }
+        .error { background: #5a2d2d; }
+        .success { background: #2d5a2d; }
+    </style>
+</head>
+<body>
+    <h1>🔍 DOM Debug</h1>
+    <div id="results"></div>
+
+    <!-- Test the same HTML structure as index.html -->
+    <div class="app-container">
+        <div class="camera-container">
+            <div class="camera-feed" id="camera-feed">
+                <div class="camera-placeholder">
+                    <button class="connect-btn" id="connect-camera">
+                        <i class="fas fa-plug"></i> Connect Camera
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls-panel">
+            <input type="range" id="zoom-control" min="1" max="10" value="1">
+        </div>
+    </div>
+
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(message, type = 'debug') {
+            const div = document.createElement('div');
+            div.className = `debug ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+            console.log(message);
+        }
+        
+        function testDOMElements() {
+            addResult('🧪 Testing DOM elements...');
+            
+            const elements = [
+                'connect-camera',
+                'zoom-control',
+                'camera-feed',
+                'results'
+            ];
+            
+            elements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    addResult(`✅ Found element: ${id}`, 'success');
+                } else {
+                    addResult(`❌ Missing element: ${id}`, 'error');
+                }
+            });
+        }
+        
+        // Test when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            addResult('🚀 DOM loaded, testing elements...');
+            testDOMElements();
+        });
+        
+        // Test immediately
+        addResult('🧪 Testing elements immediately...');
+        testDOMElements();
+    </script>
+</body>
+</html>

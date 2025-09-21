@@ -3,6 +3,7 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
+const fs = require('fs');
 const cors = require('cors');
 const axios = require('axios');
 
@@ -19,6 +20,55 @@ const io = socketIo(server, {
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// NASA Image Proxy endpoint
+app.get('/api/nasa-image', async (req, res) => {
+    try {
+        const imageUrl = req.query.url;
+        
+        if (!imageUrl) {
+            return res.status(400).json({ error: 'Image URL required' });
+        }
+        
+        console.log(`🖼️  Proxying NASA image: ${imageUrl}`);
+        
+        // Add headers to mimic a browser request
+        const response = await axios.get(imageUrl, {
+            responseType: 'stream',
+            timeout: 10000,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'Referer': 'https://apod.nasa.gov/',
+                'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache'
+            }
+        });
+        
+        res.set('Content-Type', response.headers['content-type'] || 'image/jpeg');
+        res.set('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+        res.set('Access-Control-Allow-Origin', '*');
+        
+        response.data.pipe(res);
+        
+    } catch (error) {
+        console.error('❌ Proxy error:', error.message);
+        
+        // If it's an access denied error, return a placeholder
+        if (error.response && error.response.status === 403) {
+            console.log('🔄 Access denied, returning placeholder image');
+            res.status(200).json({ 
+                error: 'Image access restricted',
+                message: 'This NASA image is not publicly accessible',
+                originalUrl: imageUrl,
+                suggestion: 'Try opening the image directly in a new tab'
+            });
+        } else {
+            res.status(500).json({ error: 'Failed to fetch image' });
+        }
+    }
+});
 
 const port = process.env.PORT || 3001;
 
@@ -146,9 +196,31 @@ async function identifyWithEBird(speciesName) {
     }
 }
 
-// Main route
+// Main route - inject API keys into HTML
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    // Read the HTML file
+    const htmlPath = path.join(__dirname, 'public', 'index.html');
+    let html = fs.readFileSync(htmlPath, 'utf8');
+
+    // Inject API keys as window.API_KEYS
+    const apiKeys = {
+        GOOGLE_VISION_API_KEY: GOOGLE_VISION_API_KEY,
+        EBIRD_API_KEY: EBIRD_API_KEY,
+        OPENWEATHER_API_KEY: process.env.OPENWEATHER_API_KEY,
+        NASA_API_KEY: process.env.NASA_API_KEY
+    };
+
+    const scriptTag = `
+    <script>
+        window.API_KEYS = ${JSON.stringify(apiKeys)};
+        console.log('🔑 API keys injected:', Object.keys(window.API_KEYS).length, 'keys loaded');
+    </script>
+    </head>`;
+
+    // Insert before closing </head> tag
+    html = html.replace('</head>', scriptTag);
+
+    res.send(html);
 });
 
 // API Status
@@ -164,7 +236,9 @@ app.get('/api/status', (req, res) => {
             wildlife: 'AI Object Tracking',
             motion: 'Motion Detection',
             editing: 'Professional Image Suite',
-            identification: 'Multi-API AI System'
+            identification: 'Multi-API AI System (23 APIs)',
+            realAPIs: 'NASA, eBird, BirdNET, PlantNet, Google Vision',
+            birdSoundID: 'BirdNET Audio Identification'
         },
         apis: {
             googleLens: { configured: true, rateLimit: '1000/month', cost: 'FREE' },
@@ -614,6 +688,14 @@ io.on('connection', (socket) => {
 
     socket.on('sensor_data', (data) => {
         console.log('📡 Sensor data:', data);
+        
+        // Handle different types of sensor data
+        if (data.type === 'orientation_data') {
+            console.log(`📱 Orientation: Az=${data.azimuth.toFixed(1)}° Pitch=${data.pitch.toFixed(1)}° Roll=${data.roll.toFixed(1)}°`);
+        } else if (data.type === 'location_update') {
+            console.log(`📍 Location: ${data.latitude.toFixed(4)}, ${data.longitude.toFixed(4)} (accuracy: ${data.accuracy}m)`);
+        }
+        
         io.emit('sensor_update', {
             ...data,
             timestamp: new Date().toISOString()

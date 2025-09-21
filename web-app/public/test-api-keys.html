@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Keys Test - Drahms Vision</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a0a0f;
+            color: #fff;
+            padding: 20px;
+        }
+        .test-result {
+            background: #1a1a2e;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #00ffff;
+        }
+        .success { border-left-color: #00ff00; }
+        .error { border-left-color: #ff0000; }
+        .warning { border-left-color: #ffaa00; }
+        pre {
+            background: #000;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔑 API Keys Test Page</h1>
+    <p>This page will test if the API keys are loading correctly.</p>
+    
+    <div id="test-results"></div>
+    
+    <script src="api-keys-config.js"></script>
+    <script>
+        function addTestResult(title, status, message) {
+            const resultsDiv = document.getElementById('test-results');
+            const div = document.createElement('div');
+            div.className = `test-result ${status}`;
+            div.innerHTML = `
+                <h3>${title}</h3>
+                <p>${message}</p>
+            `;
+            resultsDiv.appendChild(div);
+        }
+        
+        function runTests() {
+            // Test 1: Check if API_KEYS object exists
+            if (typeof window.API_KEYS !== 'undefined') {
+                addTestResult('✅ API_KEYS Object', 'success', 'API_KEYS object is loaded');
+                
+                // Test 2: Check specific keys
+                const keys = window.API_KEYS;
+                const keyTests = [
+                    { name: 'NASA_API_KEY', key: keys.NASA_API_KEY },
+                    { name: 'GOOGLE_VISION_API_KEY', key: keys.GOOGLE_VISION_API_KEY },
+                    { name: 'OPENWEATHER_API_KEY', key: keys.OPENWEATHER_API_KEY },
+                    { name: 'EBIRD_API_KEY', key: keys.EBIRD_API_KEY },
+                    { name: 'IMAGGA_API_KEY', key: keys.IMAGGA_API_KEY }
+                ];
+                
+                keyTests.forEach(test => {
+                    if (test.key && test.key.length > 10) {
+                        addTestResult(`✅ ${test.name}`, 'success', `Key loaded: ${test.key.substring(0, 10)}...`);
+                    } else {
+                        addTestResult(`❌ ${test.name}`, 'error', 'Key not found or too short');
+                    }
+                });
+                
+                // Test 3: Show all keys
+                addTestResult('📋 All API Keys', 'success', `
+                    <pre>${JSON.stringify(keys, null, 2)}</pre>
+                `);
+                
+            } else {
+                addTestResult('❌ API_KEYS Object', 'error', 'API_KEYS object is not loaded. Check if api-keys-config.js is included.');
+            }
+            
+            // Test 4: Check if main app is loaded
+            if (typeof window.app !== 'undefined') {
+                addTestResult('✅ Main App', 'success', 'Main app is loaded');
+            } else {
+                addTestResult('⚠️ Main App', 'warning', 'Main app is not loaded yet');
+            }
+        }
+        
+        // Run tests when page loads
+        window.addEventListener('load', runTests);
+        
+        // Also run tests after a short delay
+        setTimeout(runTests, 1000);
+    </script>
+</body>
+</html>

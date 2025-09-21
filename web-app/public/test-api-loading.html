@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Loading Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: #fff; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background: #2d5a2d; }
+        .error { background: #5a2d2d; }
+        .warning { background: #5a5a2d; }
+        pre { background: #333; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🔍 API Loading Test</h1>
+    <div id="results"></div>
+
+    <script src="api-keys-config.js"></script>
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(message, type = 'success') {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+        }
+        
+        function testAPILoading() {
+            addResult('🧪 Testing API key loading...');
+            
+            // Test 1: Check if API_KEYS exists
+            if (typeof window.API_KEYS !== 'undefined') {
+                addResult('✅ window.API_KEYS exists');
+                
+                // Test 2: Count API keys
+                const keyCount = Object.keys(window.API_KEYS).length;
+                addResult(`✅ Found ${keyCount} API keys`);
+                
+                // Test 3: Show all keys
+                addResult('<h3>📋 All API Keys:</h3>');
+                Object.keys(window.API_KEYS).forEach(key => {
+                    const value = window.API_KEYS[key];
+                    const displayValue = value ? value.substring(0, 10) + '...' : 'null';
+                    addResult(`✅ ${key}: ${displayValue}`);
+                });
+                
+                // Test 4: Test filtering logic
+                addResult('<h3>🔍 Testing Filtering Logic:</h3>');
+                const realKeys = {};
+                Object.keys(window.API_KEYS).forEach(key => {
+                    if (window.API_KEYS[key] && 
+                        !window.API_KEYS[key].includes('your_') && 
+                        !window.API_KEYS[key].includes('_here')) {
+                        realKeys[key] = window.API_KEYS[key];
+                    }
+                });
+                
+                addResult(`✅ After filtering: ${Object.keys(realKeys).length} keys`);
+                Object.keys(realKeys).forEach(key => {
+                    const value = realKeys[key];
+                    const displayValue = value ? value.substring(0, 10) + '...' : 'null';
+                    addResult(`✅ ${key}: ${displayValue}`);
+                });
+                
+                // Test 5: Check specific keys
+                addResult('<h3>🎯 Specific Key Tests:</h3>');
+                if (window.API_KEYS.NASA_API_KEY) {
+                    addResult('✅ NASA_API_KEY exists');
+                } else {
+                    addResult('❌ NASA_API_KEY missing', 'error');
+                }
+                
+                if (window.API_KEYS.GOOGLE_VISION_API_KEY) {
+                    addResult('✅ GOOGLE_VISION_API_KEY exists');
+                } else {
+                    addResult('❌ GOOGLE_VISION_API_KEY missing', 'error');
+                }
+                
+            } else {
+                addResult('❌ window.API_KEYS does not exist', 'error');
+            }
+            
+            // Test 6: Check for JavaScript errors
+            addResult('<h3>🚨 JavaScript Errors:</h3>');
+            window.addEventListener('error', function(e) {
+                addResult(`❌ Error: ${e.message} at ${e.filename}:${e.lineno}`, 'error');
+            });
+            
+            // Test 7: Check console
+            addResult('<h3>📝 Console Output:</h3>');
+            const originalLog = console.log;
+            const originalWarn = console.warn;
+            const originalError = console.error;
+            
+            const logs = [];
+            console.log = function(...args) {
+                logs.push('LOG: ' + args.join(' '));
+                originalLog.apply(console, args);
+            };
+            console.warn = function(...args) {
+                logs.push('WARN: ' + args.join(' '));
+                originalWarn.apply(console, args);
+            };
+            console.error = function(...args) {
+                logs.push('ERROR: ' + args.join(' '));
+                originalError.apply(console, args);
+            };
+            
+            // Restore after a delay
+            setTimeout(() => {
+                console.log = originalLog;
+                console.warn = originalWarn;
+                console.error = originalError;
+                
+                if (logs.length > 0) {
+                    logs.forEach(log => {
+                        addResult(`📝 ${log}`);
+                    });
+                } else {
+                    addResult('📝 No console output captured');
+                }
+            }, 1000);
+        }
+        
+        // Run tests when page loads
+        window.addEventListener('load', testAPILoading);
+    </script>
+</body>
+</html>

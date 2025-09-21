@@ -53,7 +53,7 @@ A professional-grade astronomy and wildlife photography system with real-time ca
 ### Prerequisites
 - **Node.js** (v16 or higher)
 - **Android Studio** (for mobile app development)
-- **Android device** or emulator (API level 24+)
+- **Android device** or emulator (API level 33+)
 - **Network connection** between devices
 
 ### 1. **Start the Web Server**
@@ -81,18 +81,18 @@ cd android-app
 
 ```
 drahms-vision/
-├── 📱 mobile-app/                 # Android application
+├── 📱 android-app/                # Android application (Samsung A25 optimized)
 │   ├── app/src/main/
 │   │   ├── java/com/drahms/vision/astronomy/
 │   │   │   ├── MainActivity.kt    # Main app interface
 │   │   │   ├── CameraActivity.kt  # Camera controls
-│   │   │   ├── SettingsActivity.kt
+│   │   │   ├── camera/            # Samsung A25 camera management
 │   │   │   ├── network/           # WebSocket communication
-│   │   │   ├── service/           # Background services
+│   │   │   ├── sensors/           # Sensor data collection
 │   │   │   └── utils/             # Utilities
 │   │   ├── res/                   # Resources
 │   │   └── AndroidManifest.xml
-│   └── build.gradle
+│   └── build.gradle.kts
 ├── 🌐 web-app/                    # Web server and interface
 │   ├── server.js                  # Express.js server
 │   ├── public/                    # Static files
@@ -115,15 +115,16 @@ drahms-vision/
 - **WebSocket**: Socket.IO for real-time communication
 
 ### Android Configuration
-- **Target SDK**: 34 (Android 14)
-- **Minimum SDK**: 24 (Android 7.0)
+- **Target SDK**: 36 (Android 15)
+- **Minimum SDK**: 33 (Android 13)
 - **Permissions**: Camera, Location, Internet, Storage
+- **Samsung A25 Optimized**: 50MP camera, night mode, astrophotography
 
 ### Network Configuration
 Update the server URL in these files:
-- `mobile-app/app/src/main/java/com/drahms/vision/astronomy/MainActivity.kt`
-- `mobile-app/app/src/main/java/com/drahms/vision/astronomy/CameraActivity.kt`
-- `mobile-app/app/src/main/java/com/drahms/vision/astronomy/service/CameraService.kt`
+- `android-app/app/src/main/java/com/drahms/vision/astronomy/MainActivity.kt`
+- `android-app/app/src/main/java/com/drahms/vision/astronomy/CameraActivity.kt`
+- `android-app/app/src/main/java/com/drahms/vision/astronomy/camera/SamsungA25CameraManager.kt`
 
 ## 🎯 Core Features
 
@@ -206,7 +207,7 @@ The system integrates **23 free APIs** across 6 categories:
 
 ### **Building Android App**
 ```bash
-cd mobile-app
+cd android-app
 ./gradlew assembleDebug
 ```
 

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drahms Vision - Debug Main</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ui-components.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🔭 Drahms Vision - Debug Mode</h1>
+            <div class="status-indicators">
+                <div id="connectionStatus" class="status-indicator offline">Offline</div>
+                <div id="cameraStatus" class="status-indicator offline">No Camera</div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="debug-section">
+                <h2>🔍 Debug Information</h2>
+                <div id="debugOutput"></div>
+            </div>
+            
+            <div class="control-panel">
+                <button id="testAPIKeys" class="btn btn-primary">Test API Keys</button>
+                <button id="testNASA" class="btn btn-secondary">Test NASA API</button>
+                <button id="testGoogleLens" class="btn btn-secondary">Test Google Lens</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Load API keys first -->
+    <script src="api-keys-config.js"></script>
+    
+    <!-- Load other scripts -->
+    <script src="api-key-manager.js"></script>
+    <script src="real-api-integration.js"></script>
+    <script src="google-lens-integration.js"></script>
+    
+    <script>
+        const debugOutput = document.getElementById('debugOutput');
+        
+        function addDebug(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `debug-message ${type}`;
+            div.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+            debugOutput.appendChild(div);
+            console.log(message);
+        }
+        
+        function testAPIKeys() {
+            addDebug('🧪 Testing API Keys...');
+            
+            if (typeof window.API_KEYS !== 'undefined') {
+                addDebug(`✅ API_KEYS loaded with ${Object.keys(window.API_KEYS).length} keys`);
+                
+                // Test filtering
+                const realKeys = {};
+                Object.keys(window.API_KEYS).forEach(key => {
+                    if (window.API_KEYS[key] && 
+                        !window.API_KEYS[key].includes('your_') && 
+                        !window.API_KEYS[key].includes('_here')) {
+                        realKeys[key] = window.API_KEYS[key];
+                    }
+                });
+                
+                addDebug(`✅ After filtering: ${Object.keys(realKeys).length} real keys`);
+                
+                // Test API Key Manager
+                try {
+                    const apiKeyManager = new APIKeyManager();
+                    apiKeyManager.setAPIKeys(realKeys);
+                    addDebug('✅ APIKeyManager initialized successfully');
+                } catch (error) {
+                    addDebug(`❌ APIKeyManager error: ${error.message}`, 'error');
+                }
+                
+                // Test Real API Integration
+                try {
+                    const realAPI = new RealAPIIntegration();
+                    realAPI.setAPIKeys(realKeys);
+                    addDebug('✅ RealAPIIntegration initialized successfully');
+                } catch (error) {
+                    addDebug(`❌ RealAPIIntegration error: ${error.message}`, 'error');
+                }
+                
+            } else {
+                addDebug('❌ API_KEYS not loaded', 'error');
+            }
+        }
+        
+        function testNASA() {
+            addDebug('🌌 Testing NASA API...');
+            
+            if (window.API_KEYS && window.API_KEYS.NASA_API_KEY) {
+                addDebug('✅ NASA API key found');
+                
+                // Test NASA API call
+                fetch(`https://api.nasa.gov/planetary/apod?api_key=${window.API_KEYS.NASA_API_KEY}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        addDebug('✅ NASA API call successful');
+                        addDebug(`📸 Today's APOD: ${data.title}`);
+                    })
+                    .catch(error => {
+                        addDebug(`❌ NASA API error: ${error.message}`, 'error');
+                    });
+            } else {
+                addDebug('❌ NASA API key not found', 'error');
+            }
+        }
+        
+        function testGoogleLens() {
+            addDebug('🔍 Testing Google Lens...');
+            
+            if (window.API_KEYS && window.API_KEYS.GOOGLE_VISION_API_KEY) {
+                addDebug('✅ Google Vision API key found');
+                
+                try {
+                    const googleLens = new GoogleLensIntegration(window.API_KEYS.GOOGLE_VISION_API_KEY);
+                    addDebug('✅ GoogleLensIntegration initialized successfully');
+                } catch (error) {
+                    addDebug(`❌ GoogleLensIntegration error: ${error.message}`, 'error');
+                }
+            } else {
+                addDebug('❌ Google Vision API key not found', 'error');
+            }
+        }
+        
+        // Event listeners
+        document.getElementById('testAPIKeys').addEventListener('click', testAPIKeys);
+        document.getElementById('testNASA').addEventListener('click', testNASA);
+        document.getElementById('testGoogleLens').addEventListener('click', testGoogleLens);
+        
+        // Auto-run tests on load
+        window.addEventListener('load', () => {
+            addDebug('🚀 Debug page loaded');
+            testAPIKeys();
+        });
+        
+        // Catch all errors
+        window.addEventListener('error', (e) => {
+            addDebug(`❌ JavaScript Error: ${e.message} at ${e.filename}:${e.lineno}`, 'error');
+        });
+    </script>
+    
+    <style>
+        .debug-section {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .debug-message {
+            margin: 5px 0;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .debug-message.info {
+            background: #333;
+            color: #fff;
+        }
+        
+        .debug-message.error {
+            background: #5a2d2d;
+            color: #ff6b6b;
+        }
+        
+        .control-panel {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn:hover {
+            opacity: 0.8;
+        }
+    </style>
+</body>
+</html>

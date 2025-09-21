@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.drahms.vision.astronomy.app-mergeDebugResources-31:/values-hdpi-v4/values-hdpi-v4.xml",
+            "outputFile": "com.drahms.vision.astronomy.app-mergeDebugResources-46:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Ashley\\.gradle\\caches\\8.13\\transforms\\709d7fe98bf3d196035fb33626a4924c\\transformed\\appcompat-1.7.1\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "source": "C:\\Users\\solsh\\.gradle\\caches\\8.13\\transforms\\74e2cf8db6b03b348cce7b0ce514ee13\\transformed\\appcompat-1.7.1\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 Drahms Vision - Celestial Overlay Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .demo-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .demo-section {
+            background: var(--surface-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .camera-demo {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .demo-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .demo-button {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            color: var(--primary-text);
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .demo-button:hover {
+            background: var(--hover-bg);
+            border-color: var(--aurora-blue);
+            transform: translateY(-2px);
+        }
+        
+        .demo-button.active {
+            background: var(--aurora-blue);
+            border-color: var(--aurora-blue);
+            color: var(--primary-bg);
+        }
+        
+        .info-panel {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .info-label {
+            color: var(--secondary-text);
+        }
+        
+        .info-value {
+            color: var(--primary-text);
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1><i class="fas fa-star"></i> Drahms Vision - Celestial Overlay Demo</h1>
+            <p>Experience real-time celestial object overlay on your camera view</p>
+        </div>
+        
+        <div class="demo-section">
+            <h2><i class="fas fa-camera"></i> Camera View with Celestial Overlay</h2>
+            <div class="camera-demo" id="camera-demo">
+                <div class="camera-placeholder">
+                    <i class="fas fa-camera"></i>
+                    <p>Camera Feed</p>
+                    <small>Celestial overlay will appear here</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2><i class="fas fa-sliders-h"></i> Overlay Controls</h2>
+            <div class="demo-controls">
+                <button class="demo-button" id="toggle-overlay">
+                    <i class="fas fa-eye"></i><br>Toggle Overlay
+                </button>
+                <button class="demo-button" id="toggle-constellations">
+                    <i class="fas fa-project-diagram"></i><br>Constellations
+                </button>
+                <button class="demo-button" id="toggle-stars">
+                    <i class="fas fa-star"></i><br>Stars
+                </button>
+                <button class="demo-button" id="toggle-planets">
+                    <i class="fas fa-globe"></i><br>Planets
+                </button>
+                <button class="demo-button" id="toggle-labels">
+                    <i class="fas fa-tag"></i><br>Labels
+                </button>
+                <button class="demo-button" id="toggle-grid">
+                    <i class="fas fa-th"></i><br>Grid
+                </button>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2><i class="fas fa-map-marker-alt"></i> Location Settings</h2>
+            <div class="location-inputs">
+                <input type="number" id="latitude-input" placeholder="Latitude" step="0.0001" value="40.7128">
+                <input type="number" id="longitude-input" placeholder="Longitude" step="0.0001" value="-74.0060">
+                <button class="demo-button" id="set-location-btn">
+                    <i class="fas fa-map-marker-alt"></i> Set Location
+                </button>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2><i class="fas fa-search"></i> Object Search</h2>
+            <div class="search-section">
+                <input type="text" id="object-search" placeholder="Search for stars, planets...">
+                <button class="demo-button" id="search-btn">
+                    <i class="fas fa-search"></i> Search
+                </button>
+                <button class="demo-button" id="highlight-btn">
+                    <i class="fas fa-crosshairs"></i> Highlight
+                </button>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2><i class="fas fa-info-circle"></i> Sky Information</h2>
+            <div class="info-panel" id="sky-info">
+                <div class="info-item">
+                    <span class="info-label">Local Sidereal Time:</span>
+                    <span class="info-value" id="lst-value">0.0°</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Visible Objects:</span>
+                    <span class="info-value" id="objects-count">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Constellations:</span>
+                    <span class="info-value" id="constellations-count">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Observer Location:</span>
+                    <span class="info-value" id="location-value">Not set</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Current Time:</span>
+                    <span class="info-value" id="time-value">--:--:--</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h2>
+            <div class="info-panel">
+                <div class="info-item">
+                    <span class="info-label">C</span>
+                    <span class="info-value">Toggle Constellations</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">S</span>
+                    <span class="info-value">Toggle Stars</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">P</span>
+                    <span class="info-value">Toggle Planets</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">L</span>
+                    <span class="info-value">Toggle Labels</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">G</span>
+                    <span class="info-value">Toggle Grid</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="astronomy-engine.js"></script>
+    <script src="ar-overlay.js"></script>
+    <script>
+        // Demo Application
+        class CelestialOverlayDemo {
+            constructor() {
+                this.astronomyEngine = new AstronomyEngine();
+                this.arOverlay = new AROverlaySystem();
+                this.isActive = false;
+                
+                this.init();
+            }
+            
+            init() {
+                // Initialize astronomy engine
+                this.astronomyEngine.setObserverLocation(40.7128, -74.0060, 0);
+                this.astronomyEngine.updateTime();
+                
+                // Initialize AR overlay
+                this.arOverlay.initialize(this.astronomyEngine);
+                
+                // Set up demo camera feed
+                this.setupDemoCamera();
+                
+                // Set up event listeners
+                this.setupEventListeners();
+                
+                // Start update loop
+                this.startUpdateLoop();
+                
+                console.log('🌌 Celestial Overlay Demo initialized');
+            }
+            
+            setupDemoCamera() {
+                const cameraDemo = document.getElementById('camera-demo');
+                cameraDemo.innerHTML = `
+                    <div class="camera-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <p>Demo Camera Feed</p>
+                        <small>Celestial overlay will appear here</small>
+                    </div>
+                `;
+                
+                // Create overlay canvas
+                this.arOverlay.createOverlayCanvas();
+            }
+            
+            setupEventListeners() {
+                // Overlay controls
+                document.getElementById('toggle-overlay').addEventListener('click', () => {
+                    this.toggleOverlay();
+                });
+                
+                document.getElementById('toggle-constellations').addEventListener('click', () => {
+                    this.arOverlay.toggleConstellations();
+                    this.updateButtonState('toggle-constellations');
+                });
+                
+                document.getElementById('toggle-stars').addEventListener('click', () => {
+                    this.arOverlay.toggleStars();
+                    this.updateButtonState('toggle-stars');
+                });
+                
+                document.getElementById('toggle-planets').addEventListener('click', () => {
+                    this.arOverlay.togglePlanets();
+                    this.updateButtonState('toggle-planets');
+                });
+                
+                document.getElementById('toggle-labels').addEventListener('click', () => {
+                    this.arOverlay.toggleLabels();
+                    this.updateButtonState('toggle-labels');
+                });
+                
+                document.getElementById('toggle-grid').addEventListener('click', () => {
+                    this.arOverlay.toggleGrid();
+                    this.updateButtonState('toggle-grid');
+                });
+                
+                // Location controls
+                document.getElementById('set-location-btn').addEventListener('click', () => {
+                    this.setLocation();
+                });
+                
+                // Search controls
+                document.getElementById('search-btn').addEventListener('click', () => {
+                    this.searchObjects();
+                });
+                
+                document.getElementById('highlight-btn').addEventListener('click', () => {
+                    this.highlightObject();
+                });
+                
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    switch(e.key.toLowerCase()) {
+                        case 'c':
+                            this.arOverlay.toggleConstellations();
+                            this.updateButtonState('toggle-constellations');
+                            break;
+                        case 's':
+                            this.arOverlay.toggleStars();
+                            this.updateButtonState('toggle-stars');
+                            break;
+                        case 'p':
+                            this.arOverlay.togglePlanets();
+                            this.updateButtonState('toggle-planets');
+                            break;
+                        case 'l':
+                            this.arOverlay.toggleLabels();
+                            this.updateButtonState('toggle-labels');
+                            break;
+                        case 'g':
+                            this.arOverlay.toggleGrid();
+                            this.updateButtonState('toggle-grid');
+                            break;
+                    }
+                });
+            }
+            
+            toggleOverlay() {
+                if (this.isActive) {
+                    this.arOverlay.stop();
+                    this.isActive = false;
+                    document.getElementById('toggle-overlay').innerHTML = '<i class="fas fa-eye"></i><br>Start Overlay';
+                    document.getElementById('toggle-overlay').classList.remove('active');
+                } else {
+                    this.arOverlay.start();
+                    this.isActive = true;
+                    document.getElementById('toggle-overlay').innerHTML = '<i class="fas fa-eye-slash"></i><br>Stop Overlay';
+                    document.getElementById('toggle-overlay').classList.add('active');
+                }
+            }
+            
+            updateButtonState(buttonId) {
+                const button = document.getElementById(buttonId);
+                const settings = this.arOverlay.getSettings();
+                
+                let isActive = false;
+                switch(buttonId) {
+                    case 'toggle-constellations':
+                        isActive = settings.showConstellations;
+                        break;
+                    case 'toggle-stars':
+                        isActive = settings.showStars;
+                        break;
+                    case 'toggle-planets':
+                        isActive = settings.showPlanets;
+                        break;
+                    case 'toggle-labels':
+                        isActive = settings.showLabels;
+                        break;
+                    case 'toggle-grid':
+                        isActive = settings.showGrid;
+                        break;
+                }
+                
+                if (isActive) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            }
+            
+            setLocation() {
+                const lat = parseFloat(document.getElementById('latitude-input').value);
+                const lng = parseFloat(document.getElementById('longitude-input').value);
+                
+                if (isNaN(lat) || isNaN(lng)) {
+                    alert('Please enter valid latitude and longitude');
+                    return;
+                }
+                
+                this.astronomyEngine.setObserverLocation(lat, lng, 0);
+                this.arOverlay.setObserverLocation(lat, lng, 0);
+                
+                this.updateSkyInfo();
+            }
+            
+            searchObjects() {
+                const query = document.getElementById('object-search').value.trim();
+                if (!query) return;
+                
+                const results = this.astronomyEngine.searchObjects(query);
+                console.log(`Found ${results.length} objects for "${query}":`, results);
+                
+                if (results.length > 0) {
+                    alert(`Found ${results.length} objects:\n${results.map(r => `• ${r.name} (${r.type})`).join('\n')}`);
+                } else {
+                    alert(`No objects found for "${query}"`);
+                }
+            }
+            
+            highlightObject() {
+                const query = document.getElementById('object-search').value.trim();
+                if (!query) return;
+                
+                this.arOverlay.highlightObject(query);
+            }
+            
+            startUpdateLoop() {
+                setInterval(() => {
+                    this.updateSkyInfo();
+                }, 1000);
+            }
+            
+            updateSkyInfo() {
+                const skyInfo = this.astronomyEngine.getSkyInfo();
+                
+                document.getElementById('lst-value').textContent = `${skyInfo.localSiderealTime.toFixed(1)}°`;
+                document.getElementById('objects-count').textContent = skyInfo.objectCount;
+                document.getElementById('constellations-count').textContent = skyInfo.constellationCount;
+                document.getElementById('location-value').textContent = 
+                    `${skyInfo.observer.latitude.toFixed(4)}, ${skyInfo.observer.longitude.toFixed(4)}`;
+                document.getElementById('time-value').textContent = 
+                    skyInfo.currentTime.toLocaleTimeString();
+            }
+        }
+        
+        // Initialize demo when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            window.celestialDemo = new CelestialOverlayDemo();
+        });
+    </script>
+</body>
+</html>
