@@ -210,7 +210,7 @@ class BaseIdentificationPlugin {
     const base64Data = imageData.split(',')[1];
     const sizeInBytes = (base64Data.length * 3) / 4;
 
-    if (sizeInBytes > this.config.maxImageSize || 10 * 1024 * 1024) { // 10MB default
+    if (sizeInBytes > (this.config.maxImageSize ?? 10 * 1024 * 1024)) { // 10MB default
       throw new Error(`Image size (${(sizeInBytes / 1024 / 1024).toFixed(1)}MB) exceeds maximum allowed size`);
     }
   }

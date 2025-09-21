@@ -143,6 +143,8 @@ out/
 *.jks
 secrets.json
 config.json
+api-keys-config.js
+*api-keys*.js
 
 # Camera captures and media
 captures/
