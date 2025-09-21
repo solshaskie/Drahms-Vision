@@ -37,44 +37,44 @@ class GoogleVisionPlugin extends BaseIdentificationPlugin {
         return {
           ...cachedResult,
           fromCache: true,
-          cacheKey
+          cacheKey,
         };
       }
     } catch (error) {
       this.logger.warn('Cache read failed for Google Vision', { error: error.message });
     }
 
-    const result = await this.executeRequest(async () => {
+    const result = await this.executeRequest(async() => {
       const response = await axios.post(
         `${this.baseURL}/images:annotate?key=${this.apiKey}`,
         {
           requests: [{
             image: {
-              content: imageData.split(',')[1] // Remove data:image/jpeg;base64, prefix
+              content: imageData.split(',')[1], // Remove data:image/jpeg;base64, prefix
             },
             features: [
               {
                 type: 'LABEL_DETECTION',
-                maxResults: options.maxResults || this.maxResults
+                maxResults: options.maxResults || this.maxResults,
               },
               {
                 type: 'OBJECT_LOCALIZATION',
-                maxResults: options.maxResults || 5
+                maxResults: options.maxResults || 5,
               },
               {
                 type: 'WEB_DETECTION',
-                maxResults: options.maxResults || 5
-              }
-            ]
-          }]
+                maxResults: options.maxResults || 5,
+              },
+            ],
+          }],
         },
         {
           timeout: this.requestTimeout,
           headers: {
             'Content-Type': 'application/json',
-            'User-Agent': 'Drahms-Vision/2.0'
-          }
-        }
+            'User-Agent': 'Drahms-Vision/2.0',
+          },
+        },
       );
 
       return this.processResponse(response.data, imageData);
@@ -117,8 +117,8 @@ class GoogleVisionPlugin extends BaseIdentificationPlugin {
           metadata: {
             mid: label.mid,
             topicality: label.topicality,
-            featureType: 'label_detection'
-          }
+            featureType: 'label_detection',
+          },
         });
       });
     }
@@ -134,8 +134,8 @@ class GoogleVisionPlugin extends BaseIdentificationPlugin {
           boundingBox: obj.boundingPoly ? this.normalizeBoundingBox(obj.boundingPoly) : null,
           metadata: {
             mid: obj.mid,
-            featureType: 'object_localization'
-          }
+            featureType: 'object_localization',
+          },
         });
       });
     }
@@ -148,7 +148,7 @@ class GoogleVisionPlugin extends BaseIdentificationPlugin {
           // Avoid duplicates with existing labels
           const existingIndex = identifications.findIndex(id =>
             id.name.toLowerCase().includes(entity.description.toLowerCase()) ||
-            entity.description.toLowerCase().includes(id.name.toLowerCase())
+            entity.description.toLowerCase().includes(id.name.toLowerCase()),
           );
 
           if (existingIndex === -1) {
@@ -159,8 +159,8 @@ class GoogleVisionPlugin extends BaseIdentificationPlugin {
               source: 'googleVision',
               metadata: {
                 mid: entity.entityId,
-                featureType: 'web_detection'
-              }
+                featureType: 'web_detection',
+              },
             });
           }
         });
@@ -178,8 +178,8 @@ class GoogleVisionPlugin extends BaseIdentificationPlugin {
         imageHash: this.generateImageHash(originalImageData),
         totalResults: identifications.length,
         confidenceThreshold: 0.5,
-        features: ['LABEL_DETECTION', 'OBJECT_LOCALIZATION', 'WEB_DETECTION']
-      }
+        features: ['LABEL_DETECTION', 'OBJECT_LOCALIZATION', 'WEB_DETECTION'],
+      },
     };
   }
 
@@ -202,7 +202,7 @@ class GoogleVisionPlugin extends BaseIdentificationPlugin {
       y: Math.min(...ys),
       width: Math.max(...xs) - Math.min(...xs),
       height: Math.max(...ys) - Math.min(...ys),
-      normalizedVertices: vertices
+      normalizedVertices: vertices,
     };
   }
 
@@ -264,7 +264,7 @@ class GoogleVisionPlugin extends BaseIdentificationPlugin {
       // Make a lightweight request to check API availability
       await axios.get(`${this.baseURL}/images:annotate?key=${this.apiKey}&fields=`, {
         timeout: 5000, // Very short timeout for health check
-        validateStatus: (status) => status === 400 // Expecting 400 for missing image
+        validateStatus: (status) => status === 400, // Expecting 400 for missing image
       });
 
       return {
@@ -273,7 +273,7 @@ class GoogleVisionPlugin extends BaseIdentificationPlugin {
         supportedTypes: this.getSupportedTypes(),
         apiVersion: 'v1',
         features: ['LABEL_DETECTION', 'OBJECT_LOCALIZATION', 'WEB_DETECTION'],
-        lastChecked: new Date().toISOString()
+        lastChecked: new Date().toISOString(),
       };
     } catch (error) {
       const status = error.response?.status;
@@ -284,7 +284,7 @@ class GoogleVisionPlugin extends BaseIdentificationPlugin {
           status: 'healthy',
           name: this.name,
           supportedTypes: this.getSupportedTypes(),
-          lastChecked: new Date().toISOString()
+          lastChecked: new Date().toISOString(),
         };
       }
 
@@ -294,7 +294,7 @@ class GoogleVisionPlugin extends BaseIdentificationPlugin {
         error: error.message,
         statusCode: status,
         supportedTypes: this.getSupportedTypes(),
-        lastChecked: new Date().toISOString()
+        lastChecked: new Date().toISOString(),
       };
     }
   }

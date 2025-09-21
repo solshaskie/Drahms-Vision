@@ -1,4 +1,3 @@
-const config = require('../config');
 const logger = require('../utils/logger');
 
 /**
@@ -58,7 +57,6 @@ class CircuitBreaker {
       // Success - handle state transitions
       this.onSuccess();
       return result;
-
     } catch (error) {
       // Failure - handle state transitions
       this.onFailure(error, context);

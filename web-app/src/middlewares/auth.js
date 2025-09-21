@@ -102,7 +102,7 @@ const requireRole = (roles) => {
       });
 
       return next(new AuthorizationError(
-        `Role '${userRole}' does not have permission. Required: ${allowedRoles.join(', ')}`
+        `Role '${userRole}' does not have permission. Required: ${allowedRoles.join(', ')}`,
       ));
     }
 
@@ -162,7 +162,7 @@ const optionalAuth = (req, res, next) => {
  * @param {string} password - Plain text password
  * @returns {Promise<string>} - Hashed password
  */
-const hashPassword = async (password) => {
+const hashPassword = async(password) => {
   const saltRounds = config.security.bcrypt.rounds;
   return bcrypt.hash(password, saltRounds);
 };
@@ -173,7 +173,7 @@ const hashPassword = async (password) => {
  * @param {string} hash - Hashed password
  * @returns {Promise<boolean>} - True if password matches
  */
-const verifyPassword = async (password, hash) => {
+const verifyPassword = async(password, hash) => {
   return bcrypt.compare(password, hash);
 };
 
@@ -226,7 +226,7 @@ const generateRefreshToken = (user) => {
  * @param {string} userData.password
  * @returns {Promise<Object>} - Created user object
  */
-const registerUser = async (userData) => {
+const registerUser = async(userData) => {
   const { username, email, password } = userData;
 
   // Check if user already exists
@@ -273,7 +273,7 @@ const registerUser = async (userData) => {
  * @param {string} password - Plain text password
  * @returns {Promise<Object>} - User object if authenticated
  */
-const authenticateUser = async (identifier, password) => {
+const authenticateUser = async(identifier, password) => {
   // Find user by username or email
   let user = null;
   for (const u of users.values()) {
@@ -306,7 +306,8 @@ const authenticateUser = async (identifier, password) => {
     throw new AuthenticationError('Invalid credentials');
   }
 
-  const { passwordHash, ...userWithoutPassword } = user;
+  const userWithoutPassword = { ...user };
+  delete userWithoutPassword.passwordHash;
   return userWithoutPassword;
 };
 
@@ -319,7 +320,8 @@ const getUserById = (userId) => {
   const user = users.get(userId);
   if (!user) return null;
 
-  const { passwordHash, ...userWithoutPassword } = user;
+  const userWithoutPassword = { ...user };
+  delete userWithoutPassword.passwordHash;
   return userWithoutPassword;
 };
 

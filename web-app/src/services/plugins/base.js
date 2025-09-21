@@ -30,7 +30,7 @@ class BaseIdentificationPlugin {
    * @param {Object} options - Additional identification options
    * @returns {Promise<Object>} - Identification results
    */
-  async identify(imageData, options = {}) {
+  async identify(imageData, _options = {}) {
     throw new Error(`${this.constructor.name}.identify() must be implemented`);
   }
 
@@ -62,14 +62,14 @@ class BaseIdentificationPlugin {
         status: 'healthy',
         name: this.name,
         supportedTypes: this.getSupportedTypes(),
-        lastChecked: new Date().toISOString()
+        lastChecked: new Date().toISOString(),
       };
     } catch (error) {
       return {
         status: 'unhealthy',
         name: this.name,
         error: error.message,
-        lastChecked: new Date().toISOString()
+        lastChecked: new Date().toISOString(),
       };
     }
   }
@@ -84,10 +84,10 @@ class BaseIdentificationPlugin {
     const circuitContext = {
       service: this.name,
       operation: context.operation || 'identify',
-      ...context
+      ...context,
     };
 
-    return this.circuitBreaker.execute(async () => {
+    return this.circuitBreaker.execute(async() => {
       return this.retryWithBackoff(requestFn, this.retryAttempts);
     }, circuitContext);
   }
@@ -111,7 +111,7 @@ class BaseIdentificationPlugin {
         if (attempt === maxRetries) {
           this.logger.warn(`${this.name}: Max retries exceeded`, {
             attempts: attempt + 1,
-            error: error.message
+            error: error.message,
           });
           break;
         }
@@ -120,7 +120,7 @@ class BaseIdentificationPlugin {
 
         this.logger.warn(`${this.name}: Retry attempt ${attempt + 1}/${maxRetries + 1} failed, waiting ${delay}ms`, {
           error: error.message,
-          delay
+          delay,
         });
 
         await new Promise(resolve => setTimeout(resolve, delay));
@@ -183,7 +183,7 @@ class BaseIdentificationPlugin {
     const animalKeywords = [
       'dog', 'cat', 'horse', 'cow', 'pig', 'sheep', 'goat', 'deer',
       'bear', 'wolf', 'fox', 'rabbit', 'squirrel', 'mouse', 'rat',
-      'elephant', 'lion', 'tiger', 'monkey', 'zebra', 'giraffe'
+      'elephant', 'lion', 'tiger', 'monkey', 'zebra', 'giraffe',
     ];
     return animalKeywords.some(keyword => name.includes(keyword));
   }

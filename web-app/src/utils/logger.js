@@ -5,7 +5,7 @@ const config = require('../config');
 const logFormat = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
   winston.format.errors({ stack: true }),
-  winston.format.json()
+  winston.format.json(),
 );
 
 const consoleFormat = winston.format.combine(
@@ -14,7 +14,7 @@ const consoleFormat = winston.format.combine(
   winston.format.printf(({ timestamp, level, message, ...meta }) => {
     const metaStr = Object.keys(meta).length ? JSON.stringify(meta, null, 2) : '';
     return `${timestamp} [${level}]: ${message} ${metaStr}`;
-  })
+  }),
 );
 
 const transports = [];
@@ -33,14 +33,14 @@ if (config.env === 'production') {
     new winston.transports.Console({
       format: consoleFormat,
       level: config.logging.level,
-    })
+    }),
   );
 } else {
   transports.push(
     new winston.transports.Console({
       format: consoleFormat,
       level: config.logging.level,
-    })
+    }),
   );
 }
 
@@ -54,12 +54,12 @@ const logger = winston.createLogger({
 // Handle uncaught exceptions and unhandled rejections
 logger.exceptions.handle(
   new winston.transports.Console(),
-  new winston.transports.File({ filename: path.join(process.cwd(), 'logs', 'exceptions.log') })
+  new winston.transports.File({ filename: path.join(process.cwd(), 'logs', 'exceptions.log') }),
 );
 
 logger.rejections.handle(
   new winston.transports.Console(),
-  new winston.transports.File({ filename: path.join(process.cwd(), 'logs', 'rejections.log') })
+  new winston.transports.File({ filename: path.join(process.cwd(), 'logs', 'rejections.log') }),
 );
 
 // Helper methods for structured logging

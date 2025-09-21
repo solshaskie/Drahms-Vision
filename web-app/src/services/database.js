@@ -6,7 +6,7 @@ const logger = require('../utils/logger');
 // MongoDB Connection
 let mongodbConnection = null;
 
-const connectMongoDB = async () => {
+const connectMongoDB = async() => {
   try {
     if (mongodbConnection) {
       return mongodbConnection;
@@ -36,7 +36,7 @@ const connectMongoDB = async () => {
     });
 
     // Graceful shutdown
-    process.on('SIGINT', async () => {
+    process.on('SIGINT', async() => {
       await connection.connection.close();
       logger.info('MongoDB connection closed through app termination');
       process.exit(0);
@@ -56,7 +56,7 @@ const getMongoDBConnection = () => {
   return mongodbConnection;
 };
 
-const disconnectMongoDB = async () => {
+const disconnectMongoDB = async() => {
   if (mongodbConnection) {
     await mongodbConnection.connection.close();
     mongodbConnection = null;
@@ -67,7 +67,7 @@ const disconnectMongoDB = async () => {
 // Redis Connection
 let redisClient = null;
 
-const connectRedis = async () => {
+const connectRedis = async() => {
   try {
     if (redisClient) {
       return redisClient;
@@ -111,7 +111,7 @@ const getRedisClient = () => {
   return redisClient;
 };
 
-const disconnectRedis = async () => {
+const disconnectRedis = async() => {
   if (redisClient) {
     await redisClient.quit();
     redisClient = null;
@@ -120,7 +120,7 @@ const disconnectRedis = async () => {
 };
 
 // Health check methods
-const checkMongoDBHealth = async () => {
+const checkMongoDBHealth = async() => {
   try {
     const connection = getMongoDBConnection();
     await connection.connection.db.admin().ping();
@@ -130,7 +130,7 @@ const checkMongoDBHealth = async () => {
   }
 };
 
-const checkRedisHealth = async () => {
+const checkRedisHealth = async() => {
   try {
     const client = getRedisClient();
     const start = Date.now();

@@ -38,11 +38,11 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
-      imgSrc: ["'self'", "data:", "https:", "blob:"],
-      connectSrc: ["'self'", "wss:", "ws:", "https:"],
+      styleSrc: ["'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com', 'https://fonts.googleapis.com'],
+      fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+      scriptSrc: ["'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com'],
+      imgSrc: ["'self'", 'data:', 'https:', 'blob:'],
+      connectSrc: ["'self'", 'wss:', 'ws:', 'https:'],
     },
   },
   crossOriginEmbedderPolicy: false,
@@ -101,7 +101,7 @@ app.use(express.static('public', {
 }));
 
 // Health check endpoint
-app.get('/api/health', asyncHandler(async (req, res) => {
+app.get('/api/health', asyncHandler(async(req, res) => {
   const health = {
     status: 'healthy',
     timestamp: new Date().toISOString(),
@@ -180,7 +180,7 @@ io.on('connection', (socket) => {
 });
 
 // Graceful shutdown handler
-const gracefulShutdown = async (signal) => {
+const gracefulShutdown = async(signal) => {
   logger.info(`Received ${signal}. Starting graceful shutdown...`);
 
   try {
@@ -204,7 +204,6 @@ const gracefulShutdown = async (signal) => {
       logger.error('Forced shutdown due to timeout');
       process.exit(1);
     }, 10000);
-
   } catch (error) {
     logger.errorWithContext(error, { signal, operation: 'gracefulShutdown' });
     process.exit(1);
@@ -216,7 +215,7 @@ process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
 process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
 // Start server
-const startServer = async () => {
+const startServer = async() => {
   try {
     // Connect to databases
     await database.connectMongoDB();
@@ -238,7 +237,6 @@ const startServer = async () => {
         websocket: `ws://${config.host}:${config.port}`,
       });
     });
-
   } catch (error) {
     logger.errorWithContext(error, { operation: 'startServer' });
     process.exit(1);
@@ -254,7 +252,7 @@ process.on('uncaughtException', (error) => {
 process.on('unhandledRejection', (reason, promise) => {
   logger.errorWithContext(
     new Error(`Unhandled Rejection at ${promise}, reason: ${reason}`),
-    { type: 'unhandledRejection' }
+    { type: 'unhandledRejection' },
   );
   process.exit(1);
 });

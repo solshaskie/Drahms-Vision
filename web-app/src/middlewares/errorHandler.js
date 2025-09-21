@@ -96,7 +96,7 @@ const formatErrorResponse = (error, req) => {
 };
 
 // Main error handling middleware
-const errorHandler = (error, req, res, next) => {
+const errorHandler = (error, req, res, _next) => {
   // Log the error with context
   logger.errorWithContext(error, {
     url: req.url,
@@ -111,11 +111,6 @@ const errorHandler = (error, req, res, next) => {
 
   // Don't expose internal errors in production
   let statusCode = error.statusCode || 500;
-  let message = error.message;
-
-  if (statusCode === 500 && config.env === 'production') {
-    message = 'Internal server error';
-  }
 
   // Ensure status code is valid
   if (statusCode < 400 || statusCode > 599) {
@@ -165,7 +160,7 @@ const gracefulShutdown = (signal) => {
 process.on('unhandledRejection', (reason, promise) => {
   logger.errorWithContext(
     new Error(`Unhandled Rejection at ${promise}, reason: ${reason}`),
-    { type: 'unhandledRejection' }
+    { type: 'unhandledRejection' },
   );
 });
 

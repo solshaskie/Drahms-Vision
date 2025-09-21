@@ -1,5 +1,3 @@
-const fs = require('fs').promises;
-const path = require('path');
 const config = require('../config');
 const logger = require('../utils/logger');
 const { getCircuitBreaker } = require('./circuitBreaker');
@@ -28,7 +26,7 @@ class PluginManager {
       totalRequests: 0,
       successfulRequests: 0,
       failedRequests: 0,
-      averageResponseTime: 0
+      averageResponseTime: 0,
     };
     this.requestTimes = [];
 
@@ -47,10 +45,10 @@ class PluginManager {
           apiKey: config.apiKeys.googleVision,
           maxResults: 10,
           timeout: 30000,
-          retryAttempts: 3
+          retryAttempts: 3,
         },
-        enabled: !!config.apiKeys.googleVision
-      }
+        enabled: !!config.apiKeys.googleVision,
+      },
       // Future plugins will be added here
       // {
       //   name: 'ebird',
@@ -73,7 +71,7 @@ class PluginManager {
         } catch (error) {
           this.logger.error(`Failed to load plugin ${pluginConfig.name}`, {
             error: error.message,
-            plugin: pluginConfig.name
+            plugin: pluginConfig.name,
           });
         }
       } else {
@@ -100,7 +98,7 @@ class PluginManager {
       pluginSpecificConfig,
       circuitBreaker,
       this.logger,
-      this.cache
+      this.cache,
     );
 
     // Validate plugin
@@ -126,13 +124,13 @@ class PluginManager {
         requests: 0,
         successes: 0,
         failures: 0,
-        averageResponseTime: 0
-      }
+        averageResponseTime: 0,
+      },
     });
 
     this.logger.info(`Plugin ${name} loaded successfully`, {
       version: PluginClass.version || '1.0.0',
-      supportedTypes: plugin.getSupportedTypes()
+      supportedTypes: plugin.getSupportedTypes(),
     });
   }
 
@@ -155,12 +153,12 @@ class PluginManager {
       metadata: {
         totalPlugins: this.plugins.size,
         pluginsUsed: 0,
-        processingTime: 0
-      }
+        processingTime: 0,
+      },
     };
 
     // Distribute identification request to all enabled plugins
-    const pluginPromises = Array.from(this.plugins.values()).map(async (pluginInfo) => {
+    const pluginPromises = Array.from(this.plugins.values()).map(async(pluginInfo) => {
       const pluginStartTime = Date.now();
       const pluginName = pluginInfo.instance.name;
 
@@ -182,23 +180,22 @@ class PluginManager {
           responseTime,
           supportedTypes: pluginInfo.instance.getSupportedTypes(),
           metadata: {
-            fromCache: pluginResult.fromCache || false
-          }
+            fromCache: pluginResult.fromCache || false,
+          },
         };
-
       } catch (error) {
         pluginInfo.metrics.failures++;
 
         this.logger.warn(`Plugin ${pluginName} identification failed`, {
           error: error.message,
-          responseTime: Date.now() - pluginStartTime
+          responseTime: Date.now() - pluginStartTime,
         });
 
         return {
           plugin: pluginName,
           status: 'error',
           error: error.message,
-          supportedTypes: pluginInfo.instance.getSupportedTypes()
+          supportedTypes: pluginInfo.instance.getSupportedTypes(),
         };
       }
     });
@@ -219,7 +216,7 @@ class PluginManager {
       } else {
         // Plugin promise rejected - this is unexpected
         this.logger.error('Plugin promise rejected', {
-          error: promiseResult.reason.message
+          error: promiseResult.reason.message,
         });
       }
     }
@@ -261,7 +258,7 @@ class PluginManager {
         if (result.confidence > processed[existingIndex].confidence) {
           processed[existingIndex] = {
             ...result,
-            sources: [...processed[existingIndex].sources, result.source]
+            sources: [...processed[existingIndex].sources, result.source],
           };
         } else {
           // Add source to existing result
@@ -271,7 +268,7 @@ class PluginManager {
         // First time seeing this result
         processed.push({
           ...result,
-          sources: [result.source]
+          sources: [result.source],
         });
         seen.set(key, processed.length - 1);
       }
@@ -328,7 +325,7 @@ class PluginManager {
       overall: 'healthy',
       plugins: {},
       metrics: { ...this.metrics },
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     for (const [pluginName, pluginInfo] of this.plugins) {
@@ -337,7 +334,7 @@ class PluginManager {
         status.plugins[pluginName] = {
           ...health,
           loadedAt: pluginInfo.loadedAt,
-          metrics: pluginInfo.metrics
+          metrics: pluginInfo.metrics,
         };
 
         if (health.status !== 'healthy') {
@@ -349,7 +346,7 @@ class PluginManager {
           status: 'error',
           error: error.message,
           loadedAt: pluginInfo.loadedAt,
-          metrics: pluginInfo.metrics
+          metrics: pluginInfo.metrics,
         };
         status.overall = 'unhealthy';
       }
@@ -366,14 +363,14 @@ class PluginManager {
     const capabilities = {
       plugins: {},
       supportedTypes: new Set(),
-      totalPlugins: this.plugins.size
+      totalPlugins: this.plugins.size,
     };
 
     for (const [pluginName, pluginInfo] of this.plugins) {
       const plugin = pluginInfo.instance;
       capabilities.plugins[pluginName] = {
         supportedTypes: plugin.getSupportedTypes(),
-        enabled: true
+        enabled: true,
       };
 
       plugin.getSupportedTypes().forEach(type => {
@@ -450,7 +447,7 @@ class PluginManager {
     return {
       overall: this.metrics,
       plugins: pluginMetrics,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 }
